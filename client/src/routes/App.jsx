@@ -1,17 +1,17 @@
 import { Route, Routes } from "react-router-dom"
 import Intro from "../layouts/Intro"
 import IntroPage from "../page/IntroPage"
-import LogIn from "../page/logIn"
+import LogInPage from "../page/LogInPage"
 import PageNotFound from "../page/PageNotFound"
-import SignUp from "../page/signUp"
+import SignUpPage from "../page/SignUpPage"
 
 function App() {
   return (
     <Routes>
       <Route path="/" element={<Intro/>}>
         <Route path="/" element={<IntroPage/>}/>
-        <Route path="/logIn" element={<LogIn/>}/>
-        <Route path="/signUp" element={<SignUp/>}/>
+        <Route path="/logIn" element={<LogInPage/>}/>
+        <Route path="/signUp" element={<SignUpPage/>}/>
       </Route>
       <Route path="*" element={<PageNotFound/>}/>
     </Routes>

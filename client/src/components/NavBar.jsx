@@ -9,11 +9,11 @@ const NavBar = () => {
       <Link to='/'>
         <section className='flex items-center gap-1 text-white'>
           <FontAwesomeIcon icon={faTicket} />
-          MovieNotepad
+          Movie<span className='text-red-600'>Notepad</span>
         </section>
       </Link>
       <section className='flex gap-2'>
-      <Link to='/login' className='text-white'>Login</Link>
+      <Link to='/login' className='text-white'>Sign In</Link>
       <Link to='/signup' className='text-white'>Signup</Link>
       </section>
     </div>

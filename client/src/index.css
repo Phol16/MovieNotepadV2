@@ -16,7 +16,7 @@
   --primaryLight: #C9DAEA;
   --secondaryLight: red;
   --secondayDark: #AB2346;
-  --otherColor:#AB2346;
+  --otherColor:#0891b2;
 }
 *{
   margin: 0;
@@ -25,7 +25,6 @@
 }
 body{
   background-color: var(--primaryDark);
-  color: white;
   width: 100vw;
   height: 100vh;
 }
@@ -41,6 +40,7 @@ button {
   font-family: inherit;
   cursor: pointer;
   transition: border-color 0.25s;
+  color: black;
 }
 button:hover {
   border-color: var(--secondaryLight);
@@ -51,10 +51,7 @@ button:focus-visible {
 }
 
 @media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
+
   a:hover {
     color: var(--secondaryLight);
   }
