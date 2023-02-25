@@ -21,6 +21,8 @@ const SignUpPage = () => {
         <input type="text" name='username' id='username' className='text-black bg-white p-1'/>
         <label htmlFor="password">Password: </label>
         <input type="password" name='password' id='password' className='text-black bg-white p-1'/>
+        <label htmlFor="confirmpassword">Confirm Password: </label>
+        <input type="password" name='confirmpassword' id='confirmpassword' className='text-black bg-white p-1'/>
         <button>submit</button>
       </form>
       <p> Already have an account?</p>
