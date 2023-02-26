@@ -52,7 +52,7 @@ const SignUpPage = () => {
   console.log(role)
 
   return (
-    <div className='text-white p-10 rounded-lg flex flex-col gap-5 backdrop-blur-md bg-black/30 my-10'>
+    <div className='text-white p-10 rounded-lg flex flex-col gap-5 backdrop-blur-md bg-black/30'>
       <h1 className='text-xl'>Register</h1>
       <form action='' className='flex flex-col gap-1'>
         <label htmlFor='firstname'>First Name: </label>

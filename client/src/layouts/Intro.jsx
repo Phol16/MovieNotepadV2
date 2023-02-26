@@ -1,17 +1,18 @@
-import React from 'react'
-import { Outlet } from 'react-router-dom'
-import NavBar from '../components/NavBar'
-import style from './intro.module.css'
+import React from 'react';
+import { Outlet } from 'react-router-dom';
+import Footer from '../components/Footer';
+import NavBar from '../components/NavBar';
 
 const Intro = () => {
   return (
-    <div className={style.container}>
-      <NavBar/>
-      <section className=' flex justify-center pt-10'>
-      <Outlet/>
+    <div>
+      <NavBar />
+      <section className='flex justify-center items-center min-h-screen p-10'>
+        <Outlet />
       </section>
+      <Footer/>
     </div>
-  )
-}
+  );
+};
 
-export default Intro
+export default Intro;
