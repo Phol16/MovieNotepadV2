@@ -27,7 +27,7 @@ const SignUpPage = () => {
   const [lastName, setLastName] = useState('');
   const [validLastName, setValidLastName] = useState(false);
 
-  const [role, setRole] = useState('admin')
+  const [role, setRole] = useState('admin');
 
   useEffect(() => {
     userRef.current.focus();
@@ -45,22 +45,60 @@ const SignUpPage = () => {
     setValidMatch(match);
   }, [password, matchPassword]);
 
-
   return (
     <div className='text-white p-10 rounded-lg flex flex-col gap-5 backdrop-blur-md bg-black/30 w-full'>
       <h1 className='text-xl lg:text-2xl'>Register</h1>
       <form action='' className='flex flex-col gap-1'>
         <label htmlFor='firstname'>First Name: </label>
-        <input type='text' name='firstname' id='firstname' className='text-black bg-white p-1 rounded-md' placeholder='First Name' onChange={({target:{value}})=>{setFirstName(value)}}/>
+        <input
+          ref={userRef}
+          type='text'
+          name='firstname'
+          id='firstname'
+          className='text-black bg-white p-1 rounded-md'
+          placeholder='First Name'
+          onChange={({ target: { value } }) => {
+            setFirstName(value);
+          }}
+        />
         <label htmlFor='lastname'>Last Name: </label>
-        <input type='text' name='lastname' id='lastname' className='text-black bg-white p-1 rounded-md' placeholder='Last Name' onChange={({target:{value}})=>{setLastName(value)}}/>
-        <fieldset >
+        <input
+          type='text'
+          name='lastname'
+          id='lastname'
+          className='text-black bg-white p-1 rounded-md'
+          placeholder='Last Name'
+          onChange={({ target: { value } }) => {
+            setLastName(value);
+          }}
+        />
+        <fieldset>
           <legend>Select role:</legend>
           <section className='flex gap-1'>
-          <input type='radio' id='admin' name='role' value='admin' checked={role === 'admin'} onChange={({target:{value}})=>{setRole(value)}}/>
-          <label htmlFor='admin' className='mr-2'>Admin</label>
-          <input type='radio' id='user' name='role' value='user' checked={role === 'user'} onChange={({target:{value}})=>{setRole(value)}}/>
-          <label htmlFor='user'>User</label>
+            <input
+              type='radio'
+              id='admin'
+              name='role'
+              value='admin'
+              checked={role === 'admin'}
+              onChange={({ target: { value } }) => {
+                setRole(value);
+              }}
+            />
+            <label htmlFor='admin' className='mr-2'>
+              Admin
+            </label>
+            <input
+              type='radio'
+              id='user'
+              name='role'
+              value='user'
+              checked={role === 'user'}
+              onChange={({ target: { value } }) => {
+                setRole(value);
+              }}
+            />
+            <label htmlFor='user'>User</label>
           </section>
         </fieldset>
         <label htmlFor='username'>
@@ -78,10 +116,9 @@ const SignUpPage = () => {
           name='username'
           id='username'
           className='text-black bg-white p-1 rounded-md'
-          ref={userRef}
           required
           autoComplete='off'
-          onChange={({target:{value}}) => {
+          onChange={({ target: { value } }) => {
             setUsername(value);
           }}
         />
@@ -102,7 +139,7 @@ const SignUpPage = () => {
           className='text-black bg-white p-1 rounded-md'
           required
           autoComplete='off'
-          onChange={({target:{value}}) => {
+          onChange={({ target: { value } }) => {
             setPassword(value);
           }}
         />
@@ -121,15 +158,15 @@ const SignUpPage = () => {
           name='confirmpassword'
           id='confirmpassword'
           className='text-black bg-white p-1 rounded-md'
-          onChange={({target:{value}}) => {
+          onChange={({ target: { value } }) => {
             setMatchPassword(value);
           }}
         />
         <button className='my-2 w-fit p-2 rounded-md self-end bg-gradient-to-tr from-red-800 to-red-600 text-white text-base lg:text-lg'>Submit</button>
       </form>
       <section className='text-sm lg:text-base'>
-      <p> Already have an account?</p>
-      <Link to='/login'>Sign In</Link>
+        <p> Already have an account?</p>
+        <Link to='/login'>Sign In</Link>
       </section>
     </div>
   );
