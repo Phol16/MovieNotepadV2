@@ -4,6 +4,7 @@ import Footer from '../components/Footer';
 import NavBar from '../components/NavBar';
 
 const Intro = () => {
+  localStorage.removeItem('Home')
   return (
     <div>
       <NavBar />
