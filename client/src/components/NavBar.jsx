@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 
 const NavBar = () => {
   return (
-    <div className='fixed w-full flex py-5 px-2 gap-1 flex justify-between'>
+    <div className='fixed w-full flex p-5 gap-1 flex justify-between z-10'>
       <Link to='/'>
         <section className='flex items-center gap-1 text-white'>
           <FontAwesomeIcon icon={faTicket} />

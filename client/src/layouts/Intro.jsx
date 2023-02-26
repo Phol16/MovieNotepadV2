@@ -7,7 +7,7 @@ const Intro = () => {
   return (
     <div className={style.container}>
       <NavBar/>
-      <section className='w-full h-full flex justify-center items-center'>
+      <section className=' flex justify-center pt-10'>
       <Outlet/>
       </section>
     </div>
