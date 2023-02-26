@@ -31,6 +31,10 @@ const movieSchema = new Schema(
       type: String,
       default: 'unkown'
     },
+    deletedAt:{
+      type:Date,
+      default:null
+    },
     like:{
       type:Number,
       default: 0,

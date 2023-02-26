@@ -4,7 +4,7 @@ const allMovies = async (req, res) => {
   const movieList = await Movie.find().sort({createdAt: -1});
 
   if (!movieList) {
-    res.status(404).json({
+    return res.status(404).json({
       status: 'failed',
       message: ' No movie data found',
     });
