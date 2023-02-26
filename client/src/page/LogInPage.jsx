@@ -4,6 +4,7 @@ import { Link, useNavigate } from 'react-router-dom';
 const LogInPage = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
   const [theAccessToken, setAccessToken] = useState();
   const navigate = useNavigate();
 
@@ -20,7 +21,10 @@ const LogInPage = () => {
         },
         body: JSON.stringify(userInfo),
       }).then((res) => res.json());
-      setAccessToken(response.accessToken);
+      if (response.status === 'success') {
+        return setAccessToken(response.accessToken);
+      }
+      setError(response.message);
     } catch (error) {
       console.log({ message: error.message });
     }
@@ -33,6 +37,7 @@ const LogInPage = () => {
   return (
     <div className='text-white p-10 rounded-lg flex flex-col gap-5 backdrop-blur-md bg-black/30 w-full'>
       <h1 className='text-xl lg:text-2xl'>MovieNotepad</h1>
+      {error && <p>{error}</p>}
       <form onSubmit={handleSubmit} className='flex flex-col gap-1'>
         <label htmlFor='username'>Username: </label>
         <input

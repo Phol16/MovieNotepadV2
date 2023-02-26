@@ -9,6 +9,9 @@ const password_regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%.]).{8,24}$
 const SignUpPage = () => {
   const userRef = useRef();
 
+  const [error, setError] = useState('');
+  const [success, setSuccess] = useState(false);
+
   const [username, setUsername] = useState('');
   const [validUsername, setValidUsername] = useState(false);
   const [usernameFocus, setUsernameFocus] = useState(false);
@@ -29,9 +32,9 @@ const SignUpPage = () => {
 
   const [role, setRole] = useState('admin');
 
-  useEffect(() => {
-    userRef.current.focus();
-  }, []);
+  // useEffect(() => {
+  //   userRef.current.focus();
+  // }, []);
 
   useEffect(() => {
     const result = user_regex.test(username);
@@ -45,130 +48,168 @@ const SignUpPage = () => {
     setValidMatch(match);
   }, [password, matchPassword]);
 
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    const userInfo = { username, password, firstName, lastName, role };
+
+    try {
+      const response = await fetch('http://localhost:3500/users/signUp', {
+        method: 'POST',
+        cors: 'cors',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(userInfo),
+      }).then((res) => res.json());
+
+      if (response.status === 'success') {
+        return setSuccess(true);
+      }
+      setError(response.message);
+      setSuccess(false);
+    } catch (error) {
+      console.log({ message: error.message });
+    }
+  };
+
   return (
-    <div className='text-white p-10 rounded-lg flex flex-col gap-5 backdrop-blur-md bg-black/30 w-full'>
-      <h1 className='text-xl lg:text-2xl'>Register</h1>
-      <form action='' className='flex flex-col gap-1'>
-        <label htmlFor='firstname'>First Name: </label>
-        <input
-          ref={userRef}
-          type='text'
-          name='firstname'
-          id='firstname'
-          className='text-black bg-white p-1 rounded-md'
-          placeholder='First Name'
-          onChange={({ target: { value } }) => {
-            setFirstName(value);
-          }}
-        />
-        <label htmlFor='lastname'>Last Name: </label>
-        <input
-          type='text'
-          name='lastname'
-          id='lastname'
-          className='text-black bg-white p-1 rounded-md'
-          placeholder='Last Name'
-          onChange={({ target: { value } }) => {
-            setLastName(value);
-          }}
-        />
-        <fieldset>
-          <legend>Select role:</legend>
-          <section className='flex gap-1'>
+    <>
+      {success ? (
+        <div className='text-white p-10 rounded-lg flex flex-col gap-5 backdrop-blur-md bg-black/30 w-full'>
+          <p className='text-white text-2xl'>Success</p>
+          <Link to={'/login'}><button className='my-2 w-fit p-2 rounded-md self-end bg-gradient-to-tr from-red-800 to-red-600 text-white text-base lg:text-lg'>Sign In</button></Link>
+        </div>
+      ) : (
+        <div className='text-white p-10 rounded-lg flex flex-col gap-5 backdrop-blur-md bg-black/30 w-full'>
+          <h1 className='text-xl lg:text-2xl'>Register</h1>
+          {error && <p>{error}</p>}
+          <form onSubmit={handleSubmit} className='flex flex-col gap-1'>
+            <label htmlFor='firstname'>First Name: </label>
             <input
-              type='radio'
-              id='admin'
-              name='role'
-              value='admin'
-              checked={role === 'admin'}
+              ref={userRef}
+              type='text'
+              name='firstname'
+              id='firstname'
+              autoComplete='off'
+              className='text-black bg-white p-1 rounded-md'
+              placeholder='First Name'
               onChange={({ target: { value } }) => {
-                setRole(value);
+                setFirstName(value);
               }}
             />
-            <label htmlFor='admin' className='mr-2'>
-              Admin
+            <label htmlFor='lastname'>Last Name: </label>
+            <input
+              type='text'
+              name='lastname'
+              id='lastname'
+              autoComplete='off'
+              className='text-black bg-white p-1 rounded-md'
+              placeholder='Last Name'
+              onChange={({ target: { value } }) => {
+                setLastName(value);
+              }}
+            />
+            <fieldset>
+              <legend>Select role:</legend>
+              <section className='flex gap-1'>
+                <input
+                  type='radio'
+                  id='admin'
+                  name='role'
+                  value='admin'
+                  checked={role === 'admin'}
+                  onChange={({ target: { value } }) => {
+                    setRole(value);
+                  }}
+                />
+                <label htmlFor='admin' className='mr-2'>
+                  Admin
+                </label>
+                <input
+                  type='radio'
+                  id='user'
+                  name='role'
+                  value='user'
+                  checked={role === 'user'}
+                  onChange={({ target: { value } }) => {
+                    setRole(value);
+                  }}
+                />
+                <label htmlFor='user'>User</label>
+              </section>
+            </fieldset>
+            <label htmlFor='username'>
+              <span className={validUsername ? 'inline-block mr-1' : 'hidden'}>
+                <FontAwesomeIcon icon={faCheck} style={{ color: 'green' }} />
+              </span>
+              <span className={validUsername || !username ? 'hidden' : 'inline-block mr-1'}>
+                <FontAwesomeIcon icon={faTimes} style={{ color: 'red' }} />
+              </span>
+              Username:
             </label>
             <input
-              type='radio'
-              id='user'
-              name='role'
-              value='user'
-              checked={role === 'user'}
+              type='text'
+              placeholder='Username'
+              name='username'
+              id='username'
+              className='text-black bg-white p-1 rounded-md'
+              required
+              autoComplete='off'
               onChange={({ target: { value } }) => {
-                setRole(value);
+                setUsername(value);
               }}
             />
-            <label htmlFor='user'>User</label>
+            <label htmlFor='password'>
+              <span className={validPassword ? 'inline-block mr-1' : 'hidden'}>
+                <FontAwesomeIcon icon={faCheck} style={{ color: 'green' }} />
+              </span>
+              <span className={validPassword || !password ? 'hidden' : 'inline-block mr-1'}>
+                <FontAwesomeIcon icon={faTimes} style={{ color: 'red' }} />
+              </span>
+              Password:
+            </label>
+            <input
+              type='password'
+              placeholder='Password'
+              name='password'
+              id='password'
+              className='text-black bg-white p-1 rounded-md'
+              required
+              autoComplete='off'
+              onChange={({ target: { value } }) => {
+                setPassword(value);
+              }}
+            />
+            <label htmlFor='confirmpassword'>
+              <span className={validMatch && matchPassword ? 'inline-block mr-1' : 'hidden'}>
+                <FontAwesomeIcon icon={faCheck} style={{ color: 'green' }} />
+              </span>
+              <span className={validMatch || !matchPassword ? 'hidden' : 'inline-block mr-1'}>
+                <FontAwesomeIcon icon={faTimes} style={{ color: 'red' }} />
+              </span>
+              Confirm Password:
+            </label>
+            <input
+              type='password'
+              placeholder='Confirm Password'
+              name='confirmpassword'
+              id='confirmpassword'
+              className='text-black bg-white p-1 rounded-md'
+              onChange={({ target: { value } }) => {
+                setMatchPassword(value);
+              }}
+            />
+            <button type='submit' className='my-2 w-fit p-2 rounded-md self-end bg-gradient-to-tr from-red-800 to-red-600 text-white text-base lg:text-lg'>
+              Submit
+            </button>
+          </form>
+          <section className='text-sm lg:text-base'>
+            <p> Already have an account?</p>
+            <Link to='/login'>Sign In</Link>
           </section>
-        </fieldset>
-        <label htmlFor='username'>
-          <span className={validUsername ? 'inline-block mr-1' : 'hidden'}>
-            <FontAwesomeIcon icon={faCheck} style={{ color: 'green' }} />
-          </span>
-          <span className={validUsername || !username ? 'hidden' : 'inline-block mr-1'}>
-            <FontAwesomeIcon icon={faTimes} style={{ color: 'red' }} />
-          </span>
-          Username:
-        </label>
-        <input
-          type='text'
-          placeholder='Username'
-          name='username'
-          id='username'
-          className='text-black bg-white p-1 rounded-md'
-          required
-          autoComplete='off'
-          onChange={({ target: { value } }) => {
-            setUsername(value);
-          }}
-        />
-        <label htmlFor='password'>
-          <span className={validPassword ? 'inline-block mr-1' : 'hidden'}>
-            <FontAwesomeIcon icon={faCheck} style={{ color: 'green' }} />
-          </span>
-          <span className={validPassword || !password ? 'hidden' : 'inline-block mr-1'}>
-            <FontAwesomeIcon icon={faTimes} style={{ color: 'red' }} />
-          </span>
-          Password:
-        </label>
-        <input
-          type='password'
-          placeholder='Password'
-          name='password'
-          id='password'
-          className='text-black bg-white p-1 rounded-md'
-          required
-          autoComplete='off'
-          onChange={({ target: { value } }) => {
-            setPassword(value);
-          }}
-        />
-        <label htmlFor='confirmpassword'>
-          <span className={validMatch && matchPassword ? 'inline-block mr-1' : 'hidden'}>
-            <FontAwesomeIcon icon={faCheck} style={{ color: 'green' }} />
-          </span>
-          <span className={validMatch || !matchPassword ? 'hidden' : 'inline-block mr-1'}>
-            <FontAwesomeIcon icon={faTimes} style={{ color: 'red' }} />
-          </span>
-          Confirm Password:
-        </label>
-        <input
-          type='password'
-          placeholder='Confirm Password'
-          name='confirmpassword'
-          id='confirmpassword'
-          className='text-black bg-white p-1 rounded-md'
-          onChange={({ target: { value } }) => {
-            setMatchPassword(value);
-          }}
-        />
-        <button className='my-2 w-fit p-2 rounded-md self-end bg-gradient-to-tr from-red-800 to-red-600 text-white text-base lg:text-lg'>Submit</button>
-      </form>
-      <section className='text-sm lg:text-base'>
-        <p> Already have an account?</p>
-        <Link to='/login'>Sign In</Link>
-      </section>
-    </div>
+        </div>
+      )}
+    </>
   );
 };
 

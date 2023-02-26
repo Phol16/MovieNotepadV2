@@ -10,7 +10,7 @@ const ProfileTab = () => {
   }
   return (
     <div>
-      <button onClick={handleLogOut} className='p-2 rounded-md'>Log Out</button>
+      <button onClick={handleLogOut} className='p-1 rounded-md'>Log Out</button>
     </div>
   )
 }
