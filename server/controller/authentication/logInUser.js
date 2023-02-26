@@ -5,6 +5,7 @@ import Jwt from 'jsonwebtoken';
 const loginUser = async (req, res) => {
   try {
     const { username, password } = req.body;
+    console.log(username, password);
     const user = await User.findOne({ username });
     if (!user) {
       return res.status(404).json({
@@ -15,7 +16,7 @@ const loginUser = async (req, res) => {
     const isMatch = await bcrypt.compare(password, user.password);
 
     if (!isMatch) {
-      res.status(400).json({
+      return res.status(400).json({
         status: 'failed',
         message: ' Invalid Credential',
       });
@@ -32,6 +33,7 @@ const loginUser = async (req, res) => {
   } catch (err) {
     res.status(500).json({
       status: 'failed',
+      loc:'here',
       message: err.message,
     });
   }
