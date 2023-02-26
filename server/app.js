@@ -4,6 +4,7 @@ import helmet from 'helmet'
 import morgan from 'morgan'
 import errors from './controller/errors/error.js'
 import users from './routes/users.js'
+import movies from './routes/movies.js'
 
 const app = express()
 
@@ -14,6 +15,7 @@ app.use(cors())
 app.use(morgan('dev'))
 
 app.use('/users', users)
+app.use('/movies', movies)
 
 
 app.use(errors, (req, res)=>{
