@@ -45,15 +45,10 @@ const SignUpPage = () => {
     setValidMatch(match);
   }, [password, matchPassword]);
 
-  console.log(firstName);
-  console.log(lastName);
-  console.log(username);
-  console.log(password);
-  console.log(role)
 
   return (
-    <div className='text-white p-10 rounded-lg flex flex-col gap-5 backdrop-blur-md bg-black/30'>
-      <h1 className='text-xl'>Register</h1>
+    <div className='text-white p-10 rounded-lg flex flex-col gap-5 backdrop-blur-md bg-black/30 w-full'>
+      <h1 className='text-xl lg:text-2xl'>Register</h1>
       <form action='' className='flex flex-col gap-1'>
         <label htmlFor='firstname'>First Name: </label>
         <input type='text' name='firstname' id='firstname' className='text-black bg-white p-1 rounded-md' placeholder='First Name' onChange={({target:{value}})=>{setFirstName(value)}}/>
@@ -130,9 +125,9 @@ const SignUpPage = () => {
             setMatchPassword(value);
           }}
         />
-        <button className='my-2 w-fit p-2 rounded-md self-end bg-gradient-to-tr from-red-800 to-red-600 text-white'>Submit</button>
+        <button className='my-2 w-fit p-2 rounded-md self-end bg-gradient-to-tr from-red-800 to-red-600 text-white text-base lg:text-lg'>Submit</button>
       </form>
-      <section>
+      <section className='text-sm lg:text-base'>
       <p> Already have an account?</p>
       <Link to='/login'>Sign In</Link>
       </section>
