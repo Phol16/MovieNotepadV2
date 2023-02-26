@@ -7,7 +7,7 @@ const NavBar = () => {
   return (
     <div className='fixed w-full flex p-5 gap-1 flex justify-between z-10'>
       <Link to='/'>
-        <section className='flex items-center gap-1 text-white'>
+        <section className='flex items-center gap-1 text-white text-base md:text-lg lg:text-xl'>
           <FontAwesomeIcon icon={faTicket} />
           Movie<span className='text-red-600'>Notepad</span>
         </section>
