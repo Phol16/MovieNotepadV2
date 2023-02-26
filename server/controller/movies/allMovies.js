@@ -1,7 +1,7 @@
 import Movie from '../../models/MovieModel.js';
 
 const allMovies = async (req, res) => {
-  const movieList = await Movie.find();
+  const movieList = await Movie.find().sort({createdAt: -1});
 
   if (!movieList) {
     res.status(404).json({
