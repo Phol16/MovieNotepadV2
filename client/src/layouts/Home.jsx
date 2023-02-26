@@ -8,7 +8,7 @@ const Home = () => {
   return (
     <div className='text-white'>
       <NavBar/>
-      <section className='min-h-screen flex flex-col items-center p-20'>
+      <section className='min-h-screen flex flex-col items-center py-20'>
       <Outlet/>
       </section>
       <Footer/>
