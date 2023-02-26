@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import api from '../api/localhost';
 
 const LogInPage = () => {
   const [username, setUsername] = useState('');
@@ -13,7 +14,7 @@ const LogInPage = () => {
     const userInfo = { username, password };
 
     try {
-      const response = await fetch('http://localhost:3500/users/logIn', {
+      const response = await fetch(`${api()}/users/logIn`, {
         method: 'POST',
         cors: 'cors',
         headers: {

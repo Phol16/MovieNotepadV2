@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheck, faTimes } from '@fortawesome/free-solid-svg-icons';
+import api from '../api/localhost'
 
 const user_regex = /^[a-zA-Z][a-zA-Z0-9-_]{3,23}$/;
 const password_regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%.]).{8,24}$/;
@@ -53,7 +54,7 @@ const SignUpPage = () => {
     const userInfo = { username, password, firstName, lastName, role };
 
     try {
-      const response = await fetch('http://localhost:3500/users/signUp', {
+      const response = await fetch(`${api()}/users/signUp`, {
         method: 'POST',
         cors: 'cors',
         headers: {

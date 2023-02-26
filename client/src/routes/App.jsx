@@ -2,6 +2,7 @@ import { Route, Routes } from 'react-router-dom';
 import Protected from '../components/Protected';
 import Home from '../layouts/Home';
 import Intro from '../layouts/Intro';
+import HomePage from '../page/HomePage';
 import IntroPage from '../page/IntroPage';
 import LogInPage from '../page/LogInPage';
 import PageNotFound from '../page/PageNotFound';
@@ -22,7 +23,11 @@ function App() {
             <Home />
           </Protected>
         }
-      />
+      >
+        <Route path='/home' element={
+          <HomePage/>
+        }/>
+      </Route>
       <Route path='*' element={<PageNotFound />} />
     </Routes>
   );
