@@ -5,7 +5,7 @@ import api from '../api/localhost';
 import MovieCard from './MovieCard';
 
 const FeaturedList = () => {
-  const [featuredList, setFeaturedList] = useState([]);
+  const [featuredList, setFeaturedList] = useState(null);
   const [current, setCurrent] = useState(0);
   const [counter, setCounter] = useState(1);
   const [counter1, setCounter1] = useState(2);
@@ -39,6 +39,7 @@ const FeaturedList = () => {
   return (
     <div className='flex flex-col gap-2 min-w-screen'>
       <h1>Featured:</h1>
+      { featuredList ? (
       <main className='flex gap-5 items-center'>
       <button onClick={prevSlide} className='text-white bg-transparent focus:outline-0'>
         <FontAwesomeIcon icon={faArrowAltCircleLeft} className='scale-125 hover:scale-150 transtion-all duration-[150ms]'/>
@@ -62,6 +63,10 @@ const FeaturedList = () => {
         <FontAwesomeIcon icon={faArrowAltCircleRight} className='scale-125 hover:scale-150 transtion-all duration-[150ms]'/>
       </button>
       </main>
+      ):(
+        <p>Loading...</p>
+      )
+}
     </div>
   );
 };
