@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import api from '../api/localhost';
+import AddWatchList from '../components/AddWatchList';
 import AdminButton from '../components/AdminButton';
 
 const MoviePage = () => {
@@ -68,7 +69,7 @@ const MoviePage = () => {
         {userInfo._id === movie.authorId && userInfo.role === 'admin' ? (
           <AdminButton {...movie}/>
         ):userInfo.role === 'user'?(
-          <p>addWL</p>
+          <AddWatchList/>
         ):(null)
         }
         <article className='flex items-center justify-between p-1 text-sm md:text-base'>
