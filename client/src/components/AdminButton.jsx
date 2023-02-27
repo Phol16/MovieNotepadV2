@@ -56,7 +56,7 @@ const AdminButton = (props) => {
   };
 
   return (
-    <section className='flex flex-col gap-1'>
+    <section className='flex flex-col gap-1 my-2'>
       {edit && (
         <main className=' bg-black p-2 rounded-md'>
           <h1 className='text-red-600 p-2 text-lg'>Update:</h1>
@@ -162,14 +162,14 @@ const AdminButton = (props) => {
           }}>Cancel</button>
         </main>
       )}
-      <button
+      <button className='bg-red-600 rounded-md text-white'
         onClick={() => {
           setEdit(!edit);
         }}
       >
         Edit
       </button>
-      <button
+      <button className='bg-red-600 rounded-md text-white'
       onClick={()=>{
         setDeleted(!deleted)
       }}>Delete</button>
