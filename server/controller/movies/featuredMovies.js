@@ -1,7 +1,7 @@
 import Movie from "../../models/MovieModel.js";
 
 const featuredMovies = async(req, res)=>{
-  const FeaturedList = await Movie.find().sort({like: -1}).limit(5)
+  const FeaturedList = await Movie.find({deletedAt:null}).sort({like: -1}).limit(5)
 
   if(!FeaturedList){
     return res.status(404).json({
