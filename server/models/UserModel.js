@@ -1,26 +1,26 @@
-import mongoose from 'mongoose';
+import mongoose, { SchemaTypes } from 'mongoose';
 
 const { Schema, model } = mongoose;
 
 const userSchema = new Schema(
   {
     firstName: {
-      type: String,
+      type: SchemaTypes.String,
     },
     lastName: { 
-      type: String 
+      type: SchemaTypes.String,
     },
     username: {
-      type: String,
+      type: SchemaTypes.String,
       required: [true, 'username is required'],
       unique: true,
     },
     password: {
-      type: String,
+      type: SchemaTypes.String,
       required: [true, 'password is required']
     },
     role:{
-      type: String,
+      type: SchemaTypes.String,
       required: [true, 'Must have a role']
     },
   },
