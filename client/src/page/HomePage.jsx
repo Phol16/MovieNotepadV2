@@ -6,6 +6,7 @@ import api from '../api/localhost';
 
 const HomePage = () => {
   const [userRole, setUserRole] = useState(null);
+  const [update, setUpdate] = useState('up');
   const accessToken = localStorage.getItem('Token');
 
   useEffect(() => {
@@ -27,11 +28,15 @@ const HomePage = () => {
     }
   }, []);
 
+  const handleUpdate = (e)=>{
+    setUpdate(e)
+  }
+
   return (
     <div className='flex flex-col items-center'>
       <FeaturedList />
-      <MoviesList />
-      <section className='fixed bottom-5 left-5'>{userRole ? userRole === 'admin' ? <AddMovie /> : <p>watchlist</p> : <p>Loading...</p>}</section>
+      <MoviesList update={update}/>
+      <section className='fixed bottom-5 left-5'>{userRole ? userRole === 'admin' ? <AddMovie listen={handleUpdate}/> : <p>watchlist</p> : <p>Loading...</p>}</section>
     </div>
   );
 };

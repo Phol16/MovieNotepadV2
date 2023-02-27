@@ -1,9 +1,9 @@
 import { faPlusCircle } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import api from '../api/localhost';
 
-const AddMovie = () => {
+const AddMovie = ({listen}) => {
   const [title, setTitle] = useState('');
   const [year, setYear] = useState([]);
   const [genre, setGenre] = useState([]);
@@ -33,8 +33,8 @@ const AddMovie = () => {
     } catch (error) {
       console.log(error.message);
     }
+    listen(new Date(Date.now()).toLocaleString())
     setOpen(!open);
-    setHidden('hidden');
   };
 
   return (

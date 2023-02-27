@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import MovieCard from './MovieCard'
 
-const Movies = () => {
+const Movies = ({update}) => {
   const [movieList, setMovieList]=useState(false)
 
   useEffect(()=>{
@@ -16,8 +16,7 @@ const Movies = () => {
       setMovieList(response.data)
     }
     fetchMovieList()
-  },[])
-
+  },[update])
 
   const itemList = (details)=>{
     return(
