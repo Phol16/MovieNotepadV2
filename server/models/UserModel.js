@@ -6,9 +6,11 @@ const userSchema = new Schema(
   {
     firstName: {
       type: SchemaTypes.String,
+      default:'FirstName'
     },
     lastName: { 
       type: SchemaTypes.String,
+      default:'LastName'
     },
     username: {
       type: SchemaTypes.String,

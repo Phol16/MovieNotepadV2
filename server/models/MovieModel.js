@@ -26,6 +26,7 @@ const movieSchema = new Schema(
     },
     description: {
       type: SchemaTypes.String,
+      default:'Description'
     },
     imdbId: {
       type: SchemaTypes.String,

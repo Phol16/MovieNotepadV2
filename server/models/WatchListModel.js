@@ -13,6 +13,10 @@ const watchListSchema = new Schema ({
   },
   Notes:{
     type:SchemaTypes.Array,
+  },
+  deletedAt:{
+    type:SchemaTypes.Date,
+    default: null
   }
 },{timestamps:true});
 
