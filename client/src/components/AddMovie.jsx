@@ -11,7 +11,7 @@ const AddMovie = () => {
   const [imdbId, setImdbId] = useState('');
   const [image, setImage] = useState('');
   const [hidden, setHidden] = useState('hidden');
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(true);
   const accessToken = localStorage.getItem('Token');
 
 
@@ -23,7 +23,7 @@ const AddMovie = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    const data = { title, image, imdbId, description, genre: [genre.split(' ')], year: [year.split(' ')] };
+    const data = { title, image, imdbId, description, genre: [...genre.split(' ')], year: [...year.split(' ')] };
 
     try {
       const response = await fetch(`${api()}/movies`, {
