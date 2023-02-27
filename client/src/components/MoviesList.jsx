@@ -22,7 +22,7 @@ const Movies = () => {
   const itemList = (details)=>{
     return(
       <div key={details.title} className='flex flex-col items-center justify-center hover:scale-105 transition-all ease-in duration-[150ms]'>
-        <MovieCard title={details.title} image={details.image} year={details.year}/>
+        <MovieCard title={details.title} image={details.image} year={details.year} redirect={details._id}/>
       </div>
     )
   }

@@ -5,6 +5,7 @@ import Intro from '../layouts/Intro';
 import HomePage from '../page/HomePage';
 import IntroPage from '../page/IntroPage';
 import LogInPage from '../page/LogInPage';
+import MoviePage from '../page/MoviePage';
 import PageNotFound from '../page/PageNotFound';
 import SignUpPage from '../page/SignUpPage';
 
@@ -24,9 +25,8 @@ function App() {
           </Protected>
         }
       >
-        <Route path='/home' element={
-          <HomePage/>
-        }/>
+        <Route path='/home' element={<HomePage />} />
+        <Route path='/home/movie/:movieId' element={<MoviePage/>}/>
       </Route>
       <Route path='*' element={<PageNotFound />} />
     </Routes>

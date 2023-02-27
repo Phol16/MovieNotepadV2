@@ -36,7 +36,6 @@ const FeaturedList = () => {
     setCounter1(counter1 === 0 ? featuredList.length - 1 : counter1 - 1);
   };
 
-
   return (
     <div className='flex flex-col gap-2 min-w-screen'>
       <h1>Featured:</h1>
@@ -48,12 +47,12 @@ const FeaturedList = () => {
         return (
           current === index && (
             <div className='flex gap-5' key={index}>
-              <MovieCard title={element.title} image={element.image} year={element.year} />
+              <MovieCard title={element.title} image={element.image} year={element.year} redirect={element._id}/>
               <section className='hidden md:inline'>
-              <MovieCard title={featuredList[counter].title} image={featuredList[counter].image} year={featuredList[counter].year} />
+              <MovieCard title={featuredList[counter].title} image={featuredList[counter].image} year={featuredList[counter].year} redirect={featuredList[counter]._id}/>
               </section>
               <section className='hidden xl:inline'>
-              <MovieCard title={featuredList[counter1].title} image={featuredList[counter1].image} year={featuredList[counter1].year} />
+              <MovieCard title={featuredList[counter1].title} image={featuredList[counter1].image} year={featuredList[counter1].year} redirect={featuredList[counter1]._id}/>
               </section>
             </div>
           )

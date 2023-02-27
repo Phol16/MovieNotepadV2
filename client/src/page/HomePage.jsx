@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import AddMovie from '../components/AddMovie';
 import FeaturedList from '../components/FeaturedList';
-import Movies from '../components/Movies';
+import MoviesList from '../components/MoviesList';
 import api from '../api/localhost';
 
 const HomePage = () => {
@@ -30,7 +30,7 @@ const HomePage = () => {
   return (
     <div className='flex flex-col items-center'>
       <FeaturedList />
-      <Movies />
+      <MoviesList />
       <section className='fixed bottom-5 left-5'>{userRole ? userRole === 'admin' ? <AddMovie /> : <p>watchlist</p> : <p>Loading...</p>}</section>
     </div>
   );
