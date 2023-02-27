@@ -52,8 +52,6 @@ const MoviePage = () => {
     window.open(`https://www.imdb.com/title/${movie.imdbId}`, '_blank');
   };
 
-  console.log(movie);
-  console.log(userInfo);
   return (
     <div className='max-w-xl lg:max-w-2xl p-1'>
       <button
@@ -68,7 +66,7 @@ const MoviePage = () => {
       <img src={movie.image} alt='Poster' className='m-auto w-56 lg:w-80'/>
       <main className='backdrop-blur-md bg-black/40 rounded-md p-4 self-center max-w-sm'>
         {userInfo._id === movie.authorId && userInfo.role === 'admin' ? (
-          <AdminButton authorId={movie.authorId}/>
+          <AdminButton {...movie}/>
         ):userInfo.role === 'user'?(
           <p>addWL</p>
         ):(null)
@@ -95,7 +93,7 @@ const MoviePage = () => {
         <section className='flex justify-center gap-1 text-red-600 p-2'>
           {movie.genre ? (
             movie.genre.map((event) => {
-              return <span>{event}</span>;
+              return <span key={event}>{event}</span>;
             })
           ) : (
             <div>Loading...</div>
