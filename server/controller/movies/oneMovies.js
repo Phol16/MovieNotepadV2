@@ -3,7 +3,7 @@ import Movie from '../../models/MovieModel.js';
 const oneMovie = async(req, res) => {
   const { id } = req.query;
 
-  const movieFound = await Movie.findOne({_id: id})
+  const movieFound = await Movie.findOne({_id: id, deletedAt:null})
 
   if(!movieFound){
     return res.status(404).json({
