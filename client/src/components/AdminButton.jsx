@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import api from '../api/localhost';
 
 const AdminButton = (props) => {
@@ -9,10 +10,11 @@ const AdminButton = (props) => {
   const [imdbId, setImdbId] = useState(props.imdbId);
   const [image, setImage] = useState(props.image);
   const [edit, setEdit] = useState(false);
+  const [deleted, setDeleted] = useState(false);
+  const navigate = useNavigate();
   const accessToken = localStorage.getItem('Token');
 
   const handleSubmit = async (event) => {
-    console.log('hello');
     event.preventDefault();
     const data = { title, image, imdbId, description, genre: typeof genre === 'string' ? [...genre.split(' ')] : genre, year: typeof year === 'string' ? [...year.split(' ')] : year };
     try {
@@ -31,11 +33,32 @@ const AdminButton = (props) => {
       console.log(error.message);
     }
     setEdit(!edit);
+    navigate(-1)
   };
+
+  const handleDelete = async ()=>{
+    try {
+      const response = await fetch(`${api()}/movies?id=${props._id}`, {
+        method: 'DELETE',
+        cors: 'cors',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `bearer ${accessToken}`,
+        },
+      }).then((res) => res.json());
+
+      console.log(response);
+    } catch (error) {
+      console.log(error.message);
+    }
+    setDeleted(!deleted);
+    navigate(-1)
+  };
+
   return (
     <section className='flex flex-col gap-1'>
       {edit && (
-        <main className=' min-w-screen bg-black p-2 rounded-md'>
+        <main className=' bg-black p-2 rounded-md'>
           <h1 className='text-red-600 p-2 text-lg'>Update:</h1>
           <form onSubmit={handleSubmit} className='flex flex-col'>
             <label htmlFor='title' className='w-fit'>
@@ -128,6 +151,17 @@ const AdminButton = (props) => {
           </form>
         </main>
       )}
+      {deleted && (
+        <main className=' bg-black p-2 rounded-md'>
+          <p>Are you sure you want to delete {props.title}?</p>
+          <button className='p-2 rounded-lg text-white bg-red-600 hover:scale-110 text-xs md:text-sm mr-2' onClick={handleDelete}>
+            Confirm
+          </button>
+          <button className='p-2 rounded-lg text-white bg-red-600 hover:scale-110 text-xs md:text-sm' onClick={()=>{
+            setDeleted(!deleted)
+          }}>Cancel</button>
+        </main>
+      )}
       <button
         onClick={() => {
           setEdit(!edit);
@@ -135,7 +169,10 @@ const AdminButton = (props) => {
       >
         Edit
       </button>
-      <button>Delete</button>
+      <button
+      onClick={()=>{
+        setDeleted(!deleted)
+      }}>Delete</button>
     </section>
   );
 };
