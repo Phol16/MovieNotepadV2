@@ -8,5 +8,5 @@ const router = Router();
 
 router.route('/').get(verifyToken, allWatchList).post(verifyToken, createWatchList);
 
-router.route('/watchlist').get(verifyToken, oneWatchList);
+router.route('/movie').get(verifyToken, oneWatchList);
 export default router;
