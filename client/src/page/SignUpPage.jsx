@@ -91,6 +91,7 @@ const SignUpPage = () => {
               type='text'
               name='firstname'
               id='firstname'
+              required
               autoComplete='off'
               className='text-black bg-white p-1 rounded-md'
               placeholder='First Name'
@@ -103,6 +104,7 @@ const SignUpPage = () => {
               type='text'
               name='lastname'
               id='lastname'
+              required
               autoComplete='off'
               className='text-black bg-white p-1 rounded-md'
               placeholder='Last Name'

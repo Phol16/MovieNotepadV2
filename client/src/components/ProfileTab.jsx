@@ -52,7 +52,7 @@ const ProfileTab = () => {
             <section className='absolute mt-8 p-2 bg-white w-[150px] right-4 rounded-md text-black flex flex-col gap-1'>
               <h1 className='text-red-600 text-lg'>Profile</h1>
               <p>
-                Name: {userInfo.firstName[0].toUpperCase() + userInfo.firstName.substring(1)} <span>{userInfo.lastName}</span>
+                Name: {userInfo.firstName ? userInfo.firstName[0].toUpperCase() + userInfo.firstName.substring(1) : null} <span>{userInfo.lastName}</span>
               </p>
               <p>Role: {userInfo.role[0].toUpperCase() + userInfo.role.substring(1)}</p>
               <button onClick={handleLogOut} className='p-1 rounded-md bg-red-600 text-white'>

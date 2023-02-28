@@ -35,6 +35,7 @@ const FeaturedList = () => {
     setCounter(counter === 0 ? featuredList.length - 1 : counter - 1);
     setCounter1(counter1 === 0 ? featuredList.length - 1 : counter1 - 1);
   };
+  console.log(featuredList)
 
   return (
     <div className='flex flex-col gap-2 min-w-screen'>
