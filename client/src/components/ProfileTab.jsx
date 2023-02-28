@@ -21,13 +21,11 @@ const ProfileTab = () => {
             Authorization: `bearer ${accessToken}`,
           },
         }).then((res) => res.json());
-
         setUserInfo(response.data);
       } catch (error) {
         console.log(error.message);
       }
     };
-
     fetchUser();
   }, []);
 
@@ -40,7 +38,12 @@ const ProfileTab = () => {
       {userInfo ? (
         <main>
           <section>
-            <button className='flex justify-center items-center gap-1 bg-transparent text-white focus:outline-none hover:scale-110 transition-all' onClick={()=>{setOpen(!open)}}>
+            <button
+              className='flex justify-center items-center gap-1 bg-transparent text-white focus:outline-none hover:scale-110 transition-all'
+              onClick={() => {
+                setOpen(!open);
+              }}
+            >
               <FontAwesomeIcon icon={faUserAlt} />
               <p>{userInfo.role[0].toUpperCase() + userInfo.role.substring(1)}</p>
             </button>
@@ -48,7 +51,9 @@ const ProfileTab = () => {
           {open && (
             <section className='absolute mt-8 p-2 bg-white w-[150px] right-4 rounded-md text-black flex flex-col gap-1'>
               <h1 className='text-red-600 text-lg'>Profile</h1>
-              <p>Name: {userInfo.firstName[0].toUpperCase()+userInfo.firstName.substring(1)} <span>{userInfo.lastName}</span></p>
+              <p>
+                Name: {userInfo.firstName[0].toUpperCase() + userInfo.firstName.substring(1)} <span>{userInfo.lastName}</span>
+              </p>
               <p>Role: {userInfo.role[0].toUpperCase() + userInfo.role.substring(1)}</p>
               <button onClick={handleLogOut} className='p-1 rounded-md bg-red-600 text-white'>
                 Log Out

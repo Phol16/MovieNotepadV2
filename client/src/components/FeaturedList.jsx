@@ -1,4 +1,4 @@
-import { faArrowAltCircleLeft, faArrowAltCircleRight, faArrowLeft, faArrowLeftLong, faCircleArrowLeft } from '@fortawesome/free-solid-svg-icons';
+import { faArrowAltCircleLeft, faArrowAltCircleRight, faArrowLeft, faArrowLeftLong, faCircleArrowLeft, faExclamationCircle } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { useEffect, useState } from 'react';
 import api from '../api/localhost';
@@ -19,7 +19,7 @@ const FeaturedList = () => {
           'Content-Type': 'application/json',
         },
       }).then((res) => res.json());
-      setFeaturedList(response.data);
+      response.status === 'success' ? setFeaturedList(response.data) : setFeaturedList(response.message);
     };
     fetchFeaturedList();
   }, []);
@@ -40,6 +40,10 @@ const FeaturedList = () => {
     <div className='flex flex-col gap-2 min-w-screen'>
       <h1>Featured:</h1>
       { featuredList ? (
+        typeof featuredList === 'string' ?
+        <p className='text-red-600 bg-black p-5 rounded-md'>
+          <FontAwesomeIcon icon={faExclamationCircle}/>
+          {featuredList}</p>:
       <main className='flex gap-5 items-center'>
       <button onClick={prevSlide} className='text-white bg-transparent focus:outline-0'>
         <FontAwesomeIcon icon={faArrowAltCircleLeft} className='scale-125 hover:scale-150 transtion-all duration-[150ms]'/>

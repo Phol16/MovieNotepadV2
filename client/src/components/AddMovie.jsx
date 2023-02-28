@@ -28,7 +28,6 @@ const AddMovie = ({listen}) => {
         },
         body: JSON.stringify(data),
       }).then((res) => res.json());
-
       console.log(response);
     } catch (error) {
       console.log(error.message);
