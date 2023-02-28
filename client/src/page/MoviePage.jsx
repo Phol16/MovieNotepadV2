@@ -69,7 +69,7 @@ const MoviePage = () => {
         {userInfo._id === movie.authorId && userInfo.role === 'admin' ? (
           <AdminButton {...movie}/>
         ):userInfo.role === 'user'?(
-          <AddWatchList/>
+          <AddWatchList movieId={movie._id}/>
         ):(null)
         }
         <article className='flex items-center justify-between p-1 text-sm md:text-base'>

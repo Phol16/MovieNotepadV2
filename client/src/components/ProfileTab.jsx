@@ -30,7 +30,6 @@ const ProfileTab = () => {
 
     fetchUser();
   }, []);
-  console.log(userInfo);
 
   const handleLogOut = () => {
     localStorage.removeItem('Token');
