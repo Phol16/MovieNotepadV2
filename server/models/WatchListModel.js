@@ -13,6 +13,7 @@ const watchListSchema = new Schema ({
   },
   Notes:{
     type:SchemaTypes.Array,
+    default:'No notes yet'
   },
   deletedAt:{
     type:SchemaTypes.Date,
