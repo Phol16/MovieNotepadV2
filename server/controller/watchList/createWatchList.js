@@ -5,7 +5,7 @@ const createWatchList = async(req, res)=>{
   try {
     const newWatchList = new WatchList({
       movieId,
-      userId: req.user,
+      userId: req.user.id,
     })
     const response = await newWatchList.save()
   

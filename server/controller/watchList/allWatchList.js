@@ -8,7 +8,7 @@ const allWatchList = async(req, res)=>{
     if(findWL){
       return res.status(404).json({
         status:'failed',
-        message:'Movie not in the watchlist'
+        message:'No list of movie added to Watch List'
       })
     }
 
