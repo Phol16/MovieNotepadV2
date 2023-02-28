@@ -6,6 +6,7 @@ import errors from './controller/errors/error.js'
 import users from './routes/users.js'
 import movies from './routes/movies.js'
 import watchList from './routes/watchList.js'
+import initialfetch from './controller/initialFetch.js'
 
 const app = express()
 
@@ -18,6 +19,7 @@ app.use(morgan('dev'))
 app.use('/users', users)
 app.use('/movies', movies)
 app.use('/watchList', watchList)
+app.get('/', initialfetch)
 
 
 app.use(errors, (req, res)=>{
