@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import Protected from '../components/Protected';
 import Home from '../layouts/Home';
@@ -8,11 +9,28 @@ import LogInPage from '../page/LogInPage';
 import MoviePage from '../page/MoviePage';
 import PageNotFound from '../page/PageNotFound';
 import SignUpPage from '../page/SignUpPage';
+import api from '../api/localhost';
+import ConnectingPage from '../page/ConnectingPage';
 
 function App() {
+  const [connected, setConnected] = useState(false);
+
+  console.log(connected);
+
+  useEffect(() => {
+    try {
+      const connecting = async () => {
+        const response = await fetch(`${api()}/`).then((res) => res.json());
+        response.message === 'Connected' ? setConnected(true) : setConnected(false);
+      };
+      connecting()
+    } catch (error) {
+      console.log(error.message);
+    }
+  }, []);
   return (
     <Routes>
-      <Route path='/' element={<Intro />}>
+      <Route path='/' element={connected ? <Intro /> : <ConnectingPage />}>
         <Route path='/' element={<IntroPage />} />
         <Route path='/logIn' element={<LogInPage />} />
         <Route path='/signUp' element={<SignUpPage />} />
@@ -26,7 +44,7 @@ function App() {
         }
       >
         <Route path='/home' element={<HomePage />} />
-        <Route path='/home/movie/:movieId' element={<MoviePage/>}/>
+        <Route path='/home/movie/:movieId' element={<MoviePage />} />
       </Route>
       <Route path='*' element={<PageNotFound />} />
     </Routes>
