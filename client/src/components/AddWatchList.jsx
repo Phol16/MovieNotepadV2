@@ -48,22 +48,26 @@ const AddWatchList = ({ movieId }) => {
   };
 
   return (
-    <div className='flex justify-center'>
-      {added ? (
-        <button className='bg-transparent text-white text-2xl md:text-3xl hover:scale-110 transition-all flex justify-center items-center gap-1' disabled>
-          <p className='text-sm '>
-            Movie in <span className='text-red-600'>WatchList</span> 
-          </p>
-        </button>
-      ) : (
-        <button className='bg-transparent text-white text-2xl md:text-3xl hover:scale-110 transition-all flex justify-center items-center gap-1' onClick={handleAddWL}>
-          <FontAwesomeIcon icon={faPlusCircle} />
-          <p className='text-sm '>
-            Add to <span className='text-red-600'>WatchList</span>
-          </p>
-        </button>
-      )}
-    </div>
+    <>
+      {movieId ? (
+        <div className='flex justify-center'>
+          {added ? (
+            <button className='bg-transparent text-white text-2xl md:text-3xl hover:scale-110 transition-all flex justify-center items-center gap-1' disabled>
+              <p className='text-sm '>
+                Movie in <span className='text-red-600'>WatchList</span>
+              </p>
+            </button>
+          ) : (
+            <button className='bg-transparent text-white text-2xl md:text-3xl hover:scale-110 transition-all flex justify-center items-center gap-1' onClick={handleAddWL}>
+              <FontAwesomeIcon icon={faPlusCircle} />
+              <p className='text-sm '>
+                Add to <span className='text-red-600'>WatchList</span>
+              </p>
+            </button>
+          )}
+        </div>
+      ) : null}
+    </>
   );
 };
 
