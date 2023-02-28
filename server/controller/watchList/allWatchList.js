@@ -5,7 +5,7 @@ const allWatchList = async(req, res)=>{
   try {
     const findWL = await WatchList.find({deletedAt: null, userId: req.user})
     
-    if(findWL){
+    if(!findWL){
       return res.status(404).json({
         status:'failed',
         message:'No list of movie added to Watch List'
