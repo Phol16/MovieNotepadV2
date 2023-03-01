@@ -12,10 +12,10 @@ import SignUpPage from '../page/SignUpPage';
 import api from '../api/localhost';
 import ConnectingPage from '../page/ConnectingPage';
 import WatchListPage from '../page/WatchListPage';
+import WatchList from '../layouts/WatchList';
 
 function App() {
   const [connected, setConnected] = useState(false);
-
 
   useEffect(() => {
     try {
@@ -23,7 +23,7 @@ function App() {
         const response = await fetch(`${api()}/`).then((res) => res.json());
         response.message === 'Connected' ? setConnected(true) : setConnected(false);
       };
-      connecting()
+      connecting();
     } catch (error) {
       console.log(error.message);
     }
@@ -45,7 +45,16 @@ function App() {
       >
         <Route path='/home' element={<HomePage />} />
         <Route path='/home/movie/:movieId' element={<MoviePage />} />
-        <Route path='/home/watchList' element={<WatchListPage/>} />
+      </Route>
+      <Route
+        path='/watchList'
+        element={
+          <Protected>
+            <WatchList />
+          </Protected>
+        }
+      >
+        <Route path='/watchList' element={<WatchListPage />} />
       </Route>
       <Route path='*' element={<PageNotFound />} />
     </Routes>

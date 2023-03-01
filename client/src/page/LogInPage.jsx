@@ -36,7 +36,7 @@ const LogInPage = () => {
   }, [theAccessToken]);
 
   return (
-    <div className='text-white p-10 rounded-lg flex flex-col gap-5 backdrop-blur-md bg-black/30 w-full'>
+    <div className='text-white p-10 rounded-lg flex flex-col gap-5 backdrop-blur-md bg-black/30 w-full sm:max-w-xs'>
       <h1 className='text-xl lg:text-2xl'>MovieNotepad</h1>
       {error && <p>{error}</p>}
       <form onSubmit={handleSubmit} className='flex flex-col gap-1'>

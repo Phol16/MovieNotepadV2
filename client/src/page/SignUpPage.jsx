@@ -76,12 +76,12 @@ const SignUpPage = () => {
   return (
     <>
       {success ? (
-        <div className='text-white p-10 rounded-lg flex flex-col gap-5 backdrop-blur-md bg-black/30 w-full'>
+        <div className='text-white p-10 rounded-lg flex flex-col gap-5 backdrop-blur-md bg-black/30 w-full sm:max-w-xs'>
           <p className='text-white text-2xl'>Success</p>
           <Link to={'/login'}><button className='my-2 w-fit p-2 rounded-md self-end bg-gradient-to-tr from-red-800 to-red-600 text-white text-base lg:text-lg'>Sign In</button></Link>
         </div>
       ) : (
-        <div className='text-white p-10 rounded-lg flex flex-col gap-5 backdrop-blur-md bg-black/30 w-full'>
+        <div className='text-white p-10 rounded-lg flex flex-col gap-5 backdrop-blur-md bg-black/30 w-full sm:max-w-xs'>
           <h1 className='text-xl lg:text-2xl'>Register</h1>
           {error && <p>{error}</p>}
           <form onSubmit={handleSubmit} className='flex flex-col gap-1'>
