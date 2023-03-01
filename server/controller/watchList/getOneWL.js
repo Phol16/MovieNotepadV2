@@ -3,7 +3,7 @@ const getOneWL = async(req, res)=>{
  const {id} = req.params
 
  try {
-  const found = await WatchList.findOne({_id: id, authorId: req.user.id}).populate('movieId')
+  const found = await WatchList.findOne({_id: id,deletedAt:null, authorId: req.user.id}).populate('movieId')
 
   if(!found){
     return res.status(404).json({
