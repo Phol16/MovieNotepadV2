@@ -152,12 +152,12 @@ const AdminButton = (props) => {
         </main>
       )}
       {deleted && (
-        <main className=' bg-black p-2 rounded-md'>
+        <main className=' bg-black p-2 rounded-md flex flex-col gap-2'>
           <p>Are you sure you want to delete {props.title}?</p>
           <button className='p-2 rounded-lg text-white bg-red-600 hover:scale-110 text-xs md:text-sm mr-2' onClick={handleDelete}>
             Confirm
           </button>
-          <button className='p-2 rounded-lg text-white bg-red-600 hover:scale-110 text-xs md:text-sm' onClick={()=>{
+          <button className='p-2 rounded-lg text-white bg-transparent hover:scale-110 text-xs md:text-sm' onClick={()=>{
             setDeleted(!deleted)
           }}>Cancel</button>
         </main>

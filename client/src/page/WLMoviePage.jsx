@@ -4,8 +4,10 @@ import api from '../api/localhost';
 
 const WLMoviePage = () => {
   const [movie, setMovie] = useState(null);
+  const [remove, setRemove] = useState(false);
   const { WLMovieID } = useParams();
   const accessToken = localStorage.getItem('Token');
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchMovie = async () => {
@@ -28,10 +30,29 @@ const WLMoviePage = () => {
   }, []);
 
   const handleImdb = () => {
-    window.open(`https://www.imdb.com/title/${movie.imdbId}`, '_blank');
+    window.open(`https://www.imdb.com/title/${movie.movieId.imdbId}`, '_blank');
   };
 
-  console.log(movie);
+  const handleDelete = async () => {
+
+    try {
+      const response = await fetch(`${api()}/watchList/movie/${WLMovieID}`, {
+        method: 'DELETE',
+        cors: 'cors',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `bearer ${accessToken}`,
+        },
+      }).then((res) => res.json());
+
+      console.log(response);
+    } catch (error) {
+      console.log(error.message);
+    }
+    setRemove(!remove);
+    navigate(-1);
+  };
+
   return (
     <>
       {movie ? (
@@ -39,9 +60,32 @@ const WLMoviePage = () => {
           <div className='grid grid-rows-2 lg:grid-cols-2 lg:grid-rows-none'>
             <img src={movie.movieId.image} alt='Poster' className='m-auto w-56 lg:w-80' />
             <main className='backdrop-blur-md bg-black/40 rounded-md p-4 self-center max-w-sm flex flex-col items-center gap-1'>
-                <section>
-                  <button className='bg-red-600 rounded-md text-white p-2 text-xs lg:text-sm'>Remove from WatchList</button>
+              {remove && (
+                <section className=' bg-black p-2 rounded-md flex flex-col gap-2'>
+                  <p>Are you sure you want to remove {movie.movieId.title}?</p>
+                  <button className='p-2 rounded-lg text-white bg-red-600 hover:scale-110 text-xs md:text-sm mr-2' onClick={handleDelete}>
+                    Confrim
+                  </button>
+                  <button
+                    className='p-2 rounded-lg text-white bg-transparent hover:scale-110 text-xs md:text-sm'
+                    onClick={() => {
+                      setRemove(!remove);
+                    }}
+                  >
+                    Cancel
+                  </button>
                 </section>
+              )}
+              <section>
+                <button
+                  className='bg-red-600 rounded-md text-white p-2 text-xs lg:text-sm'
+                  onClick={() => {
+                    setRemove(!remove);
+                  }}
+                >
+                  Remove from WatchList
+                </button>
+              </section>
               <article className='flex items-center justify-between p-1 text-sm md:text-base w-full lg:text-lg'>
                 <section className='flex gap-1'>
                   <h1 className='max-w-[150px]'>{movie.movieId.title}</h1>
