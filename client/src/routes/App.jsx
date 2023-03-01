@@ -13,6 +13,7 @@ import api from '../api/localhost';
 import ConnectingPage from '../page/ConnectingPage';
 import WatchListPage from '../page/WatchListPage';
 import WatchList from '../layouts/WatchList';
+import WLMoviePage from '../page/WLMoviePage';
 
 function App() {
   const [connected, setConnected] = useState(false);
@@ -55,6 +56,7 @@ function App() {
         }
       >
         <Route path='/watchList' element={<WatchListPage />} />
+        <Route path='/watchList/movie/:WLMovieID' element={<WLMoviePage/>}/>
       </Route>
       <Route path='*' element={<PageNotFound />} />
     </Routes>

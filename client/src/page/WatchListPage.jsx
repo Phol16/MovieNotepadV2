@@ -27,13 +27,12 @@ const WatchListPage = () => {
     fetchMovie();
   }, []);
 
-  console.log(list);
   return (
       <main>
         {list ? (
           <div className='p-2 grid gap-5 sm:grid-cols-2 md:grid-cols-3'>
             {list.map((details) => {
-              return <MovieCard title={details.movieId.title} image={details.movieId.image} year={details.movieId.year} redirect={'#'} />;
+              return <MovieCard key={details._id} title={details.movieId.title} image={details.movieId.image} year={details.movieId.year} redirect={`/watchList/movie/${details._id}`} />;
             })}
           </div>
         ) : (
