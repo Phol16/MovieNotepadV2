@@ -11,11 +11,11 @@ import PageNotFound from '../page/PageNotFound';
 import SignUpPage from '../page/SignUpPage';
 import api from '../api/localhost';
 import ConnectingPage from '../page/ConnectingPage';
+import WatchListPage from '../page/WatchListPage';
 
 function App() {
   const [connected, setConnected] = useState(false);
 
-  console.log(connected);
 
   useEffect(() => {
     try {
@@ -45,6 +45,7 @@ function App() {
       >
         <Route path='/home' element={<HomePage />} />
         <Route path='/home/movie/:movieId' element={<MoviePage />} />
+        <Route path='/home/watchList' element={<WatchListPage/>} />
       </Route>
       <Route path='*' element={<PageNotFound />} />
     </Routes>

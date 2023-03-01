@@ -1,10 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-const FeaturedCard = ({ image, title, year, redirect }) => {
+const MovieCard = ({ image, title, year, redirect }) => {
   return (
     <>
-    <Link to={`/home/movie/${redirect}`}>
+    <Link to={`${redirect}`}>
     <div className='flex flex-col items-center hover:scale-105 transition-all ease-in duration-[150ms]'>
       <img src={image} alt='poster' className='w-36 h-48 md:w-36 xl:w-44 xl:h-60 rounded-md ' />
       <section className='text-xs md:text-[15px] flex justify-center items-center max-w-[180px]'>
@@ -24,4 +24,4 @@ const FeaturedCard = ({ image, title, year, redirect }) => {
   );
 };
 
-export default FeaturedCard;
+export default MovieCard;

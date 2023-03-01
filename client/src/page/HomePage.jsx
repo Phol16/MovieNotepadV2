@@ -44,7 +44,7 @@ const HomePage = () => {
           userRole === 'admin' ? (
             <AddMovie listen={handleUpdate} />
           ) : (
-            <Link>
+            <Link to={'/home/watchList'}>
               <button className='bg-transparent text-3xl transition-all hover:scale-110 duration-[300ms] w-fit focus:outline-none'>
                 <FontAwesomeIcon icon={faEye} className='text-red-600 lg:text-white drop-shadow-md' />
                 <p className='text-white text-xs drop-shadow-md backdrop-blur-md bg-black/30 md:backdrop-blur-none md:bg-transparent p-1 rounded-md'>Watch List</p>
