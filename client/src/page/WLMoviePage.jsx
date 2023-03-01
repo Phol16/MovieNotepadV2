@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import api from '../api/localhost';
+import Notes from '../components/Notes';
 
 const WLMoviePage = () => {
   const [movie, setMovie] = useState(null);
   const [remove, setRemove] = useState(false);
+  const [open, setOpen] = useState(false);
   const { WLMovieID } = useParams();
   const accessToken = localStorage.getItem('Token');
   const navigate = useNavigate();
@@ -34,7 +36,6 @@ const WLMoviePage = () => {
   };
 
   const handleDelete = async () => {
-
     try {
       const response = await fetch(`${api()}/watchList/movie/${WLMovieID}`, {
         method: 'DELETE',
@@ -76,7 +77,10 @@ const WLMoviePage = () => {
                   </button>
                 </section>
               )}
-              <section>
+              <section className='flex flex-col gap-2'>
+                <button className='bg-red-600 rounded-md text-white p-2 text-xs lg:text-sm' onClick={()=>{setOpen(!open)}}>
+                  Add Notes
+                </button>
                 <button
                   className='bg-red-600 rounded-md text-white p-2 text-xs lg:text-sm'
                   onClick={() => {
@@ -115,7 +119,17 @@ const WLMoviePage = () => {
                 )}
               </section>
               <p className='text-sm'>{movie.movieId.description}</p>
+              {open && 
+              <main>
+                <form action="" className='text-black flex flex-col'>
+                  <input type="text" placeholder='Title' className='focus:outline-none p-1 w-full rounded-t-md'/>
+                  <textarea name="content" id="content" cols="30" rows="5" placeholder='Content' className='w-full focus:outline-none p-1 rounded-b-md'/>
+                  <button className='p-2 rounded-lg text-white bg-red-600 hover:scale-110 text-xs md:text-sm w-fit self-end m-2'>Add</button>
+                </form>
+              </main>
+              }
             </main>
+            <Notes/>
           </div>
         </div>
       ) : (
