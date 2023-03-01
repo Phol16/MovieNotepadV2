@@ -5,10 +5,12 @@ const {Schema, model} = mongoose
 const watchListSchema = new Schema ({
   movieId:{
     type:SchemaTypes.ObjectId,
+    ref:'Movie',
     required:[true, 'Must have a movieId']
   },
   userId:{
     type:SchemaTypes.ObjectId,
+    ref:'User',
     required:[true, 'Must have a UserId']
   },
   Notes:{

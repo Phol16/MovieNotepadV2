@@ -3,7 +3,7 @@ import WatchList from "../../models/WatchListModel.js"
 const allWatchList = async(req, res)=>{
 
   try {
-    const findWL = await WatchList.find({deletedAt: null, userId: req.user})
+    const findWL = await WatchList.find({deletedAt: null, userId: req.user.id}).populate('movieId')
     
     if(!findWL){
       return res.status(404).json({
@@ -18,7 +18,9 @@ const allWatchList = async(req, res)=>{
       data:findWL
     })
   } catch (error) {
-    
+    console.log(error);
+    res.status(500).json({status:'failed',
+  message:error.message})
   }
 
 }
