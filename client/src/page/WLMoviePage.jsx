@@ -7,6 +7,9 @@ const WLMoviePage = () => {
   const [movie, setMovie] = useState(null);
   const [remove, setRemove] = useState(false);
   const [open, setOpen] = useState(false);
+  const [title, setTitle] = useState('');
+  const [content, setContent] = useState('');
+  const [added, setAdded] = useState('');
   const { WLMovieID } = useParams();
   const accessToken = localStorage.getItem('Token');
   const navigate = useNavigate();
@@ -54,11 +57,34 @@ const WLMoviePage = () => {
     navigate(-1);
   };
 
+
+  const submitNote = async(event)=>{
+    event.preventDefault()
+    const data = {title, content, movieId: movie.movieId._id}
+    
+    try {
+      const response = await fetch(`${api()}/notes/`,{
+        method:'POST',
+        cors:'cors',
+        headers:{
+          'Content-Type':'application/json',
+          Authorization: `bearer ${accessToken}`
+        },
+        body: JSON.stringify(data)
+      }).then((res)=>res.json())
+      console.log(response);
+      setOpen(!open)
+      setAdded(response.message)
+    } catch (error) {
+      console.log(error.message);
+    }
+  }
+
   return (
     <>
       {movie ? (
         <div className='max-w-xl lg:max-w-2xl p-1 text-white'>
-          <div className='grid grid-rows-2 lg:grid-cols-2 lg:grid-rows-none'>
+          <div className='grid lg:grid-cols-2'>
             <img src={movie.movieId.image} alt='Poster' className='m-auto w-56 lg:w-80' />
             <main className='backdrop-blur-md bg-black/40 rounded-md p-4 self-center max-w-sm flex flex-col items-center gap-1'>
               {remove && (
@@ -122,14 +148,16 @@ const WLMoviePage = () => {
               {open && 
               <main>
                 <form action="" className='text-black flex flex-col'>
-                  <input type="text" placeholder='Title' className='focus:outline-none p-1 w-full rounded-t-md'/>
-                  <textarea name="content" id="content" cols="30" rows="5" placeholder='Content' className='w-full focus:outline-none p-1 rounded-b-md'/>
-                  <button className='p-2 rounded-lg text-white bg-red-600 hover:scale-110 text-xs md:text-sm w-fit self-end m-2'>Add</button>
+                  <input type="text" placeholder='Title' className='focus:outline-none p-1 w-full rounded-t-md' onChange={({target:{value}})=>{setTitle(value)}}/>
+                  <textarea name="content" id="content" cols="30" rows="5" placeholder='Content' className='w-full focus:outline-none p-1 rounded-b-md'onChange={({target:{value}})=>{setContent(value)}}/>
+                  <button type='submit' className='p-2 rounded-lg text-white bg-red-600 hover:scale-110 text-xs md:text-sm w-fit self-end m-2' onClick={submitNote}>Add</button>
                 </form>
               </main>
               }
             </main>
-            <Notes/>
+            <section className='lg:col-span-2 p-1'>
+            <Notes movieId={movie.movieId._id} added={added}/>
+            </section>
           </div>
         </div>
       ) : (
