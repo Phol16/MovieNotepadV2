@@ -1,4 +1,4 @@
-import Note from "../../models/NoteModel"
+import Note from "../../models/NoteModel.js"
 const createNotes = async(req, res)=>{
  const { title, content, movieId } = req.body
 

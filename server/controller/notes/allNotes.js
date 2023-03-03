@@ -1,13 +1,13 @@
-import Note from "../../models/NoteModel"
+import Note from "../../models/NoteModel.js"
 const allNotes = async(req, res)=>{
-  const { id } = req.params
+  const { id } = req.query
   try {
-    const found = await Note.find({movieId: id, authorId: req.user.id, deletedAt:null}).populate('movieId', 'authorId')
+    const found = await Note.find({movieId: id, authorId: req.user.id, deletedAt:null}).sort({createdAt:-1}).populate('movieId', 'authorId')
 
-    if(!found){
+    if(!found.length){
       return res.status(404).json({
         status:'failed',
-        message:'Not found'
+        message:'No notes yet..'
       })
     }
 
@@ -15,11 +15,6 @@ const allNotes = async(req, res)=>{
       status:'success',
       fetchDataAt:Date.now(),
       data:found
-    })
-
-    res.status(200).json({
-      status:'success',
-      message:'note added'
     })
 
   } catch (error) {
