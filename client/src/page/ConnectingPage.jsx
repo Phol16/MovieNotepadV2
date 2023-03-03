@@ -13,7 +13,8 @@ const ConnectingPage = () => {
 
   setTimeout(()=>{
     setAuthor(true)
-  },[10000])
+  },[1000])
+
 
   return (
     <div className='text-white flex flex-col justify-center items-center min-h-screen'>
@@ -22,9 +23,9 @@ const ConnectingPage = () => {
       <FontAwesomeIcon icon={faSpinner} className='animate-spin'/>
       <p>Connecting...</p>
       </section>
-      <section className='bg-black/60 p-2 rounded-lg flex flex-col items-center'>
-      {waited ? <p className=' text-xl p-2'>Please Wait.</p>:null}
-      {author ? <p>App Created By: <span className='text-red-600'>Phol</span> </p>:null}
+      <section className={`bg-black/60 p-2 rounded-lg flex-col items-center ${waited ? 'flex' : 'hidden'}`}>
+      {waited ? <p className=' text-xl p-2'>Please Wait</p>:null}
+      {author ? <p>Created By: <span className='text-red-600'>Phol</span> </p>:null}
       </section>
       </div>
   )
