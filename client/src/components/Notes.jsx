@@ -35,9 +35,9 @@ const Notes = ({ movieId, added }) => {
             {notes.map((note) => {
               return (
                 <div key={note._id} className=''>
-                  <section className=' bg-white text-black h-32 p-2 rounded-md'>
+                  <section className=' bg-white text-black h-32 p-2 rounded-md text-sm'>
                     <h1 className='border-b'>{note.title}</h1>
-                    <p>{note.content}</p>
+                    <p className='overflow-auto h-24'>{note.content}</p>
                   </section>
                 </div>
               );
