@@ -8,7 +8,7 @@ const Intro = () => {
   return (
     <div>
       <NavBar />
-      <section className='flex justify-center items-center min-h-screen w-full'>
+      <section className='flex justify-center items-center min-h-screen w-full py-12'>
         <Outlet />
       </section>
       <Footer/>
