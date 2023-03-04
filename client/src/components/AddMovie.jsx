@@ -130,16 +130,16 @@ const AddMovie = ({listen}) => {
           </form>
         </section>
       )}
-      <main className='flex flex-col items-center w-fit'>
+      <main>
         <button
-          className='bg-transparent text-4xl transition-all hover:scale-110 duration-[300ms] w-fit focus:outline-none'
+          className='bg-black/70 text-3xl transition-all hover:scale-110 duration-[300ms] w-fit focus:outline-none flex items-center rounded-lg p-1 border '
           onClick={() => {
             setOpen(!open);
           }}
         >
-          <FontAwesomeIcon icon={faPlusCircle} className='text-red-600 lg:text-white drop-shadow-md' />
-        </button>
+          <FontAwesomeIcon icon={faPlusCircle} className='text-white drop-shadow-md text-sm' />
         <p className='text-white text-xs drop-shadow-md backdrop-blur-md bg-black/30 md:backdrop-blur-none md:bg-transparent p-1 rounded-md'>Add A Movie</p>
+        </button>
       </main>
     </div>
   );

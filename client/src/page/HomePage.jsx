@@ -45,8 +45,8 @@ const HomePage = () => {
             <AddMovie listen={handleUpdate} />
           ) : (
             <Link to={'/watchList'}>
-              <button className='bg-transparent text-3xl transition-all hover:scale-110 duration-[300ms] w-fit focus:outline-none'>
-                <FontAwesomeIcon icon={faEye} className='text-red-600 lg:text-white drop-shadow-md' />
+              <button className='bg-black/70 text-3xl transition-all hover:scale-110 duration-[300ms] w-fit focus:outline-none flex items-center rounded-lg p-1 border '>
+                <FontAwesomeIcon icon={faEye} className='text-white drop-shadow-md text-sm' />
                 <p className='text-white text-xs drop-shadow-md backdrop-blur-md bg-black/30 md:backdrop-blur-none md:bg-transparent p-1 rounded-md'>Watch List</p>
               </button>
             </Link>
