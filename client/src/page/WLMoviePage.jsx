@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from 'react';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
+import 'react-lazy-load-image-component/src/effects/blur.css';
 import { useNavigate, useParams } from 'react-router-dom';
 import api from '../api/localhost';
 import Notes from '../components/Notes';
@@ -85,7 +87,7 @@ const WLMoviePage = () => {
       {movie ? (
         <div className='max-w-xl lg:max-w-2xl p-1 text-white'>
           <div className='grid lg:grid-cols-2'>
-            <img src={movie.movieId.image} alt='Poster' className='m-auto w-56 lg:w-80' />
+            <LazyLoadImage effect='blur' src={movie.movieId.image} alt='Poster' className='m-auto w-56 lg:w-80' />
             <main className='backdrop-blur-md bg-black/40 rounded-md p-4 self-center max-w-sm flex flex-col items-center gap-1'>
               {remove && (
                 <section className=' bg-black p-2 rounded-md flex flex-col gap-2'>
