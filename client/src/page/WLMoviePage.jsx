@@ -18,7 +18,6 @@ const WLMoviePage = () => {
 
   useEffect(() => {
     const fetchMovie = async () => {
-      console.log(WLMovieID);
       try {
         const response = await fetch(`${api()}/watchList/movie/${WLMovieID}`, {
           method: 'GET',
@@ -74,9 +73,8 @@ const WLMoviePage = () => {
         },
         body: JSON.stringify(data)
       }).then((res)=>res.json())
-      console.log(response);
+      setAdded(Date.now())
       setOpen(!open)
-      setAdded(response.message)
     } catch (error) {
       console.log(error.message);
     }
