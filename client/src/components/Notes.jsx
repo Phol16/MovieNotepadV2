@@ -1,6 +1,6 @@
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
 import api from '../api/localhost';
 
 const Notes = ({ movieId, added }) => {
@@ -10,6 +10,11 @@ const Notes = ({ movieId, added }) => {
   const [delInfo, setDelInfo] = useState(false);
 
   const accessToken = localStorage.getItem('Token');
+
+  let update = useMemo(()=>{
+    return success
+  })
+
   useEffect(() => {
     const fetchNotes = async () => {
       try {
@@ -21,13 +26,18 @@ const Notes = ({ movieId, added }) => {
             Authorization: `bearer ${accessToken}`,
           },
         }).then((res) => res.json());
-        response.status === 'failed' ? setError(response.message) : setNotes(response.data);
+        response.status === 'failed' ? (
+          setError(response.message),
+          setNotes([])
+        )
+         : setNotes(response.data);
       } catch (error) {
         console.log(error.message);
       }
     };
     fetchNotes();
-  }, [added,success]);
+  }, [added, update]);
+
 
   const handleDelete = async(note)=>{
     try {
