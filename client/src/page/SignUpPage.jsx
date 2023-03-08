@@ -33,9 +33,6 @@ const SignUpPage = () => {
 
   const [role, setRole] = useState('admin');
 
-  // useEffect(() => {
-  //   userRef.current.focus();
-  // }, []);
 
   useEffect(() => {
     const result = user_regex.test(username);
@@ -142,15 +139,16 @@ const SignUpPage = () => {
               </section>
             </fieldset>
             <label htmlFor='username'>
-              <span className={validUsername ? 'inline-block mr-1' : 'hidden'}>
+              {/* <span className={validUsername ? 'inline-block mr-1' : 'hidden'}>
                 <FontAwesomeIcon icon={faCheck} style={{ color: 'green' }} />
               </span>
               <span className={validUsername || !username ? 'hidden' : 'inline-block mr-1'}>
                 <FontAwesomeIcon icon={faTimes} style={{ color: 'red' }} />
-              </span>
+              </span> */}
               Username:
             </label>
             <input
+            ref={userRef}
               type='text'
               placeholder='Username'
               name='username'
@@ -163,15 +161,16 @@ const SignUpPage = () => {
               }}
             />
             <label htmlFor='password'>
-              <span className={validPassword ? 'inline-block mr-1' : 'hidden'}>
+              {/* <span className={validPassword ? 'inline-block mr-1' : 'hidden'}>
                 <FontAwesomeIcon icon={faCheck} style={{ color: 'green' }} />
               </span>
               <span className={validPassword || !password ? 'hidden' : 'inline-block mr-1'}>
                 <FontAwesomeIcon icon={faTimes} style={{ color: 'red' }} />
-              </span>
+              </span> */}
               Password:
             </label>
             <input
+            ref={userRef}
               type='password'
               placeholder='Password'
               name='password'
@@ -184,15 +183,16 @@ const SignUpPage = () => {
               }}
             />
             <label htmlFor='confirmpassword'>
-              <span className={validMatch && matchPassword ? 'inline-block mr-1' : 'hidden'}>
+              {/* <span className={validMatch && matchPassword ? 'inline-block mr-1' : 'hidden'}>
                 <FontAwesomeIcon icon={faCheck} style={{ color: 'green' }} />
               </span>
               <span className={validMatch || !matchPassword ? 'hidden' : 'inline-block mr-1'}>
                 <FontAwesomeIcon icon={faTimes} style={{ color: 'red' }} />
-              </span>
+              </span> */}
               Confirm Password:
             </label>
             <input
+            ref={userRef}
               type='password'
               placeholder='Confirm Password'
               name='confirmpassword'
