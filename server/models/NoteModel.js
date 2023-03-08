@@ -24,7 +24,7 @@ const noteSchema = new Schema(
     },
     deletedAt:{
       type:SchemaTypes.Date,
-      default:null
+      default:null,
     }
   },
   { timestamps: true }

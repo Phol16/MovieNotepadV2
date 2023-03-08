@@ -1,11 +1,11 @@
 import { faPlusCircle } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useMemo } from 'react';
 import api from '../api/localhost';
 
 const AddWatchList = ({ movieId }) => {
   const [added, setAdded] = useState(false);
-  const accessToken = localStorage.getItem('Token');
+  const accessToken = useMemo(()=>{return localStorage.getItem('Token');})
 
   useEffect(() => {
     const fetchData = async () => {

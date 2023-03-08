@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useMemo } from 'react';
 import AddMovie from '../components/AddMovie';
 import FeaturedList from '../components/FeaturedList';
 import MoviesList from '../components/MoviesList';
@@ -10,7 +10,7 @@ import { faEye } from '@fortawesome/free-solid-svg-icons';
 const HomePage = () => {
   const [userRole, setUserRole] = useState(null);
   const [update, setUpdate] = useState('up');
-  const accessToken = localStorage.getItem('Token');
+  const accessToken = useMemo(()=>{return localStorage.getItem('Token');})
 
   useEffect(() => {
     try {

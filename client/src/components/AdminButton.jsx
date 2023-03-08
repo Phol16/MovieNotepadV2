@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState , useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import api from '../api/localhost';
 
@@ -12,7 +12,7 @@ const AdminButton = (props) => {
   const [edit, setEdit] = useState(false);
   const [deleted, setDeleted] = useState(false);
   const navigate = useNavigate();
-  const accessToken = localStorage.getItem('Token');
+  const accessToken = useMemo(()=>{return localStorage.getItem('Token');})
 
   const handleSubmit = async (event) => {
     event.preventDefault();

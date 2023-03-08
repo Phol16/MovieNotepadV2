@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useMemo } from 'react';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import 'react-lazy-load-image-component/src/effects/blur.css';
 import { useNavigate, useParams } from 'react-router-dom';
@@ -13,7 +13,7 @@ const WLMoviePage = () => {
   const [content, setContent] = useState('');
   const [added, setAdded] = useState('');
   const { WLMovieID } = useParams();
-  const accessToken = localStorage.getItem('Token');
+  const accessToken = useMemo(()=>{return localStorage.getItem('Token');})
   const navigate = useNavigate();
 
   useEffect(() => {

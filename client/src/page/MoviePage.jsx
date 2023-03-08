@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useMemo } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import api from '../api/localhost';
 import AddWatchList from '../components/AddWatchList';
@@ -9,7 +9,7 @@ const MoviePage = () => {
   const [userInfo, setuserInfo] = useState([]);
   const { movieId } = useParams();
   const navigate = useNavigate();
-  const accessToken = localStorage.getItem('Token')
+  const accessToken = useMemo(()=>{return localStorage.getItem('Token');})
 
   useEffect(() => {
     const fetchMovie = async () => {

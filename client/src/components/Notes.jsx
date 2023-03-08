@@ -9,7 +9,7 @@ const Notes = ({ movieId, added }) => {
   const [success, setSuccess] = useState(false);
   const [delInfo, setDelInfo] = useState(false);
 
-  const accessToken = localStorage.getItem('Token');
+  const accessToken = useMemo(()=>{return localStorage.getItem('Token');})
 
   let update = useMemo(()=>{
     return success

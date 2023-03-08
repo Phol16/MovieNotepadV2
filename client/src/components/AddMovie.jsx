@@ -1,6 +1,6 @@
 import { faPlusCircle } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import api from '../api/localhost';
 
 const AddMovie = ({listen}) => {
@@ -11,7 +11,7 @@ const AddMovie = ({listen}) => {
   const [imdbId, setImdbId] = useState('');
   const [image, setImage] = useState('');
   const [open, setOpen] = useState(false);
-  const accessToken = localStorage.getItem('Token');
+  const accessToken = useMemo(()=>{return localStorage.getItem('Token');})
 
   const handleSubmit = async (event) => {
     event.preventDefault();

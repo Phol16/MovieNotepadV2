@@ -1,8 +1,8 @@
-import React from 'react'
+import React, { useMemo} from 'react'
 import { Navigate } from 'react-router-dom'
 
 const Protected = ({children}) => {
-  const token = localStorage.getItem('Token')
+  const accessToken = useMemo(()=>{return localStorage.getItem('Token');})
   return (
     token ? children :<Navigate to='/'/>
   )

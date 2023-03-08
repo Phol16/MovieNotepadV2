@@ -2,7 +2,7 @@ import Note from "../../models/NoteModel.js"
 const allNotes = async(req, res)=>{
   const { id } = req.query
   try {
-    const found = await Note.find({movieId: id, authorId: req.user.id, deletedAt:null}).sort({createdAt:-1}).populate('movieId', 'authorId')
+    const found = await Note.find({deletedAt:null, movieId: id, authorId: req.user.id, }).sort({createdAt:-1}).populate('movieId', 'authorId')
 
     if(!found.length){
       return res.status(404).json({

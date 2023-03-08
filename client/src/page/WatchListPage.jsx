@@ -1,12 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import api from '../api/localhost';
 import MovieCard from '../components/MovieCard';
 
 const WatchListPage = () => {
   const [list, setList] = useState(null);
-  const accessToken = localStorage.getItem('Token');
-  const navigate = useNavigate();
+  const accessToken = useMemo(()=>{return localStorage.getItem('Token');})
 
   useEffect(() => {
     const fetchMovie = async () => {
