@@ -21,7 +21,12 @@ function App() {
   useEffect(() => {
     try {
       const connecting = async () => {
-        const response = await fetch(`${api()}/`).then((res) => res.json());
+        const response = await fetch(`${api()}/`,{
+          cors:'cors',
+          headers:{
+            'Content-Type': 'application/json'
+          }
+        }).then((res) => res.json());
         response.message === 'Connected' ? setConnected(true) : setConnected(false);
       };
       connecting();
