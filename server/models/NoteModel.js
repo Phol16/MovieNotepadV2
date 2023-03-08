@@ -21,6 +21,10 @@ const noteSchema = new Schema(
       type:SchemaTypes.ObjectId,
       ref:'Movie',
       required:[true, 'Must have MovieId']
+    },
+    deletedAt:{
+      type:SchemaTypes.Date,
+      default:null
     }
   },
   { timestamps: true }

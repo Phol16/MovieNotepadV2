@@ -1,6 +1,6 @@
-import Note from "../../models/NoteModel"
+import Note from "../../models/NoteModel.js"
 const removeNote = async(req, res)=>{
-  const { id } = req.params
+  const { id } = req.query
   try {
     const found = await Note.findByIdAndUpdate(id,{deletedAt: Date.now()})
 
@@ -15,11 +15,6 @@ const removeNote = async(req, res)=>{
       status:'success',
       deletedDataAt:Date.now(),
       data:found
-    })
-
-    res.status(200).json({
-      status:'success',
-      message:'note added'
     })
 
   } catch (error) {
