@@ -16,7 +16,7 @@ const AdminButton = (props) => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    const data = { title, image, imdbId, description, genre: typeof genre === 'string' ? [...genre.split(' ')] : genre, year: typeof year === 'string' ? [...year.split(' ')] : year };
+    const data = { title, imdbId, description, genre: typeof genre === 'string' ? [...genre.split(' ')] : genre, year: typeof year === 'string' ? [...year.split(' ')] : year };
     try {
       const response = await fetch(`${api()}/movies?id=${props._id}`, {
         method: 'PATCH',

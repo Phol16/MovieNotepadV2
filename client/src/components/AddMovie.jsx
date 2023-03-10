@@ -3,15 +3,36 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { useState, useMemo } from 'react';
 import api from '../api/localhost';
 
-const AddMovie = ({listen}) => {
+const AddMovie = ({ listen }) => {
   const [title, setTitle] = useState('');
-  const [year, setYear] = useState([]);
-  const [genre, setGenre] = useState([]);
+  const [year, setYear] = useState('');
+  const [genre, setGenre] = useState('');
   const [description, setDescription] = useState('');
   const [imdbId, setImdbId] = useState('');
   const [image, setImage] = useState('');
   const [open, setOpen] = useState(false);
-  const accessToken = useMemo(()=>{return localStorage.getItem('Token');})
+  const accessToken = useMemo(() => {
+    return localStorage.getItem('Token');
+  });
+
+  const handleImage = (e) => {
+    const file = e.target.files[0];
+
+    convertFile(file);
+  };
+
+  const convertFile = (file) => {
+    const reader = new FileReader();
+
+    if (file) {
+      reader.readAsDataURL(file);
+      reader.onloadend = () => {
+        setImage(reader.result);
+      };
+    } else {
+      setImage('');
+    }
+  };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -30,16 +51,16 @@ const AddMovie = ({listen}) => {
       }).then((res) => res.json());
       console.log(response);
     } catch (error) {
-      console.log(error.message);
+      console.log(error.message, 'here');
     }
-    listen(new Date(Date.now()).toLocaleString())
+    listen(new Date(Date.now()).toLocaleString());
     setOpen(!open);
   };
 
   return (
     <div className='flex flex-col gap-1'>
       {open && (
-        <section className={`bg-white text-black p-2 rounded-md text-sm 2xl:text-lg flex flex-col gap-2 max-w-xs`}>
+        <section className={`bg-white text-black p-4 rounded-md text-sm 2xl:text-lg flex flex-col gap-2 max-w-[280px] max-h-[500px] overflow-auto`}>
           <h1 className='text-lg text-red-600'>Details:</h1>
           <form onSubmit={handleSubmit} className='flex flex-col'>
             <label htmlFor='title'>Title:</label>
@@ -103,19 +124,14 @@ const AddMovie = ({listen}) => {
               }}
             />
             <label htmlFor='image'>Poster:</label>
-            <input
-              type='text'
-              id='image'
-              placeholder='Poster'
-              name='image'
-              autoComplete='off'
-              className='bg-slate-400 p-1 rounded-md placeholder:text-gray-500'
-              onChange={({ target: { value } }) => {
-                setImage(value);
-              }}
-            />
+            {image ? <img src={image} alt='Photo' /> : <p>No Image Uploaded</p>}
+            <label htmlFor='image'>
+              <p className='mt-2 bg-black/80 hover:-translate-y-0.5 w-fit text-white p-1 rounded-md cursor-pointer'>Upload Image</p>
+            </label>
+            <input className='hidden' type='file' id='image' accept='image/*' name='image' onChange={handleImage} />
             <section className='self-end flex gap-2 my-2'>
-              <button className='p-1'
+              <button
+                className='p-1'
                 type='button'
                 onClick={() => {
                   setOpen(!open);
@@ -138,7 +154,7 @@ const AddMovie = ({listen}) => {
           }}
         >
           <FontAwesomeIcon icon={faPlusCircle} className='text-white drop-shadow-md text-sm' />
-        <p className='text-white text-xs drop-shadow-md backdrop-blur-md bg-black/30 md:backdrop-blur-none md:bg-transparent p-1 rounded-md'>Add A Movie</p>
+          <p className='text-white text-xs drop-shadow-md backdrop-blur-md bg-black/30 md:backdrop-blur-none md:bg-transparent p-1 rounded-md'>Add A Movie</p>
         </button>
       </main>
     </div>
