@@ -39,6 +39,7 @@ const createMovie = async (req, res) => {
     res.status(500).json({
       status: 'failed',
       date: Date.now(),
+      error: error,
       message: error.message,
     });
   }
