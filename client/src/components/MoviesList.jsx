@@ -6,20 +6,24 @@ import { faExclamationCircle } from '@fortawesome/free-solid-svg-icons';
 
 const Movies = ({ update }) => {
   const [movieList, setMovieList] = useState(false);
+  const [movieListTotal, setMovieListTotal] = useState(0);
+  const [page, setPage] = useState(1);
 
   useEffect(() => {
     const fetchMovieList = async () => {
-      const response = await fetch(`${api()}/movies/`, {
+      const response = await fetch(`${api()}/movies?page=${page}`, {
         method: 'GET',
         cors: 'cors',
         headers: {
           'Content-Type': 'application/json',
         },
       }).then((res) => res.json());
-      response.status === 'success' ? setMovieList(response.data) : setMovieList(response.message);
+      response.status === 'success' ? (setMovieList(response.data),setMovieListTotal(response.totalPage) ): setMovieList(response.message);
     };
     fetchMovieList();
-  }, [update]);
+  }, [update,page]);
+
+  console.log(movieListTotal);
 
   const itemList = (details) => {
     return (
@@ -45,6 +49,11 @@ const Movies = ({ update }) => {
           <h1>Loading...</h1>
         </div>
       )}
+      <section className='flex justify-center items-center p-2 gap-2'>
+        <button onClick={()=>{page <= 1 ? setPage(1) : setPage(page - 1)}} className='bg-black/30 rounded-md border border-white text-white p-1 hover:-translate-y-0.5'>prev</button>
+        <p>{page}/{movieListTotal}</p>
+        <button onClick={()=>{page >= movieListTotal ? setPage(movieListTotal) : setPage(page+1)}} className='bg-black/30 rounded-md border border-white text-white p-1 hover:-translate-y-0.5'>next</button>
+      </section>
     </div>
   );
 };
