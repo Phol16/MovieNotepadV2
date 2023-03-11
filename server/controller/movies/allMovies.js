@@ -1,7 +1,16 @@
 import Movie from '../../models/MovieModel.js';
 
 const allMovies = async (req, res) => {
-  const movieList = await Movie.find({deletedAt: null}).sort({createdAt: -1});
+  const { page, limit } = req.query
+
+  let total = 0;
+  const limitNumber =  limit || 20
+  const skip = parseInt(page) === 1 ? 0 : (parseInt(page)*limitNumber)-limitNumber ;
+
+  let movieList = await Movie.find({deletedAt: null}).sort({createdAt: -1})
+  total = movieList.length/(limitNumber)
+
+   movieList = movieList.slice(skip, skip ? skip+limitNumber : limitNumber )
 
   if (!movieList.length) {
     return res.status(404).json({
@@ -10,12 +19,11 @@ const allMovies = async (req, res) => {
     });
   }
 
-  const currentDate = Date.now()
-
   res.status(200).json({
     status: 'success',
-    dateFetched: new Date(currentDate).toLocaleString(),
+    dateFetched: Date.now(),
     data: movieList,
+    totalPage: Math.ceil(total),
   });
 };
 
