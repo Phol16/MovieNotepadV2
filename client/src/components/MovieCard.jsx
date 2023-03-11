@@ -12,7 +12,7 @@ const MovieCard = ({ image, title, year, redirect }) => {
       <section className='text-xs md:text-[15px] flex justify-center items-center max-w-[180px]'>
         <p className='mr-1 text-white'>{title}</p>
         {year.map((event, index) => {
-                return <span key={event} className='text-red-600'>{
+                return <span key={index} className='text-red-600'>{
                   year.length > 1 ? (
                   index !== year.length-1 ? `${event}-`: event
                   ):( event )

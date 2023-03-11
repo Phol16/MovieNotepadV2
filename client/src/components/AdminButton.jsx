@@ -16,7 +16,7 @@ const AdminButton = (props) => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    const data = { title, imdbId, description, genre: typeof genre === 'string' ? [...genre.split(' ')] : genre, year: typeof year === 'string' ? [...year.split(' ')] : year };
+    const data = { title,image, imdbId, description, genre: typeof genre === 'string' ? [...genre.split(' ')] : genre, year: typeof year === 'string' ? [...year.split(' ')] : year };
     try {
       const response = await fetch(`${api()}/movies?id=${props._id}`, {
         method: 'PATCH',
@@ -53,6 +53,21 @@ const AdminButton = (props) => {
     setDeleted(!deleted);
     navigate(-1)
   };
+
+  const handleImage=(e)=>{
+    const file = e.target.files[0]
+    convertImage(file)
+  }
+  const convertImage = (file)=>{
+    const reader = new FileReader()
+
+    if(file){
+      reader.readAsDataURL(file)
+      reader.onloadend=()=>{
+        setImage(reader.result)
+      }
+    }
+  }
 
   return (
     <section className='flex flex-col gap-1 my-2'>
@@ -133,17 +148,11 @@ const AdminButton = (props) => {
             <label htmlFor='image' className='w-fit'>
               Poster:
             </label>
-            <input
-              type='text'
-              id='image'
-              value={image}
-              name='image'
-              autoComplete='off'
-              className='bg-slate-400 p-1 rounded-md placeholder:text-gray-500'
-              onChange={({ target: { value } }) => {
-                setImage(value);
-              }}
-            />
+            {image ? <img src={image} alt='Photo' width={150}/> : <p>No Image Uploaded</p>}
+            <label htmlFor='image'>
+              <p className='mt-2 bg-white/30 hover:-translate-y-0.5 w-fit text-white p-1 rounded-md cursor-pointer'>Upload Image</p>
+            </label>
+            <input className='hidden' type='file' id='image' accept='image/*' name='image' onChange={handleImage} />
             <button type='submit' className='bg-red-600 p-1 w-fit rounded-md text-white self-end my-2 hover:scale-110 transition-all duration-[150ms]'>
               Submit
             </button>

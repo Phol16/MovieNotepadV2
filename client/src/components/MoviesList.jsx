@@ -23,8 +23,6 @@ const Movies = ({ update }) => {
     fetchMovieList();
   }, [update,page]);
 
-  console.log(movieListTotal);
-
   const itemList = (details) => {
     return (
       <div key={details.title} className='flex flex-col items-center justify-center hover:scale-105 transition-all ease-in duration-[150ms]'>

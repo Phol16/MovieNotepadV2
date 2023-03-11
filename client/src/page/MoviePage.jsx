@@ -72,13 +72,14 @@ const MoviePage = () => {
           <AddWatchList movieId={movie._id}/>
         ):(null)
         }
-        <article className='flex items-center justify-between p-1 text-sm md:text-base'>
-          <section className='flex gap-1'>
+        <article className='grid grid-cols-3 p-1 text-sm md:text-base'>
+          <section className='flex flex-col col-span-2 gap-1'>
             <h1 className='max-w-[150px]'>{movie.title}</h1>
+            <section>
             {movie.year ? (
               movie.year.map((event, index) => {
                 return (
-                  <span key={event} className='text-red-600 self-center'>
+                  <span key={index} className='text-red-600 self-center'>
                     {movie.year.length > 1 ? (index !== movie.year.length - 1 ? `${event}-` : event) : event}
                   </span>
                 );
@@ -86,8 +87,9 @@ const MoviePage = () => {
             ) : (
               <div>Loading...</div>
             )}
+            </section>
           </section>
-          <button onClick={handleImdb} className='p-2 rounded-lg text-white bg-red-600 hover:scale-110 text-xs md:text-sm'>
+          <button onClick={handleImdb} className=' w-fit h-fit self-center p-2 rounded-lg text-white bg-red-600 hover:scale-110 text-xs md:text-sm'>
             Learn More
           </button>
         </article>

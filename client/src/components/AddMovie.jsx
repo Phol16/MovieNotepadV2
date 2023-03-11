@@ -49,7 +49,7 @@ const AddMovie = ({ listen }) => {
         },
         body: JSON.stringify(data),
       }).then((res) => res.json());
-      console.log(response);
+      response.message === 'success' ? setImage('') : setImage(image)
     } catch (error) {
       console.log(error.message, 'here');
     }
@@ -60,7 +60,7 @@ const AddMovie = ({ listen }) => {
   return (
     <div className='flex flex-col gap-1'>
       {open && (
-        <section className={`bg-white text-black p-4 rounded-md text-sm 2xl:text-lg flex flex-col gap-2 max-w-[280px] max-h-[500px] overflow-auto`}>
+        <section className={`bg-white text-black p-4 rounded-md text-sm 2xl:text-lg flex flex-col gap-2 max-w-[280px] max-h-[500px] 2xl:max-h-[600px] overflow-auto`}>
           <h1 className='text-lg text-red-600'>Details:</h1>
           <form onSubmit={handleSubmit} className='flex flex-col'>
             <label htmlFor='title'>Title:</label>
