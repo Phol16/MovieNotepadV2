@@ -49,7 +49,7 @@ const AddMovie = ({ listen }) => {
         },
         body: JSON.stringify(data),
       }).then((res) => res.json());
-      response.message === 'success' ? setImage('') : setImage(image)
+      response.status === 'success' ? setImage('') : setImage(image)
     } catch (error) {
       console.log(error.message, 'here');
     }
