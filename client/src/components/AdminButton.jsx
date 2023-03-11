@@ -4,8 +4,8 @@ import api from '../api/localhost';
 
 const AdminButton = (props) => {
   const [title, setTitle] = useState(props.title);
-  const [year, setYear] = useState(props.year);
-  const [genre, setGenre] = useState(props.genre);
+  const [year, setYear] = useState(props.year.join(' '));
+  const [genre, setGenre] = useState(props.genre.join(' '));
   const [description, setDescription] = useState(props.description);
   const [imdbId, setImdbId] = useState(props.imdbId);
   const [image, setImage] = useState(props.image);
@@ -46,7 +46,6 @@ const AdminButton = (props) => {
           Authorization: `bearer ${accessToken}`,
         },
       }).then((res) => res.json());
-
       console.log(response);
     } catch (error) {
       console.log(error.message);
@@ -82,7 +81,7 @@ const AdminButton = (props) => {
               type='text'
               id='year'
               name='year'
-              value={year.join(' ')}
+              value={year}
               autoComplete='off'
               className='bg-slate-400 p-1 rounded-md placeholder:text-gray-500'
               onChange={({ target: { value } }) => {
@@ -96,7 +95,7 @@ const AdminButton = (props) => {
               type='text'
               id='genre'
               name='genre'
-              value={genre.join(' ')}
+              value={genre}
               autoComplete='off'
               className='bg-slate-400 p-1 rounded-md placeholder:text-gray-500'
               onChange={({ target: { value } }) => {
