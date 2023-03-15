@@ -36,10 +36,10 @@ const HomePage = () => {
   };
 
   return (
-    <div className='flex flex-col items-center'>
+    <div className='flex flex-col items-center bg-black'>
       <FeaturedList />
       <MoviesList update={update} />
-      <section className='fixed bottom-5 left-5'>
+      <section className='fixed bottom-2 left-2 z-20'>
         {userRole ? (
           userRole === 'admin' ? (
             <AddMovie listen={handleUpdate} />

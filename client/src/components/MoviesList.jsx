@@ -25,21 +25,21 @@ const Movies = ({ update }) => {
 
   const itemList = (details) => {
     return (
-      <div key={details.title} className='flex flex-col items-center justify-center hover:scale-105 transition-all ease-in duration-[150ms]'>
+      <div key={details.title} className='flex items-center justify-center hover:scale-105 transition-all ease-in duration-[150ms]'>
         <MovieCard title={details.title} image={details.image} year={details.year} redirect={`/home/movie/${details._id}`} />
       </div>
     );
   };
 
   return (
-    <div className='mt-5 min-w-screen'>
+    <div className='z-20 relative xl:bottom-24 lg:h-[300px] pb-6'>
       <h1 className='my-2'>Movies & Series:</h1>
       {movieList ? (
                   typeof movieList === 'string' ?
                   <p className='text-red-600 bg-black p-5 rounded-md'>
                     <FontAwesomeIcon icon={faExclamationCircle}/>
                     {movieList}</p>:
-        <main className='grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4'>{
+        <main className={`grid ${ movieList.length <=2 ? `grid-cols-${(movieList.length - 1)}` : 'grid-cols-2'} md:${ movieList.length <=2 ? `grid-cols-${(movieList.length - 1)}` : 'grid-cols-3'} lg:grid-flow-col gap-4`}>{
           movieList.map(itemList)
           }</main>
       ) : (

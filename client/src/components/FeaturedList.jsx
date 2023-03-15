@@ -1,14 +1,22 @@
-import { faArrowAltCircleLeft, faArrowAltCircleRight, faArrowLeft, faArrowLeftLong, faCircleArrowLeft, faExclamationCircle } from '@fortawesome/free-solid-svg-icons';
+import { faArrowAltCircleLeft, faArrowAltCircleRight, faArrowLeft, faArrowLeftLong, faArrowRight, faCircleArrowLeft, faExclamationCircle } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { useEffect, useState } from 'react';
 import api from '../api/localhost';
-import MovieCard from './MovieCard';
+import { Cloudinary } from '@cloudinary/url-gen';
+import style from './style/textShadow.module.css'
 
 const FeaturedList = () => {
   const [featuredList, setFeaturedList] = useState(null);
   const [current, setCurrent] = useState(0);
   const [counter, setCounter] = useState(1);
   const [counter1, setCounter1] = useState(2);
+
+  const TextTitle = 'text-base md:text-xl'
+  const TextSubMain = 'text-xs md:text-base'
+  const TextDesc = 'text-xs md:text-base'
+  const container= 'flex flex-col items-center'
+  const mainContainer= 'relative flex gap-2 backdrop-blur-md max-w-sm md:max-w-lg rounded-lg overflow-hidden shadow-md shadow-black lg:absolute lg:left-[5%] lg:top-[20%]'
+  const button = 'bg-black/20 text-white p-2 hover:scale-125'
 
   useEffect(() => {
     const fetchFeaturedList = async () => {
@@ -36,42 +44,40 @@ const FeaturedList = () => {
     setCounter1(counter1 === 0 ? featuredList.length - 1 : counter1 - 1);
   };
 
+  const cld = new Cloudinary({
+    cloud: {
+      cloudName: 'df8nkgje6',
+    },
+  });
   return (
-    <div className='flex flex-col gap-2 min-w-screen'>
-      <h1>Featured:</h1>
-      { featuredList ? (
-        typeof featuredList === 'string' ?
-        <p className='text-red-600 bg-black p-5 rounded-md'>
-          <FontAwesomeIcon icon={faExclamationCircle}/>
-          {featuredList}</p>:
-      <main className='flex gap-5 items-center'>
-      <button onClick={prevSlide} className='text-white bg-transparent focus:outline-0'>
-        <FontAwesomeIcon icon={faArrowAltCircleLeft} className='scale-125 hover:scale-150 transtion-all duration-[150ms]'/>
-      </button>
-      {featuredList.map((element, index) => {
-        return (
-          current === index && (
-            <div className='flex gap-5' key={index}>
-              <MovieCard title={element.title} image={element.image} year={element.year} redirect={`/home/movie/${element._id}`}/>
-              <section className='hidden md:inline'>
-              <MovieCard title={featuredList[counter].title} image={featuredList[counter].image} year={featuredList[counter].year} redirect={`/home/movie/${featuredList[counter]._id}`}/>
-              </section>
-              <section className='hidden xl:inline'>
-              <MovieCard title={featuredList[counter1].title} image={featuredList[counter1].image} year={featuredList[counter1].year} redirect={`/home/movie/${featuredList[counter1]._id}`}/>
-              </section>
-            </div>
-          )
-        );
-      })}
-      <button onClick={nextSlide} className='text-white bg-transparent focus:outline-0'>
-        <FontAwesomeIcon icon={faArrowAltCircleRight} className='scale-125 hover:scale-150 transtion-all duration-[150ms]'/>
-      </button>
-      </main>
-      ):(
-        <p>Loading...</p>
-      )
+    <>
+      <div className='relative top-0 min-w-full'>
+        { featuredList ? ( featuredList.map((e, index)=>{ if(current === index) return (
+        <section key={index} className={`${container}`}>
+        <video preload='none' poster={e.image} className={`relative top-0 w-full max-h-[810px] object-contain`} src={cld.video(e.video).toURL()} autoPlay loop muted />
+        <main className={`${mainContainer}`}>
+          <button onClick={prevSlide} className={`${button}`} >
+            <FontAwesomeIcon icon={faArrowLeft}/>
+          </button>
+          <article className='flex flex-col gap-2 p-5'>
+          <h1 className={`${TextSubMain} text-red-600`}>Featured</h1>
+          <h1 className={`${style.textShadow} ${TextTitle}`}>{e.title}</h1>
+          <h2 className={`${style.textShadow} ${TextSubMain}`}>{e.year}</h2>
+          <h3 className={`${style.textShadow} ${TextSubMain}`}>{e.genre}</h3>
+          <p className={`${style.textShadow} ${TextDesc}`}>{e.description}</p>
+          <button className='w-fit p-1 rounded-lg self-end' onClick={()=>{window.open(`https://www.imdb.com/title/${e.imdbId}`, '_blank');}}>Learn More</button>
+          </article>
+          <button onClick={nextSlide} className={`${button}`}>
+            <FontAwesomeIcon icon={faArrowRight}/>
+          </button>
+        </main>
+        </section>
+        )
+        })
+        ):<p>Loading...</p>
 }
-    </div>
+      </div>
+    </>
   );
 };
 

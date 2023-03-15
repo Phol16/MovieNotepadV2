@@ -54,7 +54,7 @@ const MoviePage = () => {
   };
 
   return (
-    <div className='max-w-xl lg:max-w-2xl p-1'>
+    <div className='max-w-xl lg:max-w-2xl p-1 m-auto'>
       <button
         onClick={() => {
           navigate(-1);
