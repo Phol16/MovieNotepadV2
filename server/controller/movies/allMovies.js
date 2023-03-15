@@ -4,7 +4,7 @@ const allMovies = async (req, res) => {
   const { page, limit } = req.query
 
   let total = 0;
-  const limitNumber =  limit || 20
+  const limitNumber =  limit || 6
   const skip = parseInt(page) === 1 ? 0 : (parseInt(page)*limitNumber)-limitNumber ;
 
   let movieList = await Movie.find({deletedAt: null}).sort({createdAt: -1})
