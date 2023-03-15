@@ -46,8 +46,8 @@ const HomePage = () => {
           ) : (
             <Link to={'/watchList'}>
               <button className='bg-red-900 text-3xl transition-all hover:scale-110 duration-[300ms] w-fit focus:outline-none flex items-center rounded-lg p-1 border '>
-                <FontAwesomeIcon icon={faEye} className='text-white drop-shadow-md text-sm' />
-                <p className='text-white text-xs drop-shadow-md backdrop-blur-md bg-black/30 md:backdrop-blur-none md:bg-transparent p-1 rounded-md'>Watch List</p>
+                <FontAwesomeIcon icon={faEye} className='text-white  text-sm' />
+                <p className='text-white text-xs p-1 rounded-md'>Watch List</p>
               </button>
             </Link>
           )

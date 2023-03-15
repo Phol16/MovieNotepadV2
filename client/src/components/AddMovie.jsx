@@ -153,8 +153,8 @@ const AddMovie = ({ listen }) => {
             setOpen(!open);
           }}
         >
-          <FontAwesomeIcon icon={faPlusCircle} className='text-white drop-shadow-md text-sm' />
-          <p className='text-white text-xs drop-shadow-md backdrop-blur-md bg-black/30 md:backdrop-blur-none md:bg-transparent p-1 rounded-md'>Add A Movie</p>
+          <FontAwesomeIcon icon={faPlusCircle} className='text-white  text-sm' />
+          <p className='text-white text-xs p-1 rounded-md'>Add A Movie</p>
         </button>
       </main>
     </div>
