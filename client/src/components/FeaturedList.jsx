@@ -8,8 +8,7 @@ import style from './style/textShadow.module.css'
 const FeaturedList = () => {
   const [featuredList, setFeaturedList] = useState(null);
   const [current, setCurrent] = useState(0);
-  const [counter, setCounter] = useState(1);
-  const [counter1, setCounter1] = useState(2);
+  const [controls,setControls] = useState(false)
 
   const TextTitle = 'text-base md:text-xl'
   const TextSubMain = 'text-xs md:text-base'
@@ -34,14 +33,10 @@ const FeaturedList = () => {
 
   const nextSlide = () => {
     setCurrent(current === featuredList.length - 1 ? 0 : current + 1);
-    setCounter(counter === featuredList.length - 1 ? 0 : counter + 1);
-    setCounter1(counter1 === featuredList.length - 1 ? 0 : counter1 + 1);
   };
 
   const prevSlide = () => {
     setCurrent(current === 0 ? featuredList.length - 1 : current - 1);
-    setCounter(counter === 0 ? featuredList.length - 1 : counter - 1);
-    setCounter1(counter1 === 0 ? featuredList.length - 1 : counter1 - 1);
   };
 
   const cld = new Cloudinary({
@@ -54,7 +49,7 @@ const FeaturedList = () => {
       <div className='relative top-0 min-w-full'>
         { featuredList ? ( featuredList.map((e, index)=>{ if(current === index) return (
         <section key={index} className={`${container}`}>
-        <video preload='none' poster={e.image} className={`relative top-0 w-full max-h-[810px] object-contain`} src={cld.video(e.video).toURL()} autoPlay loop muted />
+        <video controls={controls}  onClick={()=>{setControls(!controls)}} preload='none' poster={e.image} className={`relative top-0 w-full max-h-[810px] object-contain`} src={cld.video(e.video).toURL()} autoPlay loop muted />
         <main className={`${mainContainer}`}>
           <button onClick={prevSlide} className={`${button}`} >
             <FontAwesomeIcon icon={faArrowLeft}/>
