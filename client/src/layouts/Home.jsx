@@ -9,7 +9,7 @@ const Home = () => {
   return (
     <div className='text-white'>
       <NavBar/>
-      <section className='min-h-screen flex flex-col'>
+      <section className='min-h-screen flex flex-col bg-black/60'>
       <Outlet/>
       </section>
       <Footer/>
