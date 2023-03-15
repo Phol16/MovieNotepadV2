@@ -58,7 +58,7 @@ const AddMovie = ({ listen }) => {
   };
 
   return (
-    <div className='flex flex-col gap-1'>
+    <div className='flex flex-col gap-1 '>
       {open && (
         <section className={`bg-white text-black p-4 rounded-md text-sm 2xl:text-lg flex flex-col gap-2 max-w-[280px] max-h-[500px] 2xl:max-h-[600px] overflow-auto`}>
           <h1 className='text-lg text-red-600'>Details:</h1>
@@ -148,7 +148,7 @@ const AddMovie = ({ listen }) => {
       )}
       <main>
         <button
-          className='bg-black/70 text-3xl transition-all hover:scale-110 duration-[300ms] w-fit focus:outline-none flex items-center rounded-lg p-1 border '
+          className='bg-red-900 text-3xl transition-all hover:scale-110 duration-[300ms] w-fit focus:outline-none flex items-center rounded-lg p-1 border '
           onClick={() => {
             setOpen(!open);
           }}

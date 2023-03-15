@@ -39,13 +39,13 @@ const HomePage = () => {
     <div className='flex flex-col items-center '>
       <FeaturedList />
       <MoviesList update={update} />
-      <section className='fixed bottom-2 left-2 z-20'>
+      <section className='fixed bottom-5 left-3 z-20'>
         {userRole ? (
           userRole === 'admin' ? (
             <AddMovie listen={handleUpdate} />
           ) : (
             <Link to={'/watchList'}>
-              <button className='bg-black/70 text-3xl transition-all hover:scale-110 duration-[300ms] w-fit focus:outline-none flex items-center rounded-lg p-1 border '>
+              <button className='bg-red-900 text-3xl transition-all hover:scale-110 duration-[300ms] w-fit focus:outline-none flex items-center rounded-lg p-1 border '>
                 <FontAwesomeIcon icon={faEye} className='text-white drop-shadow-md text-sm' />
                 <p className='text-white text-xs drop-shadow-md backdrop-blur-md bg-black/30 md:backdrop-blur-none md:bg-transparent p-1 rounded-md'>Watch List</p>
               </button>
