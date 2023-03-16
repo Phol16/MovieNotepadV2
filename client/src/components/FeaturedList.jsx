@@ -11,10 +11,10 @@ const FeaturedList = () => {
   const [controls,setControls] = useState(false)
 
   const TextTitle = 'text-base md:text-xl'
-  const TextSubMain = 'text-xs md:text-base'
-  const TextDesc = 'text-xs md:text-base'
+  const TextSubMain = 'text-xs md:text-sm '
+  const TextDesc = 'text-xs md:text-sm '
   const container= 'flex flex-col items-center'
-  const mainContainer= 'relative flex gap-2 backdrop-blur-md max-w-sm md:max-w-lg rounded-lg overflow-hidden shadow-md shadow-black lg:absolute lg:left-[5%] lg:top-[20%]'
+  const mainContainer= 'relative flex gap-2 backdrop-blur-md max-w-sm md:max-w-lg lg:max-w-sm xl:max-w-lg rounded-lg overflow-hidden shadow-md shadow-black lg:absolute lg:left-[5%] lg:top-[20%]'
   const button = 'bg-black/20 text-white p-2 hover:scale-125'
 
   useEffect(() => {
