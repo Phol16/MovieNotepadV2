@@ -49,7 +49,7 @@ const FeaturedList = () => {
       <div className='relative top-0 min-w-full'>
         { featuredList ? ( featuredList.map((e, index)=>{ if(current === index) return (
         <section key={index} className={`${container}`}>
-        <video controls={controls}  onClick={()=>{setControls(!controls)}} preload='none' poster={e.image} className={`relative top-0 w-full max-h-[810px] object-contain`} src={cld.video(e.video).toURL()} autoPlay loop muted />
+        <video controls={controls}  onClick={()=>{setControls(!controls)}} preload='none' poster={e.image} className={`relative top-0 w-full md:max-h-[810px] max-h-[400px] object-contain`} src={cld.video(e.video).toURL()} autoPlay loop muted />
         <main className={`${mainContainer}`}>
           <button onClick={prevSlide} className={`${button}`} >
             <FontAwesomeIcon icon={faArrowLeft}/>
