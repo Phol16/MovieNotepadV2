@@ -154,7 +154,7 @@ const AddMovie = ({ listen }) => {
           }}
         >
           <FontAwesomeIcon icon={faPlusCircle} className='text-white  text-sm' />
-          <p className='text-white text-xs p-1 rounded-md'>Add A Movie</p>
+          <p className='text-white text-xs p-1 rounded-md'>Add <span className='hidden sm:inline-block'>A Movie</span></p>
         </button>
       </main>
     </div>

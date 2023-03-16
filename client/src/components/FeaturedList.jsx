@@ -10,7 +10,7 @@ const FeaturedList = () => {
   const [current, setCurrent] = useState(0);
   const [controls,setControls] = useState(false)
 
-  const TextTitle = 'text-base md:text-xl'
+  const TextTitle = 'text-lg md:text-2xl'
   const TextSubMain = 'text-xs md:text-sm '
   const TextDesc = 'text-xs md:text-sm '
   const container= 'flex flex-col items-center'
@@ -60,7 +60,7 @@ const FeaturedList = () => {
           <h2 className={`${style.textShadow} ${TextSubMain}`}>{e.year}</h2>
           <h3 className={`${style.textShadow} ${TextSubMain}`}>{e.genre}</h3>
           <p className={`${style.textShadow} ${TextDesc}`}>{e.description}</p>
-          <button className='w-fit p-1 rounded-lg self-end text-white hover:-translate-y-0.5 transition-all transition-[150ms]' onClick={()=>{window.open(`https://www.imdb.com/title/${e.imdbId}`, '_blank');}}>Learn More</button>
+          <button className={` ${TextSubMain} text-white border-b border-t w-fit p-1 rounded-lg self-end hover:-translate-y-0.5 transition-all transition-[150ms]`} onClick={()=>{window.open(`https://www.imdb.com/title/${e.imdbId}`, '_blank');}}>Learn More</button>
           </article>
           <button onClick={nextSlide} className={`${button}`}>
             <FontAwesomeIcon icon={faArrowRight}/>
