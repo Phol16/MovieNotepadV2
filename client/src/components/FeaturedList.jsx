@@ -15,7 +15,7 @@ const FeaturedList = () => {
   const TextDesc = 'text-xs md:text-sm '
   const container= 'flex flex-col items-center'
   const mainContainer= 'relative flex gap-2 backdrop-blur-md max-w-sm md:max-w-lg lg:max-w-sm xl:max-w-lg rounded-lg overflow-hidden shadow-md shadow-black lg:absolute lg:left-[5%] lg:top-[20%]'
-  const button = 'bg-black/20 text-white p-2 hover:scale-125'
+  const button = 'bg-black/20 text-white p-2 hover:scale-125 transition-all duration-[150ms]'
 
   useEffect(() => {
     const fetchFeaturedList = async () => {
@@ -60,7 +60,7 @@ const FeaturedList = () => {
           <h2 className={`${style.textShadow} ${TextSubMain}`}>{e.year}</h2>
           <h3 className={`${style.textShadow} ${TextSubMain}`}>{e.genre}</h3>
           <p className={`${style.textShadow} ${TextDesc}`}>{e.description}</p>
-          <button className='w-fit p-1 rounded-lg self-end' onClick={()=>{window.open(`https://www.imdb.com/title/${e.imdbId}`, '_blank');}}>Learn More</button>
+          <button className='w-fit p-1 rounded-lg self-end text-white hover:-translate-y-0.5 transition-all transition-[150ms]' onClick={()=>{window.open(`https://www.imdb.com/title/${e.imdbId}`, '_blank');}}>Learn More</button>
           </article>
           <button onClick={nextSlide} className={`${button}`}>
             <FontAwesomeIcon icon={faArrowRight}/>

@@ -29,7 +29,7 @@ const WatchListPage = () => {
   return (
       <main>
         {list ? (
-          <div className='p-2 grid gap-5 sm:grid-cols-2 md:grid-cols-3'>
+          <div className='p-2 grid gap-5 grid-cols-2 md:grid-cols-3'>
             {list.map((details) => {
               return <MovieCard key={details._id} title={details.movieId.title} image={details.movieId.image} year={details.movieId.year} redirect={`/watchList/movie/${details._id}`} />;
             })}
