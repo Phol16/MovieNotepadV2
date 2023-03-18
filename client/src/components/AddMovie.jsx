@@ -1,4 +1,4 @@
-import { faPlusCircle } from '@fortawesome/free-solid-svg-icons';
+import { faPlusCircle, faSpinner } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { useState, useMemo } from 'react';
 import api from '../api/localhost';
@@ -11,6 +11,7 @@ const AddMovie = ({ listen }) => {
   const [imdbId, setImdbId] = useState('');
   const [image, setImage] = useState('');
   const [open, setOpen] = useState(false);
+  const [load, setLoad] = useState(false);
   const accessToken = useMemo(() => {
     return localStorage.getItem('Token');
   });
@@ -36,7 +37,7 @@ const AddMovie = ({ listen }) => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-
+    setLoad(true)
     const data = { title, image, imdbId, description, genre: [...genre.split(' ')], year: [...year.split(' ')] };
 
     try {
@@ -49,7 +50,8 @@ const AddMovie = ({ listen }) => {
         },
         body: JSON.stringify(data),
       }).then((res) => res.json());
-      response.status === 'success' ? setImage('') : setImage(image)
+      response.status === 'success' ? setImage(''): setImage(image)
+      setLoad(false)
     } catch (error) {
       console.log(error.message, 'here');
     }
@@ -140,6 +142,7 @@ const AddMovie = ({ listen }) => {
                 Cancel
               </button>
               <button type='submit' className='bg-red-600 p-1 w-fit rounded-md text-white hover:scale-110 transition-all duration-[150ms]'>
+                <FontAwesomeIcon icon={faSpinner} className={`${load ? 'inline-block' : 'hidden'} animate-spin mr-2`}/>
                 Submit
               </button>
             </section>
