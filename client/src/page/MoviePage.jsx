@@ -54,7 +54,7 @@ const MoviePage = () => {
   };
 
   return (
-    <div className='max-w-xl lg:max-w-2xl p-1 m-auto'>
+    <div className='max-w-xl lg:max-w-2xl p-1 pt-20 m-auto'>
       <button
         onClick={() => {
           navigate(-1);
@@ -63,7 +63,7 @@ const MoviePage = () => {
       >
         Back
       </button>
-      <div className='grid grid-rows-2 lg:grid-cols-2 lg:grid-rows-none'>
+      <div className='grid grid-rows-[0.5fr,1fr] lg:grid-cols-2 lg:grid-rows-none'>
       <img src={movie.image} alt='Poster' className='m-auto w-56 lg:w-80'/>
       <main className='backdrop-blur-md bg-black/40 rounded-md p-4 self-center max-w-sm'>
         {userInfo._id === movie.authorId && userInfo.role === 'admin' ? (
