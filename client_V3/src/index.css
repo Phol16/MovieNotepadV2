@@ -1,0 +1,52 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  background-color: #242424;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
+
+  --primary: #0c090d;
+  --secondary: #b3001b;
+  --secondaryHover: #b3001bd2;
+  --teriary: #5E6973;
+  --primaryText: #eef0f2;
+}
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+html {
+  width: 100%;
+  height: 100%;
+}
+body {
+  position: relative;
+  min-width: 100%;
+  min-height: 100%;
+  overflow-x: hidden;
+  background-color: black;
+}
+a {
+  color: #646cff;
+  text-decoration: inherit;
+}
+a:hover {
+  color: #535bf2;
+}
+button:hover {
+  border-color: var(--secondary);
+}
+button:focus,
+button:focus-visible {
+  outline: 4px auto -webkit-focus-ring-color;
+}
+.textShadow{
+  text-shadow: 1px 1px 2px black;
+}
