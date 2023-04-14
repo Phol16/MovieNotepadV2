@@ -43,6 +43,7 @@ const LogInPage = () => {
         if(response.data.role === 'Admin'){
           document.cookie = 'role=Admin'
         }
+        sessionStorage.setItem('user', response.data._id)
         navigate('/home');
       }
     } catch (error) {

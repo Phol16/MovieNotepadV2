@@ -1,15 +1,17 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { API } from '../api/Api';
 import { useNavigate, useParams } from 'react-router-dom';
-import { primText, subText } from '../style/theme';
+import { primText, subText, primButton, primButtonDisable } from '../style/theme';
 import logo from '../assets/logo.svg';
 import home from '../assets/home.svg';
 
-const primButton = 'bg-red-600 text-white p-2 rounded-lg';
 const MoviePage = () => {
   const [movie, setMovie] = useState<Record<string, any>>();
+  const [disable, setDisable] = useState<boolean>(false);
+  const [update, setUpdate] = useState<Date>();
   const { id } = useParams();
   const navigate = useNavigate();
+  const user = sessionStorage.getItem('user');
 
   useEffect(() => {
     const fetchMovie = async () => {
@@ -20,16 +22,52 @@ const MoviePage = () => {
           'Content-Type': 'application/json',
         },
       }).then((res) => res.json());
-      setMovie(response.data);
+      if (response.message === 'success') {
+        setMovie(response.data);
+      }
     };
     fetchMovie();
   }, []);
+
+  useEffect(() => {
+    const getData = async () => {
+      const response = await fetch(`${API}/watchList/movie/${id}`, {
+        method: 'GET',
+        credentials: 'include',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      }).then((res) => res.json());
+      if(response.message === 'success'){
+        setDisable(true)
+      }
+    };
+    getData();
+  }, [update]);
 
   const handleImdb = () => {
     if (movie) {
       window.open(`https://www.imdb.com/title/${movie.imdbId}`, '_blank');
     }
   };
+
+  const handleAdd = useCallback(() => {
+    const AddData = async () => {
+      const response = await fetch(`${API}/watchList/${id}`, {
+        method: 'POST',
+        credentials: 'include',
+        headers: {
+          'Content-Type': 'application/json',
+          authorization: `Bearer ${user}`,
+        },
+        body: JSON.stringify({}),
+      }).then((res) => res.json());
+      if(response.message ==='success'){
+        setUpdate(new Date(Date.now()))
+      }
+    };
+    AddData();
+  }, []);
 
   return (
     <div className='max-w-6xl m-auto pt-20'>
@@ -44,7 +82,13 @@ const MoviePage = () => {
             <h2>
               / {movie.year} / {movie.genre.join(' ')}
             </h2>
-            <button className={`${primButton} ${subText}`}>Add to WatchList</button>
+            {disable ? (
+              <button disabled className={`${primButtonDisable} ${subText}`}>Movie Already in the WatchList</button>
+            ) : (
+              <button className={`${primButton} ${subText}`} onClick={handleAdd}>
+                Add to WatchList
+              </button>
+            )}
             <button className={`${primButton} ${subText}`} onClick={handleImdb}>
               Learn More
             </button>
@@ -54,7 +98,13 @@ const MoviePage = () => {
       ) : (
         <p className='text-center w-full h-full text-xl font-semibold py-20'>Loading...</p>
       )}
-      <button className='fixed bottom-5 left-3 hover:scale-110 transition-transform duration-200' title='Home' onClick={()=>{navigate('/home')}}>
+      <button
+        className='fixed bottom-5 left-3 hover:scale-110 transition-transform duration-200'
+        title='Home'
+        onClick={() => {
+          navigate('/home');
+        }}
+      >
         <img src={home} alt='Icon' />
       </button>
     </div>

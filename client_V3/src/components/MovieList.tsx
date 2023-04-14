@@ -6,6 +6,7 @@ import 'react-lazy-load-image-component/src/effects/blur.css';
 import { useNavigate } from 'react-router-dom';
 import arrowleft from '../assets/arrowLeft.svg';
 import arrowright from '../assets/arrowRight.svg';
+import MovieCard from './MovieCard';
 
 interface movieTypes {
   _id: string;
@@ -69,15 +70,7 @@ const MovieList = () => {
         {movies.length ? (
           movies.map((element, index) => {
             return (
-              <span
-                key={index}
-                onClick={() => {
-                  navigate(`/home/movie/${element._id}`);
-                }}
-                className='border overflow-hidden rounded-lg flex cursor-pointer hover:-translate-y-1 transition-transform duration-200'
-              >
-                <LazyLoadImage key={index} effect='blur' src={element.image} alt='Poster' className=' w-full h-full object-cover' title={element.title} />
-              </span>
+              <MovieCard key={index} id={element._id} index={index} image={element.image} title={element.title}/>
             );
           })
         ) : (
