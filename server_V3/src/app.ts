@@ -7,11 +7,13 @@ import cors from 'cors';
 import router from './router';
 import { codeError } from './middleware/codeError';
 
+const curr = process.env.NODE_ENV;
+
 const app: Express = express();
 
 app.use(
   cors({
-    origin:'https://movienotepadclient.onrender.com',
+    origin: curr === 'Development' ?  'http://localhost:5173' : 'https://movienotepadclient.onrender.com' ,
     credentials: true,
   })
 );
