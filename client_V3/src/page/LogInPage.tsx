@@ -2,6 +2,7 @@ import React, { useCallback, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import SecondaryButton from '../components/SecondaryButton';
 import SubmitButton from '../components/SubmitButton';
+import spinner from '../assets/spinner.svg'
 import { API } from '../api/Api';
 
 interface information {
@@ -12,6 +13,7 @@ interface information {
 const LogInPage = () => {
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
+  const [loading,setLoading] = useState<boolean>(false);
   const navigate = useNavigate();
   sessionStorage.setItem('Page', 'signIn');
 
@@ -31,6 +33,7 @@ const LogInPage = () => {
 
   const sendData = async (data: information) => {
     try {
+      setLoading(true)
       const response = await fetch(`${API}/auth/logIn`, {
         method: 'POST',
         credentials: 'include',
@@ -45,7 +48,7 @@ const LogInPage = () => {
         }
         sessionStorage.setItem('user', response.data._id)
         navigate('/home');
-      }
+      }else{setLoading(false)}
     } catch (error) {
       console.log(error);
     }
@@ -64,6 +67,7 @@ const LogInPage = () => {
             placeholder='Email (user@gmail.com)'
             className='rounded-md p-1 text-black'
             onChange={useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
+              setLoading(false)
               setEmail(e.target.value);
             }, [])}
           />
@@ -77,6 +81,7 @@ const LogInPage = () => {
             placeholder='Password (qwerty)'
             className='rounded-md p-1 text-black'
             onChange={useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
+              setLoading(false)
               setPassword(e.target.value);
             }, [])}
           />
@@ -86,7 +91,10 @@ const LogInPage = () => {
             <p className='max-w-[6rem]'>Don't have an Account?</p>
             <SecondaryButton Name={'Sign Up'} handleClick={handlesignUp} />
           </section>
+          <section className='flex items-center gap-2'>
+           {loading && <img src={spinner} alt='Icon' className='animate-spin'/> }
           <SubmitButton Name={'Log In'} />
+          </section>
         </div>
       </form>
     </div>

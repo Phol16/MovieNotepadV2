@@ -6,6 +6,7 @@ import SecondaryButton from '../components/SecondaryButton';
 import SubmitButton from '../components/SubmitButton';
 import { API } from '../api/Api';
 import SuccessRegister from '../components/SuccessRegister';
+import spinner from '../assets/spinner.svg'
 
 interface information {
   username: string;
@@ -20,6 +21,7 @@ const SignUpPage = () => {
   const [password, setPassword] = useState<string>('');
   const [image, setImage] = useState<string | undefined>();
   const [success, setSuccess] = useState<boolean>(false);
+  const [loading, setLoading] = useState<boolean>(false);
   const navigate = useNavigate();
 
   const handleSignIn = useCallback(() => {
@@ -52,6 +54,7 @@ const SignUpPage = () => {
 
   const sendData = async (data: information) => {
     try {
+      setLoading(true)
       const response = await fetch(`${API}/auth/register`, {
         method: 'POST',
         headers: {
@@ -61,7 +64,7 @@ const SignUpPage = () => {
       }).then((res) => res.json());
       if (response.message === 'success') {
         setSuccess(true);
-      }
+      }else{setLoading(false)}
     } catch (error) {
       console.log(error);
     }
@@ -127,7 +130,10 @@ const SignUpPage = () => {
                 <p className='max-w-[6rem]'>Don't have an Account?</p>
                 <SecondaryButton Name={'Sign In'} handleClick={handleSignIn} />
               </section>
-              <SubmitButton Name={'Submit'} />
+          <section className='flex items-center gap-2'>
+           {loading && <img src={spinner} alt='Icon' className='animate-spin'/> }
+          <SubmitButton Name={'Log In'} />
+          </section>
             </div>
           </form>
         </div>
