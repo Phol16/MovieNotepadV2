@@ -1,4 +1,6 @@
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
+import 'react-lazy-load-image-component/src/effects/blur.css';
 import Button from './Button';
 import SubmitButton from './SubmitButton';
 import { API } from '../api/Api';
@@ -168,7 +170,7 @@ const AdminButton = () => {
               </label>
               <label htmlFor='poster' className={`${labelDesign}`}>
                 Poster:
-                {image && <img src={image} alt='Image' className='max-w-[150px] self-center' />}
+                {image && <LazyLoadImage src={image} alt='Image' className='max-w-[150px] self-center' />}
                 <label htmlFor='poster' className=' cursor-pointer border text-center p-1 rounded-lg bg-gray-100 hover:bg-gray-500 hover:text-white'>
                   Upload A Poster
                 </label>

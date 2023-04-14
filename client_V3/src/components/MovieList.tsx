@@ -70,7 +70,7 @@ const MovieList = () => {
         {movies.length ? (
           movies.map((element, index) => {
             return (
-              <MovieCard key={index} id={element._id} index={index} image={element.image} title={element.title}/>
+              <MovieCard key={index} redirect={`/home/movie/${element._id}`} index={index} image={element.image} title={element.title}/>
             );
           })
         ) : (

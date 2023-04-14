@@ -84,7 +84,7 @@ const Profile = () => {
             </div>
             <section className='flex gap-2'>
               <h1>{user.username}</h1>
-              <button className='focus:outline-none hover:-translate-y-[2px] w-fit' title='Update Profile'><img src={editIcon} alt="Icon" className='w-4 h-fit'/></button>
+              <button className='focus:outline-none hover:-translate-y-[2px] w-fit' title='Update Profile'><LazyLoadImage src={editIcon} alt="Icon" className='w-4 h-fit'/></button>
             </section>
           </main>
         ) : (

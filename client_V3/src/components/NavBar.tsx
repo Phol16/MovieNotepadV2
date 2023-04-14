@@ -1,4 +1,6 @@
 import React, { useCallback, useState } from 'react';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
+import 'react-lazy-load-image-component/src/effects/blur.css';
 import { useNavigate } from 'react-router-dom';
 import Button from './Button';
 import Profile from './Profile';
@@ -28,7 +30,7 @@ const NavBar = () => {
       <button className='focus:outline-none' onClick={handleHome}>
         <h1 className='font-semibold text-xl p-2 textShadow flex justify-center items-center hover:-translate-y-1 transition-transform duration-200'>
           Movie <span className=' text-secondary'>Notepad</span>
-          <img src={logo} alt='Icon' className='w-8'/>
+          <LazyLoadImage src={logo} alt='Icon' className='w-8'/>
         </h1>
       </button>
       {Page === 'Home' ? <Button Name={'Profile'} handleClick={handleProfile} /> : Page !== 'signIn' ? <Button Name={'Sign In'} handleClick={handleSignIn} /> : null}

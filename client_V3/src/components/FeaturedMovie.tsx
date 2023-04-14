@@ -6,6 +6,7 @@ import { primText, subText, buttonText } from '../style/theme';
 import arrowleft from '../assets/arrowLeft.svg'
 import arrowright from '../assets/arrowRight.svg'
 import { useNavigate } from 'react-router-dom';
+import Loading from './Loading';
 
 interface featuredData {
   _id:string,
@@ -50,7 +51,7 @@ const FeaturedMovie = () => {
         featured.map((element, index) => {
           return current === index ? (
             <section key={index} className='w-full h-full relative'>
-              <video playsInline autoPlay muted className=' w-full h-full object-contain object-center aspect-video' src={element.trailer} poster={element.image} />
+              <video playsInline autoPlay muted loop className=' w-full h-full object-contain object-center aspect-video' src={element.trailer} poster={element.image} />
               <header className='flex justify-between m-auto bg-black/70 rounded-lg overflow-hidden backdrop-blur-sm w-full sm:max-w-md lg:max-w-lg lg:absolute lg:bottom-[20%] lg:left-20'>
                 <button className={`${buttonText}`} onClick={
                   ()=>{ setCurrent(current === 0 ? featured.length-1 : current-1)}
@@ -70,7 +71,7 @@ const FeaturedMovie = () => {
           ) : null;
         })
       ) : (
-        <p className='text-center w-full h-full text-xl font-semibold py-20'>Loading...</p>
+        <Loading/>
       )}
     </main>
   );

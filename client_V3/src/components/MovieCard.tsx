@@ -5,18 +5,18 @@ import { useNavigate } from 'react-router-dom'
 
 type props = {
   index:number,
-  id:string,
+  redirect:string,
   image:string,
   title:string,
 }
 
-const MovieCard = ({index, id, image, title}:props) => {
+const MovieCard = ({index, redirect, image, title}:props) => {
   const navigate = useNavigate()
   return (
     <span
     key={index}
     onClick={() => {
-      navigate(`/home/movie/${id}`);
+      navigate(`${redirect}`);
     }}
     className='border overflow-hidden rounded-lg flex cursor-pointer hover:-translate-y-1 transition-transform duration-200'
   >

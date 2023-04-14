@@ -11,6 +11,7 @@ import MainPage from '../page/MainPage';
 import HomePage from '../page/HomePage';
 import MoviePage from '../page/MoviePage';
 import PageNotFound from '../page/PageNotFound';
+import MovieWLPage from '../page/MovieWLPage';
 function App() {
   return (
     <Routes>
@@ -31,6 +32,7 @@ function App() {
         <Route path='/home/movie/:id' element={<MoviePage/>}/>
         <Route path='/home/about' element={<AboutPage/>}/>
         <Route path='/home/watchList' element={<WatchListPage/>}/>
+        <Route path='/home/watchList/movie/:WL' element={<MovieWLPage/>}/>
       </Route>
       <Route path='*' element={<PageNotFound/>}/>
     </Routes>

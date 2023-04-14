@@ -1,4 +1,6 @@
 import React, { useCallback, useState } from 'react';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
+import 'react-lazy-load-image-component/src/effects/blur.css';
 import { useNavigate } from 'react-router-dom';
 import SecondaryButton from '../components/SecondaryButton';
 import SubmitButton from '../components/SubmitButton';
@@ -114,7 +116,7 @@ const SignUpPage = () => {
             </label>
             <label htmlFor='image' className='flex flex-col gap-1'>
               Image: (Optional)
-              {image && <img src={image} className='max-w-[200px] h-auto self-center' />}
+              {image && <LazyLoadImage src={image} className='max-w-[200px] h-auto self-center' />}
               <label htmlFor='image' className='m-auto cursor-pointer bg-gray-600 p-2 rounded-lg hover:bg-gray-500 hover:text-black transition-colors duration-150 text-sm md:text-base'>
                 Upload a File
               </label>
