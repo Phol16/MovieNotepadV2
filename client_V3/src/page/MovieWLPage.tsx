@@ -9,6 +9,7 @@ import trash from '../assets/trash.svg';
 import { API } from '../api/Api';
 import Button from '../components/Button';
 import SecondaryButton from '../components/SecondaryButton';
+import Notes from '../components/Notes';
 
 const MovieWLPage = () => {
   const [movie, setMovie] = useState<Record<string, any>>();
@@ -100,6 +101,7 @@ const MovieWLPage = () => {
               Learn More
             </button>
             <p className='max-w-md'>{movie.movieId.description}</p>
+            <Notes/>
           </main>
         </div>
       ) : (
