@@ -26,5 +26,5 @@ const WatchListSchema = new Schema(
   { timestamps: true }
 );
 
-const movieModel = model('WatchList', WatchListSchema);
-export default movieModel;
+const watchListModel = model('WatchList', WatchListSchema);
+export default watchListModel;

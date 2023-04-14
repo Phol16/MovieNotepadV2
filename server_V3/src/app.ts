@@ -24,7 +24,7 @@ app.use(bodyParser.json({limit:'10000000'}));
 app.use('/', router());
 
 app.use('*', codeError, (req:Request, res:Response)=>{
-  return res.status(404).json({message:'404'})
+  return res.status(404).json({message:'404 Not Found'})
 })
 
 export default app;
