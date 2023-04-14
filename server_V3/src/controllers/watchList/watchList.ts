@@ -1,6 +1,7 @@
 import express, { Request, Response } from 'express';
-import { addWatchList, getWatchList, getWatchListById, searchWatchList } from './watchListControllers';
+import { addWatchList, deleteWatchList, getWatchList, getWatchListById, searchWatchList } from './watchListControllers';
 import { get } from 'lodash';
+import { deleteAMovie } from 'controllers/movies/movies';
 
 export const getAllWatchList = async (req: Request, res: Response) => {
   try {
@@ -33,23 +34,23 @@ export const getUserWatchList = async (req: Request, res: Response) => {
   }
 };
 
-export const searchMovieInWatchList = async(req:Request,res:Response)=>{
+export const searchMovieInWatchList = async (req: Request, res: Response) => {
   try {
-    const { search } = req.params
-    const user = get(req, 'identity._id')
+    const { search } = req.params;
+    const user = get(req, 'identity._id');
 
-    const existing = await searchWatchList(user,search)
+    const existing = await searchWatchList(user, search);
 
-    if(!existing){
-     return res.status(404).json({message:'No Movie about that'})
+    if (!existing) {
+      return res.status(404).json({ message: 'No Movie about that' });
     }
 
-    res.status(200).json({data:existing, message:'success'})
+    res.status(200).json({ data: existing, message: 'success' });
   } catch (error) {
-    console.log(error)
-    res.status(500).json({error:error.message})
+    console.log(error);
+    res.status(500).json({ error: error.message });
   }
-}
+};
 
 export const addMovieInWatchList = async (req: Request, res: Response) => {
   try {
@@ -64,6 +65,23 @@ export const addMovieInWatchList = async (req: Request, res: Response) => {
 
     const newData = await addWatchList(watchListData);
     res.status(200).json({ data: newData, message: 'success' });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ error: error.message });
+  }
+};
+
+export const deleteWL = async (req: Request, res: Response) => {
+  try {
+    const { id } = req.params;
+
+    const existing = await deleteWatchList(id);
+
+    if (!existing) {
+      return res.status(404).json({ message: 'No movie exist in watchlist' });
+    }
+
+    res.status(200).json({ data: existing, message: 'delete success' });
   } catch (error) {
     console.log(error);
     res.status(500).json({ error: error.message });
