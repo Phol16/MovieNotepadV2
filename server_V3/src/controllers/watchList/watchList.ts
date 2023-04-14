@@ -19,7 +19,6 @@ export const getAllWatchList = async (req: Request, res: Response) => {
 export const getUserWatchList = async (req: Request, res: Response) => {
   try {
     const id = get(req, 'identity._id');
-    console.log(id)
 
     const existingWL = await getWatchListById(id);
 

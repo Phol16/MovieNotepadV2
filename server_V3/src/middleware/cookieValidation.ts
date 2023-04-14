@@ -5,7 +5,6 @@ import {get, merge} from 'lodash'
 export const cookieValidation = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const sessionToken:string = req.cookies['MN_sessionToken'];
-    console.log(sessionToken)
 
     //check if cookie has session token
     if (!sessionToken) {
