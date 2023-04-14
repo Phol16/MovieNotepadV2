@@ -6,6 +6,7 @@ import notePink from '../assets/notePink.svg';
 import Questions from '../components/Questions';
 import IntroHero from '../components/IntroHero';
 import NetflixImage from '../assets/NetflixsImage.png';
+import InfoNote from '../components/InfoNote';
 
 type details = {
   title: string;
@@ -71,6 +72,9 @@ const IntroPage = () => {
             return <Questions title={element.title} content={element.content} key={index} />;
           })}
         </main>
+      </section>
+      <section className='fixed bottom-10 left-5 -rotate-[9deg]'>
+        <InfoNote/>
       </section>
     </>
   );
