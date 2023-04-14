@@ -61,6 +61,7 @@ const LogInPage = () => {
             type='email'
             id='email'
             name='email'
+            placeholder='Email (user@gmail.com)'
             className='rounded-md p-1 text-black'
             onChange={useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
               setEmail(e.target.value);
@@ -73,6 +74,7 @@ const LogInPage = () => {
             type='password'
             id='password'
             name='password'
+            placeholder='Password (qwerty)'
             className='rounded-md p-1 text-black'
             onChange={useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
               setPassword(e.target.value);

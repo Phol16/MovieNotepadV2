@@ -14,7 +14,7 @@ const InfoNote = () => {
         <button className='p-1 self-start relative -top-3 left-1' onClick={()=>{setOpen(false)}}><LazyLoadImage src={cross} alt="Icon" className='fill-black rotate-[45deg]'/></button>
       </div>
       <p className='max-w-xs font-normal'>
-        Fetching data to server will take time. <br/>
+        Fetching data from server will take time. <br/>
         Reason: free web hosting server side
       </p>
     </div>
