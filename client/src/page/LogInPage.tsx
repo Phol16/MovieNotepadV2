@@ -74,7 +74,7 @@ const LogInPage = () => {
             type='password'
             id='password'
             name='password'
-            placeholder='Password (qwerty)'
+            placeholder='Password (Password123)'
             className='rounded-md p-1 text-black'
             onChange={useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
               setLoading(false);
