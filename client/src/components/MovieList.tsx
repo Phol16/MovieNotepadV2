@@ -38,7 +38,7 @@ const MovieList = () => {
   }, [page]);
 
   return (
-    <div className={` border-t-4 border-white/30 py-10 px-8 text-primaryText font-semibold w-fit gap-5 flex flex-col m-auto`}>
+    <div className={` border-t-4 border-white/30 py-10 px-8 text-primaryText font-semibold w-full gap-5 flex flex-col m-auto`}>
       <h1 className={`${primText}`}>Movies/Series</h1>
       <header className='m-auto flex gap-5'>
         <button
