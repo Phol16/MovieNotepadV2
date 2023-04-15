@@ -60,7 +60,7 @@ const LogInPage = () => {
             type='email'
             id='email'
             name='email'
-            placeholder='Email (user@gmail.com)'
+            placeholder='Email'
             className='rounded-md p-1 text-black'
             onChange={useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
               setLoading(false);
@@ -74,7 +74,7 @@ const LogInPage = () => {
             type='password'
             id='password'
             name='password'
-            placeholder='Password (Password123)'
+            placeholder='Password'
             className='rounded-md p-1 text-black'
             onChange={useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
               setLoading(false);
