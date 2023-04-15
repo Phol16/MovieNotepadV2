@@ -25,6 +25,7 @@ const MovieList = () => {
     const fetchMovie = async () => {
       const response = await fetch(`${API}/movie?page=${page}`, {
         method: 'GET',
+        mode:'cors',
         credentials: 'include',
         headers: {
           'Content-Type': 'application/json',
