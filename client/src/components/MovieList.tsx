@@ -7,6 +7,7 @@ import { useNavigate } from 'react-router-dom';
 import arrowleft from '../assets/arrowLeft.svg';
 import arrowright from '../assets/arrowRight.svg';
 import MovieCard from './MovieCard';
+import { dataFetching } from '../utils/dataFetching';
 
 interface movieTypes {
   _id: string;
@@ -18,22 +19,15 @@ const MovieList = () => {
   const [movies, setMovies] = useState<movieTypes[]>([]);
   const [page, setPage] = useState<number>(1);
   const [total, setTotal] = useState<number>(0);
-  const navigate = useNavigate();
 
   useEffect(() => {
     let catcher = true;
     const fetchMovie = async () => {
-      const response = await fetch(`${API}/movie?page=${page}`, {
-        method: 'GET',
-        mode:'cors',
-        credentials: 'include',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      }).then((res) => res.json());
+      const response = new dataFetching(`/movie?page=${page}`);
+      const fetchedData = await response.getData();
       if (catcher) {
-        setMovies(response.data);
-        setTotal(response.totalPage);
+        setMovies(fetchedData.data);
+        setTotal(fetchedData.totalPage);
       }
     };
     fetchMovie();
@@ -70,9 +64,7 @@ const MovieList = () => {
       <main className='grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4 px-5'>
         {movies.length ? (
           movies.map((element, index) => {
-            return (
-              <MovieCard key={index} redirect={`/home/movie/${element._id}`} index={index} image={element.image} title={element.title}/>
-            );
+            return <MovieCard key={index} redirect={`/home/movie/${element._id}`} index={index} image={element.image} title={element.title} />;
           })
         ) : (
           <div className=' flex items-center relative text-center w-full h-[300px] text-xl font-semibold'>Loading...</div>

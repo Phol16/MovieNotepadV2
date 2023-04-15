@@ -1,6 +1,7 @@
 import React, { ReactNode, useEffect, useMemo, useState } from 'react';
 import { API } from '../api/Api';
 import { Navigate } from 'react-router-dom';
+import { dataFetching } from '../utils/dataFetching';
 
 type prop = {
   children: ReactNode;
@@ -11,14 +12,9 @@ const Protected = ({ children }: prop) => {
 
   useEffect(() => {
     const fetchValid = async () => {
-      const response = await fetch(`${API}/users`, {
-        method: 'GET',
-        credentials: 'include',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      }).then((res) => res.json());
-      setUser(response.data);
+      const response = new dataFetching(`/users`);
+      const fetchedData = await response.getData();
+      setUser(fetchedData.data);
     };
     fetchValid();
   }, []);

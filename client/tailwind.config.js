@@ -14,7 +14,7 @@ export default {
         primaryText:"var(--primaryText)",
       },
       backgroundImage:{
-        bgSeat: "url('./src/assets/bgseats.jpg')"
+        bgSeat: "url('./src/assets/Background.jpg')"
       },
       fontFamily:{
         poppins:"'poppins', 'serif', 'sans'"

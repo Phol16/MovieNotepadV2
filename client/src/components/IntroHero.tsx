@@ -22,7 +22,7 @@ const IntroHero = () => {
   };
 
   return (
-    <div className=' bg-bgSeat h-[80svh] w-full bg-cover bg-center bg-no-repeat'>
+    <div className={` bg-bgSeat h-[80svh] w-full bg-cover bg-center bg-no-repeat`}>
       <section className='w-full h-full flex flex-col gap-20 justify-center items-center backdrop-brightness-50 '>
         <h1 className='text-xl md:text-3xl lg:text-4xl font-semibold max-w-xs lg:max-w-none text-center'>Unlimited movies, TV shows, and more.</h1>
         <section className='flex items-center gap-5 text-xs md:text-sm lg:text-lg'>

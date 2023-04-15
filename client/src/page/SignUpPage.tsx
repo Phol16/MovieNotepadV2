@@ -4,9 +4,9 @@ import 'react-lazy-load-image-component/src/effects/blur.css';
 import { useNavigate } from 'react-router-dom';
 import SecondaryButton from '../components/SecondaryButton';
 import SubmitButton from '../components/SubmitButton';
-import { API } from '../api/Api';
 import SuccessRegister from '../components/SuccessRegister';
-import spinner from '../assets/spinner.svg'
+import spinner from '../assets/spinner.svg';
+import { dataFetching } from '../utils/dataFetching';
 
 interface information {
   username: string;
@@ -54,17 +54,14 @@ const SignUpPage = () => {
 
   const sendData = async (data: information) => {
     try {
-      setLoading(true)
-      const response = await fetch(`${API}/auth/register`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(data),
-      }).then((res) => res.json());
-      if (response.message === 'success') {
+      setLoading(true);
+      const response = new dataFetching('/auth/register', data);
+      const fetchedData = await response.postData();
+      if (fetchedData.message === 'success') {
         setSuccess(true);
-      }else{setLoading(false)}
+      } else {
+        setLoading(false);
+      }
     } catch (error) {
       console.log(error);
     }
@@ -130,10 +127,10 @@ const SignUpPage = () => {
                 <p className='max-w-[6rem]'>Don't have an Account?</p>
                 <SecondaryButton Name={'Sign In'} handleClick={handleSignIn} />
               </section>
-          <section className='flex items-center gap-2'>
-           {loading && <img src={spinner} alt='Icon' className='animate-spin'/> }
-          <SubmitButton Name={'Log In'} />
-          </section>
+              <section className='flex items-center gap-2'>
+                {loading && <img src={spinner} alt='Icon' className='animate-spin' />}
+                <SubmitButton Name={'Log In'} />
+              </section>
             </div>
           </form>
         </div>

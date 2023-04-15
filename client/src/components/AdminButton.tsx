@@ -1,22 +1,9 @@
-import React, { useCallback, useEffect, useMemo, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import 'react-lazy-load-image-component/src/effects/blur.css';
 import Button from './Button';
 import SubmitButton from './SubmitButton';
-import { API } from '../api/Api';
-
-interface movieTypes {
-  title: string;
-  image: string;
-  description: string;
-  imdbId: string;
-  year: string[];
-  genre: string[];
-}
-
-type props = {
-  update:(e:string)=>void,
-}
+import { dataFetching } from '../utils/dataFetching';
 
 const AdminButton = () => {
   const [open, setOpen] = useState<boolean>(false);
@@ -29,7 +16,6 @@ const AdminButton = () => {
   const [role, setRole] = useState<string>('');
 
   const labelDesign = 'flex flex-col gap-1';
-
 
   useEffect(() => {
     setRole(document.cookie);
@@ -57,15 +43,9 @@ const AdminButton = () => {
     e.preventDefault();
     const movieInfo = { title, image, description, imdbId, year, genre };
     try {
-      const response = await fetch(`${API}/movie/registerMovie`, {
-        method: 'POST',
-        credentials: 'include',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(movieInfo),
-      }).then((res) => res.json());
-      if (response.message === 'success') {
+      const response = new dataFetching(`/movie/registerMovie`, movieInfo);
+      const fetchedData = await response.postData();
+      if (fetchedData.message === 'success') {
         setImage('');
         setOpen(false);
       }

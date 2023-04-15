@@ -2,8 +2,8 @@ import React, { useCallback, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import SecondaryButton from '../components/SecondaryButton';
 import SubmitButton from '../components/SubmitButton';
-import spinner from '../assets/spinner.svg'
-import { API } from '../api/Api';
+import spinner from '../assets/spinner.svg';
+import { dataFetching } from '../utils/dataFetching';
 
 interface information {
   email: string;
@@ -13,7 +13,7 @@ interface information {
 const LogInPage = () => {
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
-  const [loading,setLoading] = useState<boolean>(false);
+  const [loading, setLoading] = useState<boolean>(false);
   const navigate = useNavigate();
   sessionStorage.setItem('Page', 'signIn');
 
@@ -33,22 +33,18 @@ const LogInPage = () => {
 
   const sendData = async (data: information) => {
     try {
-      setLoading(true)
-      const response = await fetch(`${API}/auth/logIn`, {
-        method: 'POST',
-        credentials: 'include',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(data),
-      }).then((res) => res.json());
-      if (response.message === 'success') {
-        if(response.data.role === 'Admin'){
-          document.cookie = 'role=Admin'
+      setLoading(true);
+      const response = new dataFetching('/auth/logIn', data);
+      const fetchedData = await response.postData();
+      if (fetchedData.message === 'success') {
+        if (fetchedData.data.role === 'Admin') {
+          document.cookie = 'role=Admin';
         }
-        sessionStorage.setItem('user', response.data._id)
+        sessionStorage.setItem('user', fetchedData.data._id);
         navigate('/home');
-      }else{setLoading(false)}
+      } else {
+        setLoading(false);
+      }
     } catch (error) {
       console.log(error);
     }
@@ -67,7 +63,7 @@ const LogInPage = () => {
             placeholder='Email (user@gmail.com)'
             className='rounded-md p-1 text-black'
             onChange={useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
-              setLoading(false)
+              setLoading(false);
               setEmail(e.target.value);
             }, [])}
           />
@@ -81,7 +77,7 @@ const LogInPage = () => {
             placeholder='Password (qwerty)'
             className='rounded-md p-1 text-black'
             onChange={useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
-              setLoading(false)
+              setLoading(false);
               setPassword(e.target.value);
             }, [])}
           />
@@ -92,8 +88,8 @@ const LogInPage = () => {
             <SecondaryButton Name={'Sign Up'} handleClick={handlesignUp} />
           </section>
           <section className='flex items-center gap-2'>
-           {loading && <img src={spinner} alt='Icon' className='animate-spin'/> }
-          <SubmitButton Name={'Log In'} />
+            {loading && <img src={spinner} alt='Icon' className='animate-spin' />}
+            <SubmitButton Name={'Log In'} />
           </section>
         </div>
       </form>

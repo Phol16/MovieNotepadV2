@@ -6,6 +6,7 @@ import { API } from '../api/Api';
 import Button from './Button';
 import profile from '../assets/profile.svg';
 import editIcon from '../assets/editIcon.svg';
+import { dataFetching } from '../utils/dataFetching';
 
 interface redirects {
   name: string;
@@ -39,14 +40,9 @@ const Profile = () => {
 
   useEffect(() => {
     const fetchUser = async () => {
-      const response = await fetch(`${API}/users/userDetail`, {
-        method: 'GET',
-        credentials: 'include',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      }).then((res) => res.json());
-      setUser(response.data);
+      const response = new dataFetching(`/users/userDetail`);
+      const fetchData = await response.getData();
+      setUser(fetchData.data);
     };
 
     fetchUser();
@@ -58,19 +54,12 @@ const Profile = () => {
 
   const handleLogout = () => {
     const fetchLogout = async () => {
-      await fetch(`${API}/auth/logOut`, {
-        method: 'GET',
-        credentials: 'include',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      }).then((res) => {
-        res.json();
-      });
+      const response = new dataFetching(`/auth/logOut`);
+      await response.getData();
     };
     fetchLogout();
-    sessionStorage.removeItem('Page')
-    document.cookie = `role=; expires=${Date.now()}`
+    sessionStorage.removeItem('Page');
+    document.cookie = `role=; expires=${Date.now()}`;
     navigate('/');
   };
 
@@ -80,11 +69,13 @@ const Profile = () => {
         {user ? (
           <main className='flex flex-col items-center gap-2'>
             <div className='rounded-[50%] w-40 h-40 border-2 border-secondary overflow-hidden'>
-            <LazyLoadImage src={user.image !== 'No Image' ? user.image : profile} alt='Photo' className=' object-cover object-center h-full w-full' />
+              <LazyLoadImage src={user.image !== 'No Image' ? user.image : profile} alt='Photo' className=' object-cover object-center h-full w-full' />
             </div>
             <section className='flex gap-2'>
               <h1>{user.username}</h1>
-              <button className='focus:outline-none hover:-translate-y-[2px] w-fit' title='Update Profile'><LazyLoadImage src={editIcon} alt="Icon" className='w-4 h-fit'/></button>
+              <button className='focus:outline-none hover:-translate-y-[2px] w-fit' title='Update Profile'>
+                <LazyLoadImage src={editIcon} alt='Icon' className='w-4 h-fit' />
+              </button>
             </section>
           </main>
         ) : (

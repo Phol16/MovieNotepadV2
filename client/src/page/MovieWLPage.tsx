@@ -6,29 +6,24 @@ import { primButton, primText, subText } from '../style/theme';
 import logo from '../assets/logo.svg';
 import home from '../assets/home.svg';
 import trash from '../assets/trash.svg';
-import { API } from '../api/Api';
 import Button from '../components/Button';
 import SecondaryButton from '../components/SecondaryButton';
 import Notes from '../components/Notes';
+import { dataFetching } from '../utils/dataFetching';
 
 const MovieWLPage = () => {
   const [movie, setMovie] = useState<Record<string, any>>();
   const [openDelete, setOpenDelete] = useState<boolean>(false);
-  const user = sessionStorage.getItem('user')
+  const user = sessionStorage.getItem('user');
   const navigate = useNavigate();
   const { WL } = useParams();
 
   useEffect(() => {
     const fetchMovie = async () => {
-      const response = await fetch(`${API}/watchList/movie/${WL}`, {
-        method: 'GET',
-        credentials: 'include',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      }).then((res) => res.json());
-      if (response.message === 'success') {
-        setMovie(response.data);
+      const response = new dataFetching(`/watchList/movie/${WL}`);
+      const fetchedData = await response.getData();
+      if (fetchedData.message === 'success') {
+        setMovie(fetchedData.data);
       }
     };
     fetchMovie();
@@ -41,24 +36,17 @@ const MovieWLPage = () => {
   };
 
   const handleDelete = () => {
-    const fetchDelete = async ()=>{
-      if(movie){
-        console.log('active')
-      const response = await fetch(`${API}/watchList/movie/${movie._id}`,{
-        method:'DELETE',
-        credentials:'include',
-        headers:{
-          'Content-Type': 'applicaiton/json',
-          authorization: `bearer ${user}`
+    const fetchDelete = async () => {
+      if (movie) {
+        const response = new dataFetching(`/watchList/movie/${movie._id}`, {}, `bearer ${user}`);
+        const fetchedData = await response.deleteData();
+        if (fetchedData.message === 'delete success') {
+          navigate('/home/watchList');
         }
-      }).then((res)=>res.json())
-      if(response.message === 'delete success'){
-        navigate('/home/watchList')
       }
-    }
-    }
-    fetchDelete()
-  }
+    };
+    fetchDelete();
+  };
 
   return (
     <div className='max-w-6xl m-auto pt-20 px-3'>
@@ -101,7 +89,7 @@ const MovieWLPage = () => {
               Learn More
             </button>
             <p className='max-w-md'>{movie.movieId.description}</p>
-            <Notes/>
+            <Notes />
           </main>
         </div>
       ) : (

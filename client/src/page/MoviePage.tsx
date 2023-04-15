@@ -1,11 +1,11 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import 'react-lazy-load-image-component/src/effects/blur.css';
-import { API } from '../api/Api';
 import { useNavigate, useParams } from 'react-router-dom';
 import { primText, subText, primButton, primButtonDisable } from '../style/theme';
 import logo from '../assets/logo.svg';
 import home from '../assets/home.svg';
+import { dataFetching } from '../utils/dataFetching';
 
 const MoviePage = () => {
   const [movie, setMovie] = useState<Record<string, any>>();
@@ -18,15 +18,10 @@ const MoviePage = () => {
 
   useEffect(() => {
     const fetchMovie = async () => {
-      const response = await fetch(`${API}/movie/${id}`, {
-        method: 'GET',
-        credentials: 'include',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      }).then((res) => res.json());
-      if (response.message === 'success') {
-        setMovie(response.data);
+      const response = new dataFetching(`/movie/${id}`);
+      const fetchedData = await response.getData();
+      if (fetchedData.message === 'success') {
+        setMovie(fetchedData.data);
       }
     };
     fetchMovie();
@@ -34,15 +29,10 @@ const MoviePage = () => {
 
   useEffect(() => {
     const getData = async () => {
-      const response = await fetch(`${API}/watchList/movie/${id}`, {
-        method: 'GET',
-        credentials: 'include',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      }).then((res) => res.json());
-      if(response.message === 'success'){
-        setDisable(true)
+      const response = new dataFetching(`/watchList/movie/${id}`);
+      const fetchedData = await response.getData();
+      if (fetchedData.message === 'success') {
+        setDisable(true);
       }
     };
     getData();
@@ -56,17 +46,10 @@ const MoviePage = () => {
 
   const handleAdd = useCallback(() => {
     const AddData = async () => {
-      const response = await fetch(`${API}/watchList/${id}`, {
-        method: 'POST',
-        credentials: 'include',
-        headers: {
-          'Content-Type': 'application/json',
-          authorization: `Bearer ${user}`,
-        },
-        body: JSON.stringify({}),
-      }).then((res) => res.json());
-      if(response.message ==='success'){
-        setUpdate(new Date(Date.now()))
+      const response = new dataFetching(`/watchList/${id}`, {}, `Bearer ${user}`);
+      const fetchedData = await response.postData();
+      if (fetchedData.message === 'success') {
+        setUpdate(new Date(Date.now()));
       }
     };
     AddData();
@@ -76,7 +59,18 @@ const MoviePage = () => {
     <div className='max-w-6xl m-auto pt-20 px-3'>
       {movie ? (
         <div className='flex flex-col gap-2'>
-          <video onClick={()=>{setControls(!controls)}} controls={controls} src={movie.trailer} poster={movie.image} autoPlay loop muted className=' aspect-video m-auto max-h-[650px] overflow-hidden' />
+          <video
+            onClick={() => {
+              setControls(!controls);
+            }}
+            controls={controls}
+            src={movie.trailer}
+            poster={movie.image}
+            autoPlay
+            loop
+            muted
+            className=' aspect-video m-auto max-h-[650px] overflow-hidden'
+          />
           <main className='flex flex-col gap-2 max-w-lg m-auto'>
             <header className='flex items-center'>
               <h1 className={`${primText} font-semibold text-secondary`}>{movie.title}</h1>
@@ -86,7 +80,9 @@ const MoviePage = () => {
               / {movie.year} / {movie.genre.join(' ')}
             </h2>
             {disable ? (
-              <button disabled className={`${primButtonDisable} ${subText}`}>Movie in the WatchList</button>
+              <button disabled className={`${primButtonDisable} ${subText}`}>
+                Movie in the WatchList
+              </button>
             ) : (
               <button className={`${primButton} ${subText}`} onClick={handleAdd}>
                 Add to WatchList
