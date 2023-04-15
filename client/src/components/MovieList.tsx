@@ -67,7 +67,7 @@ const MovieList = () => {
             return <MovieCard key={index} redirect={`/home/movie/${element._id}`} index={index} image={element.image} title={element.title} />;
           })
         ) : (
-          <div className=' flex items-center relative text-center w-full h-[300px] text-xl font-semibold'>Loading...</div>
+          <div className=' flex items-center justify-center col-span-6 relative text-center w-full h-[300px] text-xl font-semibold'>Loading...</div>
         )}
       </main>
     </div>
