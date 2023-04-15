@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import 'react-lazy-load-image-component/src/effects/blur.css';
 import { API } from '../api/Api';
@@ -22,6 +22,7 @@ interface featuredData {
 const FeaturedMovie = () => {
   const [featured, setFeatured] = useState<featuredData[]>([]);
   const [current, setCurrent] = useState<number>(0);
+  const [controls, setControls] = useState<boolean>(false);
   const navigate = useNavigate()
 
   useEffect(() => {
@@ -51,7 +52,7 @@ const FeaturedMovie = () => {
         featured.map((element, index) => {
           return current === index ? (
             <section key={index} className='w-full h-full relative'>
-              <video playsInline autoPlay muted loop className=' w-full h-full object-contain object-center aspect-video' src={element.trailer} poster={element.image} />
+              <video onClick={()=>{setControls(!controls)}} controls={controls} playsInline autoPlay muted loop className=' w-full h-full object-contain object-center aspect-video' src={element.trailer} poster={element.image} />
               <header className='flex justify-between m-auto bg-black/70 rounded-lg overflow-hidden backdrop-blur-sm w-full sm:max-w-md lg:max-w-lg lg:absolute lg:bottom-[20%] lg:left-20'>
                 <button className={`${buttonText}`} onClick={
                   ()=>{ setCurrent(current === 0 ? featured.length-1 : current-1)}

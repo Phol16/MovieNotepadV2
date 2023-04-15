@@ -10,6 +10,7 @@ import home from '../assets/home.svg';
 const MoviePage = () => {
   const [movie, setMovie] = useState<Record<string, any>>();
   const [disable, setDisable] = useState<boolean>(false);
+  const [controls, setControls] = useState<boolean>(false);
   const [update, setUpdate] = useState<Date>();
   const { id } = useParams();
   const navigate = useNavigate();
@@ -75,7 +76,7 @@ const MoviePage = () => {
     <div className='max-w-6xl m-auto pt-20 px-3'>
       {movie ? (
         <div className='flex flex-col gap-2'>
-          <video src={movie.trailer} poster={movie.image} autoPlay loop muted className=' aspect-video m-auto max-h-[650px] overflow-hidden' />
+          <video onClick={()=>{setControls(!controls)}} controls={controls} src={movie.trailer} poster={movie.image} autoPlay loop muted className=' aspect-video m-auto max-h-[650px] overflow-hidden' />
           <main className='flex flex-col gap-2 max-w-lg m-auto'>
             <header className='flex items-center'>
               <h1 className={`${primText} font-semibold text-secondary`}>{movie.title}</h1>
