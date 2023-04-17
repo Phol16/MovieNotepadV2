@@ -11,6 +11,17 @@ interface movieTypes {
   genre: string[];
 }
 
+export const fetchAllMovies = async(req:Request,res:Response)=>{
+  try {
+    let data = await getMovies()
+
+    res.status(200).json({message:'success',data})
+  } catch (error) {
+    console.log(error)
+    res.status(500).json({error:error.message})
+  }
+}
+
 export const getAllMovies = async (req: Request, res: Response) => {
   try {
     const { page, limit } = req.query;

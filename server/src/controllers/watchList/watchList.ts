@@ -42,7 +42,7 @@ export const searchMovieInWatchList = async (req: Request, res: Response) => {
     const existing = await searchWatchList(user, search);
 
     if (!existing) {
-      return res.status(404).json({ message: 'No Movie about that' });
+      return res.status(404).json({ message: 'Not in WL yet' });
     }
 
     res.status(200).json({ data: existing, message: 'success' });
