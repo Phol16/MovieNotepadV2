@@ -8,6 +8,7 @@ import arrowleft from '../assets/arrowLeft.svg';
 import arrowright from '../assets/arrowRight.svg';
 import MovieCard from './MovieCard';
 import { dataFetching } from '../utils/dataFetching';
+import SearchMovie from './SearchMovie';
 
 interface movieTypes {
   _id: string;
@@ -39,7 +40,10 @@ const MovieList = () => {
 
   return (
     <div className={` border-t-4 border-white/30 py-10 px-8 text-primaryText font-semibold w-full gap-5 flex flex-col m-auto`}>
-      <h1 className={`${primText}`}>Movies/Series</h1>
+      <section className={`${primText} flex flex-col sm:flex-row items-center gap-5`}>
+        <h1>Movies/Series</h1>
+        <SearchMovie />
+      </section>
       <header className='m-auto flex gap-5'>
         <button
           onClick={() => {
