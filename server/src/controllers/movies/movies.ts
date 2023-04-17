@@ -11,16 +11,16 @@ interface movieTypes {
   genre: string[];
 }
 
-export const fetchAllMovies = async(req:Request,res:Response)=>{
+export const fetchAllMovies = async (req: Request, res: Response) => {
   try {
-    let data = await getMovies()
+    let data = await getMovies();
 
-    res.status(200).json({message:'success',data})
+    res.status(200).json({ message: 'success', data });
   } catch (error) {
-    console.log(error)
-    res.status(500).json({error:error.message})
+    console.log(error);
+    res.status(500).json({ error: error.message });
   }
-}
+};
 
 export const getAllMovies = async (req: Request, res: Response) => {
   try {
@@ -41,7 +41,7 @@ export const getAllMovies = async (req: Request, res: Response) => {
       });
     }
 
-    res.status(200).json({totalPage: Math.ceil(total), data, message: 'success' });
+    res.status(200).json({ totalPage: Math.ceil(total), data, message: 'success' });
   } catch (error) {
     console.log(error);
     res.status(500).json({ error: error.message });
