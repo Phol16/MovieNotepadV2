@@ -55,7 +55,7 @@ const SearchMovie = () => {
             setActive(true);
           }}
           type='text'
-          className='text-black p-1 rounded-xl text-xs md:text-sm'
+          className='text-black py-1 px-2 rounded-xl text-xs md:text-sm'
           value={search}
           onChange={(e) => {
             setSearch(e.target.value);
