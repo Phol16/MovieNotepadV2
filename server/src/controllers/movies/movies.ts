@@ -13,9 +13,9 @@ interface movieTypes {
 
 export const fetchAllMovies = async (req: Request, res: Response) => {
   try {
-    let data = await getMovies();
+    let data = await getMovies().select('title');
 
-    res.status(200).json({ message: 'success', data });
+    res.status(200).json({ message: 'succes', data });
   } catch (error) {
     console.log(error);
     res.status(500).json({ error: error.message });
