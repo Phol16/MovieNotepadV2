@@ -14,7 +14,7 @@ const SearchMovie = () => {
 
   useEffect(() => {
     const fetchList = async () => {
-      const response = new dataFetching(`/movie/all`);
+      const response = new dataFetching(`/movie/movies`);
       const fetchedData = await response.getData();
       setList(fetchedData.data);
     };
