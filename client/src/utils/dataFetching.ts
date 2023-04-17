@@ -12,6 +12,7 @@ export class dataFetching implements dataFetch {
   public getData = async () => {
     return await fetch(`${API}${this.url}`, {
       method: 'GET',
+      mode:'cors',
       credentials: 'include',
       headers: {
         'Content-type': 'application/json',
