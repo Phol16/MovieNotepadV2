@@ -73,7 +73,7 @@ const SearchMovie = () => {
                 return (
                   <button
                     key={index}
-                    className='p-1 border-b w-full'
+                    className='p-2 border-b w-full text-justify'
                     onClick={() => {
                       setSearch(element.title), setActive(false);
                     }}
