@@ -71,7 +71,7 @@ const MoviePage = () => {
     };
     fetchDelete();
   };
-  console.log(movie);
+
   return (
     <div className='max-w-6xl m-auto pt-20 px-3'>
       {movie ? (
