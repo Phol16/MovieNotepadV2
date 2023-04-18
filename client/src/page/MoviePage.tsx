@@ -6,11 +6,15 @@ import { primText, subText, primButton, primButtonDisable } from '../style/theme
 import logo from '../assets/logo.svg';
 import home from '../assets/home.svg';
 import { dataFetching } from '../utils/dataFetching';
+import trash from '../assets/trash.svg';
+import Button from '../components/Button';
+import SecondaryButton from '../components/SecondaryButton';
 
 const MoviePage = () => {
   const [movie, setMovie] = useState<Record<string, any>>();
   const [disable, setDisable] = useState<boolean>(false);
   const [controls, setControls] = useState<boolean>(false);
+  const [openDelete, setOpenDelete] = useState<boolean>(false);
   const [update, setUpdate] = useState<Date>();
   const { id } = useParams();
   const navigate = useNavigate();
@@ -55,6 +59,19 @@ const MoviePage = () => {
     AddData();
   }, []);
 
+  const handleDelete = () => {
+    const fetchDelete = async () => {
+      if (movie) {
+        const response = new dataFetching(`/movie/${movie._id}`, {}, `bearer ${user}`);
+        const fetchedData = await response.deleteData();
+        if (fetchedData.message === 'delete success') {
+          navigate('/home');
+        }
+      }
+    };
+    fetchDelete();
+  };
+  console.log(movie);
   return (
     <div className='max-w-6xl m-auto pt-20 px-3'>
       {movie ? (
@@ -76,9 +93,35 @@ const MoviePage = () => {
               <h1 className={`${primText} font-semibold text-secondary`}>{movie.title}</h1>
               <LazyLoadImage src={logo} alt='Icon' className={`w-8 h-8`} />
             </header>
-            <h2>
-              / {movie.year} / {movie.genre.join(' ')}
-            </h2>
+            <article className='flex items-center justify-between'>
+              <h1>
+                / {movie.year} / {movie.genre.join(' ')}
+              </h1>
+              {movie.authorId?.role === 'Admin' ? (
+                <aside className='relative flex items-center z-20'>
+                  {openDelete && (
+                    <section className=' rounded-lg absolute -left-[200px] gap-3 w-48 p-2 text-sm bg-white max-w-sm flex flex-col '>
+                      <h1 className='text-black'>Are you sure you want to delete {movie.title}?</h1>
+                      <Button Name={'Confirm'} handleClick={handleDelete} />
+                      <SecondaryButton
+                        Name={'Cancel'}
+                        handleClick={() => {
+                          setOpenDelete(false);
+                        }}
+                      />
+                    </section>
+                  )}
+                  <button
+                    title='Delete Movie'
+                    onClick={() => {
+                      setOpenDelete(!openDelete);
+                    }}
+                  >
+                    <img src={trash} alt='Icon' className='w-8 h-8' />
+                  </button>
+                </aside>
+              ) : null}
+            </article>
             {disable ? (
               <button disabled className={`${primButtonDisable} ${subText}`}>
                 Movie in the WatchList

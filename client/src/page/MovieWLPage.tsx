@@ -76,7 +76,7 @@ const MovieWLPage = () => {
                   </section>
                 )}
                 <button
-                  title='delete'
+                  title='Delete from WatchList'
                   onClick={() => {
                     setOpenDelete(!openDelete);
                   }}
