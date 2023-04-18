@@ -97,7 +97,7 @@ const MoviePage = () => {
               <h1>
                 / {movie.year} / {movie.genre.join(' ')}
               </h1>
-              {movie.authorId?.role === 'Admin' ? (
+              {movie.authorId?._id === user ? (
                 <aside className='relative flex items-center z-20'>
                   {openDelete && (
                     <section className=' rounded-lg absolute -left-[200px] gap-3 w-48 p-2 text-sm bg-white max-w-sm flex flex-col '>
