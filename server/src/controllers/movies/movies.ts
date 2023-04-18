@@ -63,7 +63,7 @@ export const getOneMovie = async (req: Request, res: Response) => {
   try {
     const { id } = req.params;
 
-    const existingMovie = await getMovieById(id);
+    const existingMovie = await getMovieById(id).populate('authorId');
     if (!existingMovie) {
       return res.status(404).json({ message: 'Movie not in database' });
     }
@@ -184,7 +184,7 @@ export const deleteAMovie = async (req: Request, res: Response) => {
     }
     await deletedMovie.save();
 
-    res.status(200).json({ data: updated, message: 'success' });
+    res.status(200).json({ data: updated, message: 'delete success' });
   } catch (error) {
     console.log(error);
     res.status(500).json({ error: error.message });
