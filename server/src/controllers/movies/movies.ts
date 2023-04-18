@@ -50,7 +50,7 @@ export const getAllMovies = async (req: Request, res: Response) => {
 
 export const getFeaturedMovie = async (req: Request, res: Response) => {
   try {
-    const data = await getFeatured().select('title year genre description image');
+    const data = await getFeatured().select('title year genre description image trailer');
 
     res.status(200).json({ data, message: 'success' });
   } catch (error) {
