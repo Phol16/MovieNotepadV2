@@ -30,7 +30,7 @@ export const getAllMovies = async (req: Request, res: Response) => {
     const limitNumber = Number(limit) || 6;
     const skip = Number(page) === 1 ? 0 : Number(page) * limitNumber - limitNumber;
 
-    let data = await getMovies();
+    let data = await getMovies().select('title image');
     total = data.length / limitNumber;
     data = data.slice(skip, skip ? skip + limitNumber : limitNumber);
 
@@ -50,7 +50,7 @@ export const getAllMovies = async (req: Request, res: Response) => {
 
 export const getFeaturedMovie = async (req: Request, res: Response) => {
   try {
-    const data = await getFeatured();
+    const data = await getFeatured().select('title year genre description image');
 
     res.status(200).json({ data, message: 'success' });
   } catch (error) {

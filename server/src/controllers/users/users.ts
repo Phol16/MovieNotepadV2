@@ -10,7 +10,7 @@ interface details {
 
 export const getUserDetailsBySessionToken = async (req: Request, res: Response) => {
   try {
-    const user = get(req, 'identity');
+    const user = get(req, 'identity') as Record<string, any>;
 
     if(!user){
       return res.status(404).json({message:'User Missing'})

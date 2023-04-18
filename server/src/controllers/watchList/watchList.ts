@@ -21,7 +21,7 @@ export const getUserWatchList = async (req: Request, res: Response) => {
   try {
     const id = get(req, 'identity._id');
 
-    const existingWL = await getWatchListById(id);
+    const existingWL = await getWatchListById(id).select('movieId userId');
 
     if (!existingWL.length) {
       return res.status(404).json({ message: `user doesn't have any watchlist` });
