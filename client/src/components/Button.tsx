@@ -8,7 +8,7 @@ type props = {
 const Button = ({ Name, handleClick }: props) => {
   return (
     <button
-      className='bg-secondary font-medium p-2 rounded-lg text-sm md:text-base hover:bg-secondaryHover transition-colors duration-150'
+      className='bg-secondary font-medium p-2 rounded-lg text-sm md:text-base hover:bg-secondaryHover transition-colors duration-150 text-white'
       onClick={() => {
         handleClick();
       }}

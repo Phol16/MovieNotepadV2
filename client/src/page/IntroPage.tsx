@@ -74,7 +74,7 @@ const IntroPage = () => {
         </main>
       </section>
       <section className='fixed bottom-10 left-5 -rotate-[9deg]'>
-        <InfoNote/>
+        <InfoNote title={'Notice:'} content={'Fetching Data from server will take time. Because of free web host serverside'}/>
       </section>
     </>
   );
