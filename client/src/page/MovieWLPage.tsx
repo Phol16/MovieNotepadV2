@@ -89,7 +89,7 @@ const MovieWLPage = () => {
               Learn More
             </button>
             <p className='max-w-md'>{movie.movieId.description}</p>
-            <Notes />
+            <Notes WLID={movie._id}/>
           </main>
         </div>
       ) : (
