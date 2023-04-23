@@ -61,7 +61,7 @@ const FeaturedMovie = () => {
                 src={element.trailer}
                 poster={element.image}
               />
-              <header className='flex justify-between m-auto bg-black/70 rounded-lg overflow-hidden backdrop-blur-sm w-full sm:max-w-md lg:max-w-lg lg:absolute lg:bottom-[20%] lg:left-20'>
+              <header className='flex justify-between m-auto rounded-lg overflow-hidden  w-full sm:max-w-md lg:max-w-lg lg:absolute lg:bottom-[30%] lg:left-20'>
                 <button
                   className={`${buttonText}`}
                   onClick={() => {
@@ -74,13 +74,13 @@ const FeaturedMovie = () => {
                   onClick={() => {
                     navigate(`/home/movie/${element._id}`);
                   }}
-                  className=' cursor-pointer flex flex-col gap-1 p-5 text-center'
+                  className=' cursor-pointer flex flex-col gap-1 p-5 '
                 >
-                  <h1 className={`font-semibold text-secondary text-justify my-5 ${primText}`}>Featured</h1>
-                  <h2 className={`w-full ${primText}`}>{element.title}</h2>
-                  <h2 className={`${subText}`}>{element.year.join(' ')}</h2>
-                  <h2 className={`${subText}`}>{element.genre.join(' ')}</h2>
-                  <p className={`w-fit text-justify max-w-xs ${subText}`}>{element.description}</p>
+                  <h1 className={`font-semibold text-secondary text-justify my-5 textShadow ${primText}`}>Featured</h1>
+                  <h2 className={`w-full textShadow ${primText}`}>{element.title}</h2>
+                  <h2 className={`textShadow ${subText}`}>{element.year.join(' ')}</h2>
+                  <h2 className={` textShadow ${subText}`}>{element.genre.join(' ')}</h2>
+                  <p className={`w-fit text-justify max-w-md textShadow ${subText}`}>{element.description}</p>
                 </section>
                 <button
                   className={buttonText}
