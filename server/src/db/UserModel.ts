@@ -12,7 +12,7 @@ const UserSchema = new Schema({
     salt: { type: SchemaTypes.String, select: false },
     sessionToken: { type: SchemaTypes.String, select: false },
   },
-});
+},{timestamps:true});
 
 const UserModel = model('User', UserSchema);
 export default UserModel;
