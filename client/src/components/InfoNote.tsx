@@ -13,7 +13,7 @@ const InfoNote = ({title, content}:props) => {
   return (
     <>
       {open ? (
-        <div className='text-sm  bg-cyan-800 text-white font-medium p-2 max-w-[150px] '>
+        <div className='text-sm  bg-cyan-800 text-white font-medium p-2 max-w-[150px] h-[150px] overflow-hidden '>
           <div className='flex justify-between py-2'>
             <h1>{title}</h1>
             <button
@@ -25,7 +25,7 @@ const InfoNote = ({title, content}:props) => {
               <LazyLoadImage src={cross} alt='Icon' className='fill-black rotate-[45deg]' />
             </button>
           </div>
-          <p className='max-w-xs font-normal'>
+          <p className='overflow-ellipsis overflow-x-hidden overflow-y-auto max-h-[100px] font-normal'>
               {content}
           </p>
         </div>
