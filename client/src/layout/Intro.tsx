@@ -5,7 +5,7 @@ import Footer from '../components/Footer';
 
 const Intro = () => {
   return (
-    <div className=' text-primaryText font-poppins flex flex-col py-5'>
+    <div className=' text-primaryText font-poppins flex flex-col '>
     <NavBar/>
     <main className='min-h-[calc(100svh-76px)] flex flex-col justify-center'>
     <Outlet/>
