@@ -40,7 +40,7 @@ const LogInPage = () => {
         if (fetchedData.data.role === 'Admin') {
           document.cookie = 'role=Admin';
         }
-        sessionStorage.setItem('user', fetchedData.data._id);
+        sessionStorage.setItem('user', fetchedData.data);
         navigate('/home');
       } else {
         setLoading(false);
