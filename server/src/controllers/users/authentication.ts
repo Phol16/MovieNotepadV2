@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 import { createUser, getUserByEmail } from './userControllers';
-import { authentication, random } from '../../utils/index';
+import { authentication, jwtSign, random } from '../../utils/index';
 import dotenv from 'dotenv'
 
 dotenv.config()
@@ -74,7 +74,7 @@ export const logIn = async (req: Request, res: Response) => {
     }
 
     //checks if email exisit and fetches the salt & password because we set it to false in user schema
-    const user = await getUserByEmail(email).select('+authentication.salt +authentication.password');
+    const user = await getUserByEmail(email).select('_id authentication.salt authentication.password');
     if (!user) {
       return res.status(404).json({ message: `User dosen't exist` });
     }
@@ -92,8 +92,10 @@ export const logIn = async (req: Request, res: Response) => {
 
     //store sessiontoken in the cookie with no expiry date becomes a session cookie
     res.cookie('MN_sessionToken', user.authentication.sessionToken,{httpOnly:env==='Development', secure:true, sameSite:'none'});
+    console.log(user)
+    const token = jwtSign(user)
     return res.status(200).json({
-      data: user,
+      data: token,
       message: 'success',
     });
   } catch (error) {

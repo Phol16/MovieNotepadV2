@@ -7,6 +7,7 @@ declare global{
       PORT : number,
       DATABASE : string,
       SECRET: string,
+      JWTSECRET : string,
     }
   }
 }
