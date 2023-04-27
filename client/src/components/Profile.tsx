@@ -59,7 +59,6 @@ const Profile = () => {
     };
     fetchLogout();
     sessionStorage.removeItem('Page');
-    document.cookie = `role=; expires=${Date.now()}`;
     navigate('/');
   };
 
