@@ -56,10 +56,8 @@ const Profile = () => {
     const fetchLogout = async () => {
       const response = new dataFetching(`/auth/logOut`);
       const fetchedData = await response.getData();
-      if(fetchedData.message === 'log out success'){
         sessionStorage.removeItem('Page');
         navigate('/');
-      }
     };
     fetchLogout();
   };
