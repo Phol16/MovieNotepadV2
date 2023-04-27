@@ -3,9 +3,7 @@ import { get } from 'lodash';
 
 export const currentUser = async (req: Request, res: Response, next: NextFunction) => {
   try {
-    const  id  = req.headers.authorization;
-     const userId = id.split(' ')[1]
-
+    const userId = get(req, 'userId') as string;
     const currentUserId = get(req, 'identity._id') as string;
 
     if (!currentUserId) {
