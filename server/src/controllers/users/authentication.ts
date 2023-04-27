@@ -91,8 +91,7 @@ export const logIn = async (req: Request, res: Response) => {
     await user.save();
 
     //store sessiontoken in the cookie with no expiry date becomes a session cookie
-    res.cookie('MN_sessionToken', user.authentication.sessionToken,{domain:'.onrender.com' ,httpOnly:env==='Development', secure:true, sameSite:'none'});
-    console.log(user)
+    res.cookie('MN_sessionToken', user.authentication.sessionToken,{httpOnly:env==='Development', secure:true, sameSite:'none'});
     const token = jwtSign(user)
     return res.status(200).json({
       data: token,
