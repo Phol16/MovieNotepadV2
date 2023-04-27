@@ -105,6 +105,7 @@ export const logIn = async (req: Request, res: Response) => {
 
 export const logOut = async(req:Request, res:Response)=>{
   try {
+    res.cookie('MN_sessionToken', ' ',{httpOnly:env==='Development', secure:true, sameSite:'none'});
     res.clearCookie('MN_sessionToken',{ httpOnly:env==='Development', secure:true, sameSite:'none'})
     res.status(200).json({message:'log out success'})
   } catch (error) {
