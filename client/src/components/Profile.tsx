@@ -55,7 +55,7 @@ const Profile = () => {
   const handleLogout = () => {
     const fetchLogout = async () => {
       const response = new dataFetching(`/auth/logOut`);
-      const fetchedData = await response.getData();
+      await response.getData();
         sessionStorage.removeItem('Page');
         navigate('/');
     };
