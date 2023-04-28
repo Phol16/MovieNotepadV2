@@ -82,6 +82,7 @@ const SignUpPage = () => {
       setFrameColor('outline outline-green-500')
     }else if(!emailRE.test(email) && email !== ''){
       setEmailError(true)
+      setFrameColor(null)
     }
   },[email])
 
