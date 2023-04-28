@@ -21,7 +21,6 @@ const SignUpPage = () => {
   const [email, setEmail] = useState<string>('');
   const [emailError, setEmailError] = useState<boolean>(false);
   const [emailErrorMsg, setEmailErrorMsg] = useState<string>('Must be A valid Email');
-  const [frameColor, setFrameColor] = useState<string | null>(null)
   const [username, setUsername] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   const [image, setImage] = useState<string | undefined>();
@@ -53,10 +52,7 @@ const SignUpPage = () => {
       e.preventDefault();
       const data: information = { username, password, email, image };
       if(!emailError){
-        setFrameColor(null)
       return sendData(data);
-      }else{
-        setFrameColor('outline-red-500 outline')
       }
     },
     [username, password, email, image]
@@ -76,13 +72,12 @@ const SignUpPage = () => {
       console.log(error);
     }
   };
+
   useEffect(()=>{
     if(emailRE.test(email)){
       setEmailError(false)
-      setFrameColor('outline outline-green-500')
     }else if(!emailRE.test(email) && email !== ''){
       setEmailError(true)
-      setFrameColor(null)
     }
   },[email])
 
@@ -93,7 +88,7 @@ const SignUpPage = () => {
       ) : (
         <div className='flex flex-col gap-5 justify-center items-center py-10 h-full '>
           <h1 className='text-xl md:text-3xl text-secondary font-semibold'>Sign Up</h1>
-          <form onSubmit={handleSubmit} className={`flex flex-col gap-5 bg-teriary px-5 py-10 rounded-lg max-w-xs text-sm md:text-lg ${frameColor}`}>
+          <form onSubmit={handleSubmit} className={`flex flex-col gap-5 bg-teriary px-5 py-10 rounded-lg max-w-xs text-sm md:text-lg`}>
             <label htmlFor='email' className='flex flex-col'>
               Email: *
               <input
@@ -102,7 +97,6 @@ const SignUpPage = () => {
                 name='email'
                 placeholder='Email'
                 autoComplete='off'
-                onFocus={()=>{setEmailError(!emailRE.test(email))}}
                 onBlur={()=>{setEmailError(false)}}
                 className={`rounded-md p-1 text-black ${emailError ? ' outline outline-red-500' : 'outline-none'}`}
                 onChange={(e) => {
@@ -131,6 +125,7 @@ const SignUpPage = () => {
                 id='name'
                 name='name'
                 placeholder='Name'
+                autoComplete='off'
                 className='rounded-md p-1 text-black'
                 onChange={(e) => {
                   setUsername(e.target.value);
