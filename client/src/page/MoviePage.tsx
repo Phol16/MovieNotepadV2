@@ -54,7 +54,7 @@ const MoviePage = () => {
       const response = new dataFetching(`/watchList/${id}`, {}, `Bearer ${user}`);
       const fetchedData = await response.postData();
       if (fetchedData.message === 'success') {
-        toast(`${movie?.title} is added to the watch list`)
+        toast.success(`Successfully added to the watch list`)
         setUpdate(new Date(Date.now()));
       }
     };
@@ -126,7 +126,7 @@ const MoviePage = () => {
             </article>
             {disable ? (
  
-              <button onClick={()=>{toast('Already in the watchlist')}} className={`${primButtonDisable} ${subText} w-full focus:outline-none `}>
+              <button onClick={()=>{toast.info('Already in the watchlist')}} className={`${primButtonDisable} ${subText} w-full focus:outline-none `}>
                 Movie in the WatchList
               </button>
 

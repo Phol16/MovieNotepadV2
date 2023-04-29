@@ -42,7 +42,7 @@ const MovieWLPage = () => {
         const response = new dataFetching(`/watchList/movie/${movie._id}`, {}, `bearer ${user}`);
         const fetchedData = await response.deleteData();
         if (fetchedData.message === 'delete success') {
-          toast(`${movie.movieId.title} deleted from watchlist`)
+          toast.info(`${movie.movieId.title} deleted from watchlist`)
           navigate('/home/watchList');
         }
       }

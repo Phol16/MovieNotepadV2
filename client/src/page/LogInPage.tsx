@@ -41,7 +41,7 @@ const LogInPage = () => {
         if (fetchedData.data.role === 'Admin') {
           document.cookie = 'role=Admin';
         }
-        toast('Successfully Logged In')
+        toast.success('Successfully Logged In')
         sessionStorage.setItem('user', fetchedData.data);
         navigate('/home');
       } else {
