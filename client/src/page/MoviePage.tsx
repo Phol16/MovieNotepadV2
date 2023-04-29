@@ -9,6 +9,7 @@ import { dataFetching } from '../utils/dataFetching';
 import trash from '../assets/trash.svg';
 import Button from '../components/Button';
 import SecondaryButton from '../components/SecondaryButton';
+import { toast } from 'react-toastify';
 
 const MoviePage = () => {
   const [movie, setMovie] = useState<Record<string, any>>();
@@ -53,6 +54,7 @@ const MoviePage = () => {
       const response = new dataFetching(`/watchList/${id}`, {}, `Bearer ${user}`);
       const fetchedData = await response.postData();
       if (fetchedData.message === 'success') {
+        toast(`${movie?.title} is added to the watch list`)
         setUpdate(new Date(Date.now()));
       }
     };
@@ -123,9 +125,11 @@ const MoviePage = () => {
               ) : null}
             </article>
             {disable ? (
-              <button disabled className={`${primButtonDisable} ${subText}`}>
+ 
+              <button onClick={()=>{toast('Already in the watchlist')}} className={`${primButtonDisable} ${subText} w-full focus:outline-none `}>
                 Movie in the WatchList
               </button>
+
             ) : (
               <button className={`${primButton} ${subText}`} onClick={handleAdd}>
                 Add to WatchList

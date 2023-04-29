@@ -7,6 +7,8 @@ import SubmitButton from '../components/SubmitButton';
 import SuccessRegister from '../components/SuccessRegister';
 import spinner from '../assets/spinner.svg';
 import { dataFetching } from '../utils/dataFetching';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 interface information {
   username: string;
@@ -64,12 +66,16 @@ const SignUpPage = () => {
       const response = new dataFetching('/auth/register', data);
       const fetchedData = await response.postData();
       if (fetchedData.message === 'success') {
+        toast.success('Successfully Registered');
         setSuccess(true);
       } else {
+        toast.error(fetchedData.message)
         setLoading(false);
       }
     } catch (error) {
       console.log(error);
+    }finally{
+      setLoading(false)
     }
   };
 

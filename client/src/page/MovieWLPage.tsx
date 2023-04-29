@@ -10,6 +10,7 @@ import Button from '../components/Button';
 import SecondaryButton from '../components/SecondaryButton';
 import Notes from '../components/Notes';
 import { dataFetching } from '../utils/dataFetching';
+import { toast } from 'react-toastify';
 
 const MovieWLPage = () => {
   const [movie, setMovie] = useState<Record<string, any>>();
@@ -41,6 +42,7 @@ const MovieWLPage = () => {
         const response = new dataFetching(`/watchList/movie/${movie._id}`, {}, `bearer ${user}`);
         const fetchedData = await response.deleteData();
         if (fetchedData.message === 'delete success') {
+          toast(`${movie.movieId.title} deleted from watchlist`)
           navigate('/home/watchList');
         }
       }
