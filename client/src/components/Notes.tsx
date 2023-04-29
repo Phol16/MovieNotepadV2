@@ -4,6 +4,7 @@ import InfoNote from './InfoNote';
 import { dataFetching } from '../utils/dataFetching';
 import Button from './Button';
 import trash from '../assets/trash.svg';
+import { toast } from 'react-toastify';
 
 type props = {
   WLID: string;
@@ -35,6 +36,7 @@ const Notes = ({ WLID }: props) => {
         const response = new dataFetching(`/notes?id=${WLID}`, data, `Bearer ${user}`);
         const fetchedData = await response.postData();
         if (fetchedData.message === 'success') {
+          toast.success('Note Added')
           setUpdate(Date.now());
           setOpen(false)
         }
@@ -51,10 +53,12 @@ const Notes = ({ WLID }: props) => {
         const response = new dataFetching(`/notes?id=${id}`, {}, `Bearer ${user}`);
         const fetchedData = await response.deleteData();
         if (fetchedData.message === 'success') {
+          toast.info('Note successfully deleted')
           setUpdate(Date.now());
         }
       } catch (error) {
         console.log(error);
+        toast.error(`${error}`)
       }
     };
     sendData();

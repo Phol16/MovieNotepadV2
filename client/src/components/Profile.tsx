@@ -7,6 +7,7 @@ import Button from './Button';
 import profile from '../assets/profile.svg';
 import editIcon from '../assets/editIcon.svg';
 import { dataFetching } from '../utils/dataFetching';
+import { toast } from 'react-toastify';
 
 interface redirects {
   name: string;
@@ -57,6 +58,7 @@ const Profile = () => {
       const response = new dataFetching(`/auth/logOut`);
       await response.getData();
         sessionStorage.removeItem('Page');
+        toast.info('Logged Out')
         navigate('/');
     };
     fetchLogout();

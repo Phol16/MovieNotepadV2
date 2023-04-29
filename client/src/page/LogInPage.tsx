@@ -4,6 +4,7 @@ import SecondaryButton from '../components/SecondaryButton';
 import SubmitButton from '../components/SubmitButton';
 import spinner from '../assets/spinner.svg';
 import { dataFetching } from '../utils/dataFetching';
+import { toast } from 'react-toastify';
 
 interface information {
   email: string;
@@ -40,9 +41,11 @@ const LogInPage = () => {
         if (fetchedData.data.role === 'Admin') {
           document.cookie = 'role=Admin';
         }
+        toast('Successfully Logged In')
         sessionStorage.setItem('user', fetchedData.data);
         navigate('/home');
       } else {
+        toast(fetchedData.message)
         setLoading(false);
       }
     } catch (error) {
