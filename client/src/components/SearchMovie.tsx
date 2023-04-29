@@ -22,7 +22,6 @@ const SearchMovie = () => {
   }, []);
 
   const handleClick = () => {
-    console.log();
     list.map((e, i) => {
       if (e.title.toLowerCase() === search?.toLowerCase()) {
         navigate(`/home/movie/${e._id}`);
@@ -72,7 +71,7 @@ const SearchMovie = () => {
               if (element.title.toLowerCase().includes(search?.toLowerCase()) && index < 15) {
                 return (
                   <button
-                    key={index}
+                    key={element._id}
                     className='p-2 border-b w-full text-justify'
                     onClick={() => {
                       setSearch(element.title), setActive(false);

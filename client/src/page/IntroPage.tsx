@@ -48,7 +48,7 @@ const IntroPage = () => {
       <IntroHero />
       {PageContent.map((element, index) => {
         return (
-          <article className='p-10 border-t-8 border-white/30' key={index}>
+          <article className='p-10 border-t-8 border-white/30' key={element.title+index}>
             <section className={`flex flex-col gap-5 items-center w-fit m-auto ${index % 2 === 0 ? 'lg:flex-row' : 'lg:flex-row-reverse'}`}>
               <div className='max-w-[14rem] md:max-w-[18rem] lg:max-w-[450px]'>
                 <h1 className='text-xl md:text-2xl lg:text-4xl font-semibold'>{element.title}</h1>

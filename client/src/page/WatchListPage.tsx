@@ -30,7 +30,7 @@ const WatchListPage = () => {
         {WLData ? (
           <main className='max-w-5xl grid grid-cols-2 p-5 gap-5 lg:grid-cols-3 3xl:grid-cols-6'>
             {WLData.map((element, index) => {
-              return <MovieCard key={index} index={index} title={element.movieId.title} image={element.movieId.image} redirect={`/home/watchList/movie/${element.movieId._id}`} />;
+              return <MovieCard key={element._id} index={index} title={element.movieId.title} image={element.movieId.image} redirect={`/home/watchList/movie/${element.movieId._id}`} />;
             })}
           </main>
         ) : (

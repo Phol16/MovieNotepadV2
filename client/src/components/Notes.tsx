@@ -80,7 +80,7 @@ const Notes = ({ WLID }: props) => {
         {notes.length ? (
           notes.map((element, index) => {
             return (
-              <div key={index}>
+              <div key={element._id}>
                 <InfoNote title={element.title} content={element.content} key={index} />
                 <button title='Delete this Note' onClick={()=>{handleDeleteNote(element._id)}}>
                   <img src={trash} alt='Icon' className='w-8 h-8' />

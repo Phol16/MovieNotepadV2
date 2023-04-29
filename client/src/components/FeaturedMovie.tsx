@@ -47,7 +47,7 @@ const FeaturedMovie = () => {
       {featured.length ? (
         featured.map((element, index) => {
           return current === index ? (
-            <section key={index} className='w-full h-full relative'>
+            <section key={element._id} className='w-full h-full relative'>
               <video
                 onClick={() => {
                   setControls(!controls);

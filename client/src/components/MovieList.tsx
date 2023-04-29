@@ -68,7 +68,7 @@ const MovieList = () => {
       <main className='grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4 px-5'>
         {movies.length ? (
           movies.map((element, index) => {
-            return <MovieCard key={index} redirect={`/home/movie/${element._id}`} index={index} image={element.image} title={element.title} />;
+            return <MovieCard key={element._id} redirect={`/home/movie/${element._id}`} index={index} image={element.image} title={element.title} />;
           })
         ) : (
           <div className=' flex items-center justify-center col-span-6 relative text-center w-full h-[300px] text-xl font-semibold'>Loading...</div>
