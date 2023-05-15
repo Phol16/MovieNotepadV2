@@ -18,8 +18,15 @@ const AdminButton = () => {
   const labelDesign = 'flex flex-col gap-1';
 
   useEffect(() => {
-    setRole(document.cookie);
-  }, []);
+    // const cookie = document.cookie.split('=')
+    // let index = 0;
+    // cookie.map((e,i)=>{
+    //   if(e === 'role'){
+    //     setRole(cookie[i+1])
+    //   }
+    // })
+    setRole(document.cookie)
+  }, [document.cookie]);
 
   const handleAdd = () => {
     setOpen(true);
