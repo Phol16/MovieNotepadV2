@@ -74,7 +74,7 @@ export const logIn = async (req: Request, res: Response) => {
     }
 
     //checks if email exisit and fetches the salt & password because we set it to false in user schema
-    const user = await getUserByEmail(email).select('_id authentication.salt authentication.password');
+    const user = await getUserByEmail(email).select('_id authentication.salt authentication.password role');
     if (!user) {
       return res.status(404).json({ message: `User dosen't exist` });
     }
@@ -90,8 +90,11 @@ export const logIn = async (req: Request, res: Response) => {
     user.authentication.sessionToken = authentication(salt, user._id.toString());
     await user.save();
 
+    console.log(user)
+
     //store sessiontoken in the cookie with no expiry date becomes a session cookie
     res.cookie('MN_sessionToken', user.authentication.sessionToken,{httpOnly:env==='Development', secure:true, sameSite:'none'});
+    res.cookie('role', user.role,{httpOnly: false,secure:true, sameSite:'none'});
     const token = jwtSign(user)
     return res.status(200).json({
       data: token,
@@ -105,8 +108,8 @@ export const logIn = async (req: Request, res: Response) => {
 
 export const logOut = async(req:Request, res:Response)=>{
   try {
-    res.cookie('MN_sessionToken', ' ',{httpOnly:env==='Development', secure:true, sameSite:'none'});
     res.clearCookie('MN_sessionToken',{ httpOnly:env==='Development', secure:true, sameSite:'none'})
+    res.clearCookie('role',{ httpOnly:false, secure:true, sameSite:'none'})
     res.status(200).json({message:'log out success'})
   } catch (error) {
     console.log(error)
